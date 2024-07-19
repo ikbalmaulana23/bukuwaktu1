@@ -6,7 +6,7 @@
         <h1 class="mb-3 text-3xl tracking-tight font-bold text-gray-900 ">{{ $post['title'] }}</h1>
         <div class="text-base text-gray-600 mt-2">
             {{-- kalau array echonya tu $post['title'] --}}
-            <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->format( 'j F Y') }}
+            <a href="/posts/{{ $post['id'] }}">{{ $post->author->name }}</a> | {{ $post->created_at->format( 'j F Y') }}
 
         </div>
         <p class="my-4 font-light">{{  $post['body']}}</p>
