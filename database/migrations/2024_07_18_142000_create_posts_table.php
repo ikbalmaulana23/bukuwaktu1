@@ -14,12 +14,21 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'posts_author_id'
+            );
+            $table->foreignId('category_id')->constrained(
+                table: 'categories',
+                indexName: 'posts_category_id'
+            );
             $table->string('slug')->unique();
             $table->string('body');
             $table->timestamps();
         });
+
+        // $table->unsignedBigInteger('author_id');
+        //     $table->foreign('author_id')->references('id')->on('users');
 
         //
     }
