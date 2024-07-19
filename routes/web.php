@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 
 
@@ -21,8 +22,4 @@ Route::get('contact', function () {
     return view('contact', ['title' => 'Contact']);
 });
 
-Route::get('posts/{post}', function (Post $post) {
-
-
-    return view('post', ['title' => 'Single Post', 'post' => $post]);
-});
+Route::get('posts/{post}', [PostController::class, 'index'])->name('index');
