@@ -2,5 +2,5 @@
 
 <x-layout>
 <x-slot:title>{{ $title }}</x-slot:title>
-    <h1>ini adalah homepage</h1>
+    <div class="max-w-screen-md">ini adalah homepage</div>
 </x-layout>

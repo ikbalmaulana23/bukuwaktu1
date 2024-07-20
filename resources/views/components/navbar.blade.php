@@ -1,4 +1,4 @@
-<nav class="shadow-lg border-b"  x-data="{isOpen : false}   ">
+<nav class="shadow-md border-b bg-gray-50 fixed w-full"  x-data="{isOpen : false}   ">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
+          <div class=" flex items-center  ml-24">
             <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">View notifications</span>
@@ -87,9 +87,9 @@
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-        <x-nav-link href="posts" :active="request()->is('posts')">Blog</x-nav-link>
-        <x-nav-link href="about" :active="request()->is('about')">About</x-nav-link>
-        <x-nav-link href="contact" :active="request()->is('contact')">Contact</x-nav-link>
+        <x-nav-link href="/posts" :active="request()->is('posts')">Blog</x-nav-link>
+        <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
+        <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
 
       </div>
       <div class="border-t border-gray-700 pb-3 pt-4">
