@@ -9,6 +9,9 @@
         
  <div class="mx-auto max-w-screen-md sm:text-center">
   <form action=""> 
+    @if(request('category'))
+    <input type="hidden" name="category" value="{{ request('category') }}">
+    @endif
       <div v class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
           <div class="relative w-full">
               <label for="search" class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Search</label>
@@ -31,7 +34,7 @@
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8   lg:max-w-none lg:grid-cols-2 mt-10">
           
            
-            @foreach ($posts as $post)
+            @forelse ($posts as $post)
             <article class="flex   flex-col items-start justify-between border rounded-md p-5">
                 
                 <div class="flex  items-center gap-x-4 text-xs w-full">
@@ -70,11 +73,11 @@
                 
                 </div>
               </article>
-              @endforeach
-          
-          
-     
-            <!-- More posts... -->
+              @empty
+              <p class="text-center">Topik yang anda cari tidak ditemukan</p>
+              <a href="/posts" class="text-center text-blue-600">&laquo Kembali ke halaman bookshelf</a>
+              @endforelse
+ 
           </div>
       </div>
         <div class="mx-auto max-w-7xl ">
