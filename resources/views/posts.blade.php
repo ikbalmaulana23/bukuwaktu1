@@ -1,11 +1,16 @@
 <x-layout>
     <x-slot:title >  <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Bookshelf</h2>
-    <p class="mt-2 text-md leading-8 text-gray-600  border-b border-gray-200 ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ullam fuga deleniti vitae, explicabo recusandae.</p>
+    <p class="mt-2 text-md leading-8 text-gray-600  border-b border-gray-200 ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ullam fuga   deleniti vitae, explicabo recusandae.</p>
 
         </x-slot:title>
-    
-    <div class="bg-white  ">
-        <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8   lg:max-w-none lg:grid-cols-2 ">
+        <div class="bg-white  ">
+         
+
+        
+         
+
+        <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8   lg:max-w-none lg:grid-cols-2 mt-10">
+          
            
             @foreach ($posts as $post)
             <article class="flex   flex-col items-start justify-between border rounded-md p-5">
