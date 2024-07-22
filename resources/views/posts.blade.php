@@ -37,7 +37,7 @@
                 <div class="flex  items-center gap-x-4 text-xs w-full">
                     
                         <time datetime="2020-03-16" class="text-gray-500">{{ $post->created_at->format( 'j F Y') }}</time>
-                        <a href="/categories/{{ $post->category->slug }}" class="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $post->category->name }}</a>
+                        <a href="/posts?category={{ $post->category->slug }}" class="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $post->category->name }}</a>
                   
                   </div>
                   

@@ -13,11 +13,9 @@ Route::get('/', function () {
 });
 
 Route::get('posts', function () {
-    $posts = Post::latest();
-    if (request('search')) {
-        $posts->where('title', 'like', '%' . request('search', '%'));
-    }
-    return view('posts', ['title' => 'Blog', 'posts' => $posts->get()]);
+
+    //pencarian dengan local scope
+    return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search', 'category']))->latest()->get()]);
 });
 
 Route::get('about', function () {
