@@ -4,6 +4,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 
 
@@ -38,3 +39,9 @@ Route::get('/authors/{user:username}', function (User $user) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', ['title' =>  'Category : ' . $category->name, 'posts' => $category->posts]);
 });
+
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::get('register', [AuthController::class, 'daftar'])->name('register');
+Route::post('register.post', [AuthController::class, 'register'])->name('register.post');
+Route::post('login.post', [AuthController::class, 'login'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
