@@ -1,10 +1,9 @@
 <x-layout>
-    <x-slot:title >  <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Bookshelf</h2>
-    <p class="mt-2 text-md leading-8 text-gray-600  border-b border-gray-200 ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ullam fuga   deleniti vitae, explicabo recusandae.</p>
-
-        </x-slot:title>
+    
         <div class="bg-white  ">
-         
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Bookshelf</h2>
+          <p class="my-2 text-md leading-8 text-gray-600  border-b border-gray-200 ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ullam fuga   deleniti vitae, explicabo recusandae.</p>
+      
 
         
  <div class="mx-auto max-w-screen-md sm:text-center">
@@ -39,7 +38,7 @@
                 
                 <div class="flex  items-center gap-x-4 text-xs w-full">
                     
-                        <time datetime="2020-03-16" class="text-gray-500">{{ $post->created_at->format( 'j F Y') }}</time>
+                        {{-- <time datetime="2020-03-16" class="text-gray-500">{{ $post->created_at->format( 'j F Y') }}</time> --}}
                         <a href="/posts?category={{ $post->category->slug }}" class="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $post->category->name }}</a>
                   
                   </div>
@@ -87,21 +86,6 @@
       
 
 
-      {{-- @dd($posts) --}}
-    {{-- @foreach ($posts as $post)
-    <article class="py-8 max-w-screen-md border-b border-gray-300">
-        <a href="/posts/{{ $post['id'] }}" class="mb-3 text-3xl tracking-tight font-bold text-gray-900 hover:text-gray-700">{{ $post['title'] }}</a>
-        <div class="text-base ">
-         
-            By
-            <a href="/authors/{{ $post->author->username }}" class="text-base text-gray-600 mt-2 hover:underline">{{ $post->author->name }}</a> in <a href="/categories/{{ $post->category->slug }}" class="text-base text-gray-600 mt-2 hover:underline">{{ $post->category->name }}</a> | {{ $post->created_at->format( 'j F Y') }}
-
-
-        </div>
-        <p class="my-4 font-light">{{ Str::limit($post['body'], 150) }}</p>
-        <a href="posts/{{ $post['id'] }}" class="font-medium text-blue-600 hover:underline" >Read More &raquo;</a>
-    </article>  
-    @endforeach --}}
     
    
 </x-layout>

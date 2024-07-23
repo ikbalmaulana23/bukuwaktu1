@@ -2,9 +2,9 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
-          <div class="flex-shrink-0">
+          <a href="/" class="flex-shrink-0">
             <img class="h-14  " src="img/logo.png" alt="Your Company">
-          </div>
+          </a>
           
         </div>
         <div class="hidden md:block">

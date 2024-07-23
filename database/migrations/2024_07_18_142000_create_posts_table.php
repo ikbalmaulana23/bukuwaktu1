@@ -23,7 +23,7 @@ return new class extends Migration
                 indexName: 'posts_category_id'
             );
             $table->string('slug')->unique();
-            $table->string('body');
+            $table->text('body');
             $table->timestamps();
         });
 
