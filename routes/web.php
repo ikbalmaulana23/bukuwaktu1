@@ -6,7 +6,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
-
+use App\Http\Controllers\DashboardController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 Route::get('/', function () {
@@ -44,4 +45,9 @@ Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('register', [AuthController::class, 'daftar'])->name('register');
 Route::post('register.post', [AuthController::class, 'register'])->name('register.post');
 Route::post('login.post', [AuthController::class, 'login'])->name('login.post');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::middleware('user')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});

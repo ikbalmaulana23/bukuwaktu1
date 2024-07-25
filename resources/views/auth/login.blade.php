@@ -11,9 +11,6 @@ Halaman Login
 @endsession
 
 
-
-
-
 <main class=" md:mx-auto md:w-full md:max-w-sm mx-5 pt-32">
 
   <h1 class="pt-5 font-bold text-2xl ">Login to <span class="underline">bukuwaktu.com</span></h1>
