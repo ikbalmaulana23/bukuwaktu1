@@ -16,9 +16,10 @@ class guest
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         if (Auth::check()) {
-            return $next($request);
+            return redirect('/');
         }
-        return redirect()->route('login');
+        return $next($request);
     }
 }

@@ -24,5 +24,7 @@ class DatabaseSeeder extends Seeder
             Category::all(),
             User::all(),
         ])->create();
+
+        $this->call(BukuFavoritSeeder::class);
     }
 }
