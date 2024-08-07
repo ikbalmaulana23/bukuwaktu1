@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
 
             'name' => 'Ikbal Maulana',
             'username' => 'ikbalmaulana',
+            'bio' => 'walking with gods clue',
             'email' => 'ikbalmaulanaalfatih@gmail.com',
             'password' => '12345678'
 
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
 
             'name' => 'fizi',
             'username' => 'fizi',
+            'bio' => 'someone',
             'email' => 'fizi@gmail.com',
             'password' => '12345678'
 

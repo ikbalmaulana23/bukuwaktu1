@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -52,4 +53,7 @@ Route::middleware('user')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/follow/{user}', [FollowerController::class, 'follow'])->name('follow');
+    Route::post('/unfollow/{user}', [FollowerController::class, 'unfollow'])->name('unfollow');
+    Route::get('/follower', [FollowerController::class, 'show']);
 });

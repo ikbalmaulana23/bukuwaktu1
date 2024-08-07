@@ -14,25 +14,25 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Web Design',
-            'slug' => 'web-design'
+            'name' => 'Self Development',
+            'slug' => 'self-development'
         ]);
 
         Category::create([
-            'name' => 'Debuging',
-            'slug' => 'Debuging'
+            'name' => 'Novel',
+            'slug' => 'novel'
         ]);
         Category::create([
-            'name' => 'UI/UX',
-            'slug' => 'UI/UX'
+            'name' => 'Psikologi',
+            'slug' => 'psikologi'
         ]);
         Category::create([
-            'name' => 'Machine Learning',
-            'slug' => 'machinge-learning'
+            'name' => 'Sains',
+            'slug' => 'sains'
         ]);
         Category::create([
-            'name' => 'Data Structure',
-            'slug' => 'data-structure'
+            'name' => 'Kedokteran',
+            'slug' => 'kedokteran'
         ]);
     }
 }

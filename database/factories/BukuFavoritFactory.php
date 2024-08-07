@@ -23,7 +23,7 @@ class BukuFavoritFactory extends Factory
             'id_profile' => $this->faker->numberBetween(1, 10),
             'judul_buku' => $this->faker->sentence,
             'penulis' => $this->faker->name,
-            'rating' => $this->faker->numberBetween(1, 5),
+            'rating' => $this->faker->numberBetween(3, 5),
         ];
     }
 }
