@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('author_id')->constrained(
+            $table->foreignId('author_id')->nullable()->constrained(
                 table: 'users',
                 indexName: 'posts_author_id'
             );
-            $table->foreignId('category_id')->constrained(
+            $table->foreignId('category_id')->nullable()->constrained(
                 table: 'categories',
                 indexName: 'posts_category_id'
             );

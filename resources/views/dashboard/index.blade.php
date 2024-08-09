@@ -14,7 +14,7 @@
   <section class="flex flex-col w-2/12 bg-slate-800 ">
     
     <a href="/dashboard" class="w-30 mx-auto mt-12 mb-20 p-4 flex bg-indigo-600 rounded-2xl text-white">
-      <i class="fa-solid fa-house" style="color: #ffffff;"></i><p class="ml-4">  Dahsboard</p> 
+      <i class="fa-solid fa-house" style="color: #ffffff;"></i><p class="ml-4">  Dashboard</p> 
     </a>
     <nav class="relative flex flex-col py-4 items-center bg-slate-800">
       <a href="/newpost" class="relative w-16 p-4 bg-purple-100 text-purple-900 rounded-2xl mb-4">
@@ -106,8 +106,62 @@
         </ul>
       </div>
     </div>
-    <div class="border py-3">
-<h1>hello world</h1>
+    <div class=" py-3">
+
+      <form action="{{ route('uploadbuku') }}" method="POST">
+        @csrf
+        <div class="space-y-12">
+          <div class="border-b border-gray-900/10 pb-12">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div class="sm:col-span-4">
+                <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Judul</label>
+                <div class="mt-2">
+                  <div class="flex rounded-md sm:max-w-md gap-3">
+                    
+                    <input type="text" name="title" id="title" autocomplete="title" class="block flex-1 border bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-60" > 
+
+                    <select name="category_id" id="" class="mx-10 block flex-1 border bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-3">
+                      <option value="1">Self Development</option>
+                      <option value="2">Fiction</option>
+                      <option value="3">Buku Kiri</option>
+                      <option value="4">Sains</option>
+                    </select>
+
+                    <input type="hidden" name="author_id" class="mx-10" value="{{ Auth::id() }}">
+                   
+                  </div>
+                
+            
+                </div>
+              </div>
+
+              <div class="col-span-full">
+                <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Isi Buku</label>
+                <div class="mt-2">
+                  <textarea id="body" name="body" rows="10" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                </div>
+              
+              </div>
+
+            
+
+            
+            </div>
+          </div>
+
+        
+
+        
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+          <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Upload Buku</button>
+        </div>
+      </form>
+
     </div>
     
  

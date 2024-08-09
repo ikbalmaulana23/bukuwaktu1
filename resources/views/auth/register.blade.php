@@ -11,7 +11,7 @@ Halaman Registrasi
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <h1 class="mt-5 py-5 font-bold text-2xl ">Register to <span class="underline">bukuwaktu.com</span></h1>
 
-      <form class="space-y-4" action="{{ route('register.post') }}" method="POST">
+      <form class="space-y-4" action="{{ route('register.post') }}" method="POST" >
         @csrf
         <div>
           {{-- <label for="" class="mx-3 text-red-500">Nama : <span>{{ $errors->first('name') }}</span></label>

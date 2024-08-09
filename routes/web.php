@@ -56,4 +56,5 @@ Route::middleware('user')->group(function () {
     Route::post('/follow/{user}', [FollowerController::class, 'follow'])->name('follow');
     Route::post('/unfollow/{user}', [FollowerController::class, 'unfollow'])->name('unfollow');
     Route::get('/follower', [FollowerController::class, 'show']);
+    Route::post('/uploadbuku', [DashboardController::class, 'uploadbuku'])->name('uploadbuku');
 });

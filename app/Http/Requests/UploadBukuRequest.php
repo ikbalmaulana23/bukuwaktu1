@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class UploadBukuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,10 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|min:5',
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-
-            'email.required' => 'email tidak boleh dikosong',
-            'password.min' => 'Minimal password 8 digit',
-            'password.required' => 'password tidak boleh kosong'
+            'title' => 'required',
+            'category_id' => 'required',
+            'body' => 'required',
+            'author_id' => 'required'
         ];
     }
 }

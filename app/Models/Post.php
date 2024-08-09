@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'slug', 'body'];
+    protected $fillable = ['title', 'author', 'slug', 'body', 'author_id', 'category_id'];
 
     protected $with = ['author', 'category'];
 
@@ -37,14 +37,14 @@ class Post extends Model
 
         $query->when(
             $filters['search'] ?? false,
-            fn ($query, $search) =>
+            fn($query, $search) =>
             $query->where('title', 'like', '%' . $search . '%')
         );
 
         $query->when(
             $filters['category'] ?? false,
-            fn ($query, $category) =>
-            $query->whereHas('category', fn ($query) => $query->where('slug', $category))
+            fn($query, $category) =>
+            $query->whereHas('category', fn($query) => $query->where('slug', $category))
         );
     }
 }
