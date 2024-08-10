@@ -3,8 +3,10 @@
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
@@ -16,11 +18,11 @@ Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
 });
 
-Route::get('posts', function () {
+Route::get('posts', [PostController::class, 'index']);
 
-    //pencarian dengan local scope
-    return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search', 'category']))->latest()->get()]);
-});
+// Route::get('posts', function () {
+//     return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search', 'category']))->latest()->get()]);
+// });
 
 Route::get('about', function () {
     return view('about', ['title' => 'About', 'nama' => 'ikbal maulana']);
@@ -57,4 +59,15 @@ Route::middleware('user')->group(function () {
     Route::post('/unfollow/{user}', [FollowerController::class, 'unfollow'])->name('unfollow');
     Route::get('/follower', [FollowerController::class, 'show']);
     Route::post('/uploadbuku', [DashboardController::class, 'uploadbuku'])->name('uploadbuku');
+    Route::get('/notifications', function () {
+        $notifications = Auth::user()->unreadNotifications;
+
+        // Tandai sebagai telah dibaca
+        Auth::user()->unreadNotifications->markAsRead();
+
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => Auth::user()->unreadNotifications->count(),
+        ]);
+    });
 });

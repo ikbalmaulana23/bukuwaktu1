@@ -23,6 +23,23 @@
         </main>
       </div>
 
-  
+  <script>
+    document.getElementById('notification-button').addEventListener('click', function () {
+    fetch('/notifications')
+        .then(response => response.json())
+        .then(data => {
+            let notificationList = document.getElementById('notification-list');
+            notificationList.innerHTML = '';  // Kosongkan daftar sebelumnya
+            data.notifications.forEach(notification => {
+                let li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `<a href="/posts/${notification.data.post_id}">${notification.data.author_name} uploaded a new post: ${notification.data.post_title}</a>`;
+                notificationList.appendChild(li);
+            });
+            document.getElementById('notification-count').innerText = data.unread_count;
+        });
+});
+
+  </script>
 </body>
 </html>

@@ -20,7 +20,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
+            'title' => implode(' ', fake()->words(rand(2, 4))),
             'author_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => Str::slug(fake()->sentence()),
