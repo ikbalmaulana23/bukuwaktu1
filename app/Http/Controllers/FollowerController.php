@@ -20,6 +20,19 @@ class FollowerController extends Controller
         return back();
     }
 
+    public function follow1($id)
+    {
+        $user = User::findOrFail($id);
+        $currentUser = auth()->user();
+
+        if (!$currentUser->followings()->where('followed_id', $id)->exists()) {
+            $currentUser->followings()->attach($user);
+        }
+
+        return redirect()->back()->with('success', 'You have followed this user.');
+    }
+
+
     // public function show($id)
     // {
     //     $user = User::findOrFail($id);

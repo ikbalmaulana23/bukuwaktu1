@@ -31,8 +31,28 @@ class CategorySeeder extends Seeder
             'slug' => 'sains'
         ]);
         Category::create([
-            'name' => 'Kedokteran',
-            'slug' => 'kedokteran'
+            'name' => 'Fiksi',
+            'slug' => 'fiksi'
+        ]);
+        Category::create([
+            'name' => 'Pergerakan',
+            'slug' => 'pergerakan'
+        ]);
+        Category::create([
+            'name' => 'Filsafat',
+            'slug' => 'Filsafat'
+        ]);
+        Category::create([
+            'name' => 'Romance',
+            'slug' => 'romance'
+        ]);
+        Category::create([
+            'name' => 'Health',
+            'slug' => 'health'
+        ]);
+        Category::create([
+            'name' => 'Others',
+            'slug' => 'others'
         ]);
     }
 }

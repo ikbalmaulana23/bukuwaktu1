@@ -22,6 +22,9 @@
           </div>
         </main>
       </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     
+    
 
   <script>
     document.getElementById('notification-button').addEventListener('click', function () {
@@ -39,6 +42,23 @@
             document.getElementById('notification-count').innerText = data.unread_count;
         });
 });
+// $(document).ready(function() {
+//               $('#refresh-quote').click(function() {
+//                   $.ajax({
+//                       url: '{{ route('quotes.refresh') }}',
+//                       type: 'POST',
+//                       data: {
+//                           _token: '{{ csrf_token() }}'
+//                       },
+//                       success: function(response) {
+//                           $('#quote').text(response.quote.text);
+//                       },
+//                       error: function(xhr) {
+//                           console.log('Error:', xhr.responseText);
+//                       }
+//                   });
+//               });
+//           });
 
   </script>
 </body>

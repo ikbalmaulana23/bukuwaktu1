@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
+
+    public function audiobooks()
+    {
+        return $this->hasMany(Audiobook::class, 'speaker_id'); // Periksa nama kolom di sini
+    }
 }

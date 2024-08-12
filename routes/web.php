@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -19,36 +21,45 @@ Route::get('/', function () {
 });
 
 Route::get('posts', [PostController::class, 'index']);
+Route::post('/quotes/refresh', [PostController::class, 'refreshQuote'])->name('quotes.refresh');
 
 // Route::get('posts', function () {
 //     return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search', 'category']))->latest()->get()]);
 // });
 
-Route::get('about', function () {
-    return view('about', ['title' => 'About', 'nama' => 'ikbal maulana']);
-});
+// Route::get('genre', function () {
+//     return view('genre', ['title' => 'genre', 'nama' => 'ikbal maulana']);
+// });
 
-Route::get('contact', function () {
-    return view('contact', ['title' => 'Contact']);
-});
+
+
+Route::get('genre', [GenreController::class, 'index']);
+
+
+// Route::get('audiobook', function () {
+//     return view('audiobook', ['title' => 'Audiobook']);
+// });
 
 Route::get('posts/{post}', function (Post $post) {
     return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
-Route::get('/authors/{user:username}', function (User $user) {
-    return view('posts', ['title' =>  count($user->posts) . ' Artikel by ' . $user->name, 'posts' => $user->posts]);
-});
-// Route::get('authors', [AuthorController::class, 'index']);
+// Route::get('/authors/{user:username}', function (User $user) {
+//     return view('category', ['title' =>  count($user->posts) . ' Artikel by ' . $user->name, 'posts' => $user->posts]);
+// });
+Route::get('authors/{user:username}', [AuthorController::class, 'index']);
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', ['title' =>  'Category : ' . $category->name, 'posts' => $category->posts]);
 });
 
+// Route::get('categories/{category:slug}', []);
+
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('register', [AuthController::class, 'daftar'])->name('register');
 Route::post('register.post', [AuthController::class, 'register'])->name('register.post');
 Route::post('login.post', [AuthController::class, 'login'])->name('login.post');
+Route::resource('audiobooks', AudiobookController::class);
 
 
 Route::middleware('user')->group(function () {
@@ -57,6 +68,7 @@ Route::middleware('user')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/follow/{user}', [FollowerController::class, 'follow'])->name('follow');
     Route::post('/unfollow/{user}', [FollowerController::class, 'unfollow'])->name('unfollow');
+    Route::post('/follow1/{id}', [ProfileController::class, 'follow1'])->name('follow1');
     Route::get('/follower', [FollowerController::class, 'show']);
     Route::post('/uploadbuku', [DashboardController::class, 'uploadbuku'])->name('uploadbuku');
     Route::get('/notifications', function () {

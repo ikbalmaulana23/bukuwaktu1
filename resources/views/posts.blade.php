@@ -23,8 +23,16 @@
           
             </form>
           </div>
-         
-          <p class="mb-10 text-md leading-8 text-gray-600 border-gray-200 ">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ullam fuga   deleniti vitae, explicabo recusandae.</p>
+         {{-- @dd($quote) --}}
+          <div class="container mx-auto pb-4 mb-4">
+            <p id="quote" class=" text-md leading-8 text-gray-600 border-gray-200">
+                {{ $quote['quote'] ?? 'Quote not found.' }}
+            </p>
+            <p class="text-gray-400">
+                — {{ $quote['author'] ?? 'Unknown author' }}
+            </p>
+            {{-- <button id="refresh-quote" class="bg-blue-500 text-white px-4 py-2 rounded">Generate New Quote</button> --}}
+        </div>
       
 
         

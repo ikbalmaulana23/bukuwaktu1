@@ -17,17 +17,17 @@
   <section class="flex flex-col w-2/12 bg-slate-800 ">
     
     <a href="/" class="w-30 mx-auto mt-12 mb-20 p-4 flex bg-indigo-600 rounded-2xl text-white">
-      <i class="fa-solid fa-house" style="color: #ffffff;"></i><p class="ml-4"> Bukuwaktu</p> 
+      <i class="fa-solid fa-house" style="color: #ffffff;"></i><p class="ml-4"> Buku Waktu</p> 
     </a>
     <nav class="relative flex flex-col py-4 items-center bg-slate-800">
-      <a href="/dashboard" class="relative w-16 p-4 bg-purple-100 text-purple-900 rounded-2xl mb-4">
+      <a href="/dashboard" class="w-16 p-4 border text-gray-100 rounded-2xl mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
             d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
         </svg>
        
       </a>
-      <a href="/audiobooks/create" class="w-16 p-4 border text-gray-100 rounded-2xl mb-4">
+      <a href="/audiobooks/create" class="relative w-16 p-4 bg-purple-100 text-purple-900 rounded-2xl mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
             d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -109,66 +109,59 @@
         </ul>
       </div>
     </div>
-    <div class=" py-3">
+    <div class="container mx-auto p-6">
+      <h1 class="text-2xl font-bold mb-6">Tambah Audiobook Baru</h1>
 
-      <form action="{{ route('uploadbuku') }}" method="POST">
-        @csrf
-        <div class="space-y-12">
-          <div class="border-b border-gray-900/10 pb-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+      @if ($errors->any())
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
 
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div class="sm:col-span-4">
-                <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Judul</label>
-                <div class="mt-2">
-                  <div class="flex rounded-md sm:max-w-md gap-3">
-                    
-                    <input type="text" name="title" id="title" autocomplete="title" class="block flex-1 border bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-60" > 
+      <form action="{{ route('audiobooks.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+          @csrf
 
-                    <select name="category_id" id="" class="mx-10 block flex-1 border bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-3">
-                      <option value="1">Self Development</option>
-                      <option value="2">Fiction</option>
-                      <option value="3">Buku Kiri</option>
-                      <option value="4">Sains</option>
-                    </select>
-
-                    <input type="hidden" name="author_id" class="mx-10" value="{{ Auth::id() }}">
-                   
-                  </div>
-                
-            
-                </div>
-              </div>
-
-              <div class="col-span-full">
-                <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Isi Buku</label>
-                <div class="mt-2">
-                    <input id="body" type="hidden" name="body">
-                    <trix-editor input="body" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></trix-editor>
-                </div>
-            </div>
-            
-              
-              </div>
-
-            
-
-            
-            </div>
+          <div>
+              <label for="title" class="block text-sm font-medium text-gray-700">Judul</label>
+              <input type="text" name="title" id="title" value="{{ old('title') }}" 
+                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 
+                     focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
           </div>
 
-        
+          <div>
+              <label for="cover" class="block text-sm font-medium text-gray-700">Cover (Gambar)</label>
+              <input type="file" name="cover" id="cover" 
+                     class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 
+                     rounded-md cursor-pointer focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
 
-        
+          <div>
+              <label for="file" class="block text-sm font-medium text-gray-700">File Audio (MP3/WAV)</label>
+              <input type="file" name="file" id="file" 
+                     class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 
+                     rounded-md cursor-pointer focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
 
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-          <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-          <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Upload Buku</button>
-        </div>
+          <div>
+              <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi</label>
+              <textarea name="description" id="description" rows="4" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 
+                        focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ old('description') }}</textarea>
+          </div>
+
+          <div>
+              <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent 
+                      shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 
+                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Simpan
+              </button>
+          </div>
       </form>
-
-    </div>
+  </div>
     
  
   </section>

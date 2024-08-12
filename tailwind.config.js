@@ -11,6 +11,9 @@ export default {
             fontFamily: {
                 sans: ["Inter var", ...defaultTheme.fontFamily.sans],
             },
+            rotate: {
+                270: "270deg",
+            },
         },
     },
     plugins: [],
