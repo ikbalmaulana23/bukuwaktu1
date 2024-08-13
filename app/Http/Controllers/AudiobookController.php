@@ -50,8 +50,9 @@ class AudiobookController extends Controller
 
 
     // Menampilkan audiobook
-    public function show(Audiobook $audiobook)
+    public function show($id)
     {
+        $audiobook = Audiobook::findOrFail($id);
         return view('audiobooks.show', compact('audiobook'));
     }
 }

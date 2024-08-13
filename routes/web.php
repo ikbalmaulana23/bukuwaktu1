@@ -48,6 +48,7 @@ Route::get('posts/{post}', function (Post $post) {
 //     return view('category', ['title' =>  count($user->posts) . ' Artikel by ' . $user->name, 'posts' => $user->posts]);
 // });
 Route::get('authors/{user:username}', [AuthorController::class, 'index']);
+Route::post('/profile/update-photo', [ProfileController::class, 'updateProfilePhoto'])->name('profile.update.photo');
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', ['title' =>  'Category : ' . $category->name, 'posts' => $category->posts]);
@@ -60,6 +61,7 @@ Route::get('register', [AuthController::class, 'daftar'])->name('register');
 Route::post('register.post', [AuthController::class, 'register'])->name('register.post');
 Route::post('login.post', [AuthController::class, 'login'])->name('login.post');
 Route::resource('audiobooks', AudiobookController::class);
+Route::get('/audiobooks/{id}', [AudiobookController::class, 'show'])->name('audiobooks.show');
 
 
 Route::middleware('user')->group(function () {

@@ -10,11 +10,12 @@ class AuthorController extends Controller
 {
     public function index(User $user)
     {
-
         $data = [
-            'AuthUser' => $user, // Pastikan $user dikirimkan ke view
-            'user' => Auth::user(), // Optional: Mengirimkan user yang sedang login
-            'posts' => $user->posts
+            'AuthUser' => $user, // Penulis post
+            'user' => Auth::user(), // User yang sedang login
+            'posts' => $user->posts,
+            'followerCount' => $user->followers()->count(), // Jumlah followers
+            'isFollowing' => Auth::check() && Auth::user()->following()->where('user_id', $user->id)->exists(), // Status following
         ];
 
         return view('category', $data);
