@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
 
             'name' => 'Ikbal Maulana',
             'username' => 'ikbalmaulana',
-            'bio' => 'walking with gods clue',
+            'bio' => 'Dingin Tapi Tidak Kejam 🐱‍🏍',
             'email' => 'ikbalmaulanaalfatih@gmail.com',
             'password' => '12345678'
 

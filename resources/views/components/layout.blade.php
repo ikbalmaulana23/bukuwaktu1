@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    #profilePhotoModal {
+        transition: opacity 0.3s ease;
+    }
+ 
+  
+</style>
 </head>
 <body class="h-full">
  
@@ -23,9 +31,6 @@
         </main>
       </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     
-    
-
   <script>
     document.getElementById('notification-button').addEventListener('click', function () {
     fetch('/notifications')
@@ -59,6 +64,26 @@
 //                   });
 //               });
 //           });
+
+
+document.getElementById('openModal').addEventListener('click', function() {
+        document.getElementById('profileModal').classList.remove('hidden');
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('profileModal').classList.add('hidden');
+    });
+
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('profileModal');
+        if (event.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
+    
+
+
 
   </script>
 </body>

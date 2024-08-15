@@ -17,12 +17,19 @@
 
 
 
-    <div class="flex justify-center my-5">
+    <div class="flex justify-center mb-5">
 
-        <div class="rounded-md border basis-2/6 p-3">
+        
+        <div class="rounded-md border basis-2/6 p-3 relative">
             <h1 class="text-center font-semibold text-lg">Halaman Profile</h1>
-            <div class="flex justify-center mt-4">
+            
+            <div class="flex justify-center mt-4 relative">
                 <img src="{{ $user->profile_photo ? asset('storage/profile_photos/' . $user->profile_photo) : asset('img/profile.jpeg') }}" class="rounded-full" width="150px" alt="Profile Photo">
+                
+                <!-- Tombol untuk membuka modal -->
+                <button id="openModal" class="absolute top-0 right-1/4 bg-white text-black p-1 rounded-full shadow-md">
+                    <i class="fas fa-edit m-1"></i>
+                </button>
             </div>
             
             <p class="text-center mt-2">{{ $user->name }}</p>
@@ -44,14 +51,39 @@
                     </form>
                 @endif
             </div>
-        
-            <!-- Form untuk mengubah foto profil -->
-            <form action="{{ route('profile.update.photo') }}" method="POST" enctype="multipart/form-data" class="mt-4 text-center">
-                @csrf
-                <input type="file" name="profile_photo" class="mb-2">
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">Ubah Foto Profil</button>
-            </form>
         </div>
+        
+        <!-- Modal -->
+        <div id="profileModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-5 rounded-lg shadow-lg w-96">
+                <h2 class="text-center font-semibold text-lg mb-4">Edit Profile</h2>
+                <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+        
+                    <div class="mb-4">
+                        <label for="profile_photo" class="block text-sm font-medium text-gray-700">Foto Profil</label>
+                        <input type="file" name="profile_photo" id="profile_photo" class="mt-1 block w-full">
+                    </div>
+        
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
+                        <input type="text" name="name" id="name" value="{{ $user->name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+        
+                    <div class="mb-4">
+                        <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
+                        <textarea name="bio" id="bio" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ $user->bio }}</textarea>
+                    </div>
+        
+                    <div class="flex justify-end">
+                        <button type="button" id="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">Batal</button>
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
         
     </div>
     <div class="flex justify-center gap-2">
@@ -65,7 +97,7 @@
                 @foreach($posts as $post)
                     <div class="bg-white shadow-md rounded p-4 mb-4">
                         <h2 class="text-xl font-bold">{{ $post->title }}</h2>
-                        <p>{{ $post->body }}</p>
+                        <p>{!! $post->body !!}</p>
                         <small class="text-gray-500">Posted on {{ $post->created_at->format('d M Y') }}</small>
                     </div>
                 @endforeach
@@ -85,10 +117,7 @@
                             <p class="text-gray-600">Oleh: {{ $audiobook->speaker->name ?? 'Unknown' }}</p>
                            
                             <p>{{ $audiobook->description }}</p>
-                            <audio controls class="w-full mt-2">
-                                <source src="{{ asset('storage/' . $audiobook->file_path) }}" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
+                           
                         </div>
                     @endforeach
                 @else

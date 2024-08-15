@@ -6,13 +6,18 @@
   @vite('resources/css/app.css')
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css'><link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <body class="flex bg-gray-100 min-h-screen">
   <aside class="hidden sm:flex sm:flex-col">
     <a href="/" class="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500">
-      <img src="{{ asset('img/logo.png') }}" alt="" class=" ">
+      <img src="{{ asset('img/logo.png') }}" alt="">
     </a>
     <div class="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
       <nav class="flex flex-col mx-4 my-6 space-y-4">
@@ -86,87 +91,63 @@
         </div>
       </div>
     </header>
-    <main class="p-6 sm:p-10 space-y-6">
-      <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-        <div class="mr-6">
-          <h1 class="text-4xl font-semibold mb-2">Dashboard Buku Waktu</h1>
-          <h2 class="text-gray-600 ml-0.5 italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
-        </div>
-        <div class="flex flex-wrap items-start justify-end -mb-3">
-         
-          <a href="/dashboard/posts" class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Buat Resume Buku Baru
-          </a>
+    <main class="px-6  ">
+     
 
+      
+    <div class="">
 
-          <a href="/audiobooks/create" class="inline-flex px-5 py-3 text-white bg-amber-600 hover:bg-amber-700  rounded-md ml-6 mb-3">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Upload Audibook Baru
-          </a>
-        </div>
-
-        
-      </div>
-      <div>
-       
-
-<h2>Your Posts</h2>
- 
-  <div class="grid grid-cols-3 w-full gap-2 p-3">
-  @foreach($posts as $post)  
-  <div class="bg-white p-3 mb-2 flex justify-between rounded-md shadow-sm"> 
-    
-  <div>
-    {{ $post->title }}
-  </div>
-
-  <!-- Edit button -->
-  <div class="">
-    <a href="{{ route('posts.edit', $post->id) }}" class="text-white bg-blue-600 rounded-md px-3 py-1">Edit</a>
-    <a href="{{ route('posts.destroy', $post->id) }}" class="text-white bg-red-600 rounded-md px-3 py-1">Delete</a>
-
-    
-    
-  </div>
-
-</div>
-  @endforeach
-</div>
-
-<h2>Your Audiobooks</h2>
-<div class="grid grid-cols-3 w-full gap-2 p-3">
-  @foreach($audiobooks as $audiobook)  
-  <div class="bg-white p-3 mb-2 flex justify-between rounded-md shadow-sm"> 
-    
-    <!-- Title of the Audiobook -->
-    <div>
-      {{ $audiobook->title }}
-    </div>
-
-    <!-- Edit and Delete buttons -->
-    <div>
-      <a href="{{ route('audiobooks.edit', $audiobook->id) }}" class="text-white bg-blue-600 rounded-md px-3 py-1">Edit</a>
-      <form action="{{ route('audiobooks.destroy', $audiobook->id) }}" method="POST" style="display:inline-block;">
+      <form action="{{ route('posts.update', $post->id) }}" method="POST">
         @csrf
-        @method('DELETE')
-        <button type="submit" class="text-white bg-red-600 rounded-md px-3 py-1" onclick="return confirm('Are you sure you want to delete this audiobook?');">Delete</button>
+        <div class="">
+            <div class="border-b border-gray-900/10 pb-12">
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-4">
+                        <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Judul</label>
+                        <div class="mt-2">
+                            <div class="flex rounded-md gap-3 w-full">
+                                <input type="text" name="title" id="title" autocomplete="title" class="flex-grow w-1/2 border bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" value="{{ old('title', $post->title) }}">
+    
+                                <select name="category_id" id="" class="mx-10 block flex-1 border bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-3">
+                                    <option value="1" {{ $post->category_id == 1 ? 'selected' : '' }}>Self Development</option>
+                                    <option value="2" {{ $post->category_id == 2 ? 'selected' : '' }}>Fiction</option>
+                                    <option value="3" {{ $post->category_id == 3 ? 'selected' : '' }}>Buku Kiri</option>
+                                    <option value="4" {{ $post->category_id == 4 ? 'selected' : '' }}>Sains</option>
+                                </select>
+    
+                                <input type="hidden" name="author_id" class="mx-10" value="{{ Auth::id() }}">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-span-full">
+                        <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Isi Buku</label>
+                        <div class="mt-2">
+                            <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
+                            <trix-editor input="body" class="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 h-72"></trix-editor>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update Buku</button>
+            </div>
+        </div>
     </form>
     
     </div>
+    
+ 
 
-  </div>
-  @endforeach
-</div>
-
-      </div>
     </main>
   </div>
 </body>
 <!-- partial -->
-
+  
+</body>
 </html>
+
+
+

@@ -1,8 +1,17 @@
 <x-layout>
   
-  <div class="p-5 border rounded-md w-96"> 
+  <div class="p-5 border rounded-md w-1/3"> 
       <!-- Profil Penulis -->
-      <div class="text-center mb-4">
+      <div class="text-center flex">
+
+        <div class="flex justify-center items-center ">
+          <img src="{{ $AuthUser->profile_photo ? asset('storage/profile_photos/' . $AuthUser->profile_photo) : asset('img/avatar.png') }}" 
+             alt="Profile Photo" 
+             class="w-48 h-auto rounded-md">
+        </div>
+        <div class="p-3 text-center">
+
+      
           <h2 class="text-2xl font-semibold">{{ $AuthUser->name }}</h2>
           <p class="text-gray-600">{{ $AuthUser->bio }}</p>
           <p class="mt-2 text-sm text-gray-500">Followers: {{ $followerCount }}</p>
@@ -16,6 +25,7 @@
                   </button>
               </form>
           @endif
+        </div>
       </div>
   </div>
 

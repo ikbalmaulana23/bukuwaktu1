@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Audiobook;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,21 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $userId = Auth::id();
+
+        // Get posts created by the logged-in user
+        $posts = Post::where('author_id', $userId)->get();
+
+        // Get audiobooks created by the logged-in user
+        $audiobooks = Audiobook::where('speaker_id', $userId)->get();
+
+        // Pass data to the view
+        return view('dashboard.index', compact('userId', 'posts', 'audiobooks'));
+    }
+
+    public function posts()
+    {
+        return view('dashboard.posts');
     }
     public function uploadbuku(UploadBukuRequest $request)
     {

@@ -55,4 +55,31 @@ class AudiobookController extends Controller
         $audiobook = Audiobook::findOrFail($id);
         return view('audiobooks.show', compact('audiobook'));
     }
+
+    public function edit(Audiobook $audiobook)
+    {
+        return view('audiobooks.edit', compact('audiobook'));
+    }
+
+    public function update(Request $request, Audiobook $audiobook)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'speaker_id' => 'required|integer',
+            'cover' => 'nullable|string|max:255',
+            'file_path' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $audiobook->update($validated);
+
+        return redirect()->route('audiobooks.index')->with('success', 'Audiobook berhasil diupdate!');
+    }
+
+    // Menghapus audiobook dari database
+    public function destroy(Audiobook $audiobook)
+    {
+        $audiobook->delete();
+        return redirect()->route('dashboard')->with('success', 'Audiobook berhasil dihapus!');
+    }
 }

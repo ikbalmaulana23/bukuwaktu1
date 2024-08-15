@@ -20,25 +20,28 @@ class ProfileController extends Controller
 
         return view('profile.index', compact('user', 'audiobooks', 'posts',));
     }
-    public function updateProfilePhoto(Request $request)
+    public function update(Request $request)
     {
-        $request->validate([
-            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
         $user = Auth::user();
 
-        // Hapus foto profil lama jika ada
-        if ($user->profile_photo) {
-            Storage::delete('public/profile_photos/' . $user->profile_photo);
+        $request->validate([
+            'profile_photo' => 'nullable|image|max:2048',
+            'name' => 'required|string|max:255',
+            'bio' => 'nullable|string|max:500',
+        ]);
+
+        if ($request->hasFile('profile_photo')) {
+            if ($user->profile_photo) {
+                Storage::delete('public/profile_photos/' . $user->profile_photo);
+            }
+            $fileName = $request->file('profile_photo')->store('public/profile_photos');
+            $user->profile_photo = basename($fileName);
         }
 
-        // Simpan foto profil baru
-        $imageName = time() . '.' . $request->profile_photo->extension();
-        $request->profile_photo->storeAs('public/profile_photos', $imageName);
+        $user->name = $request->input('name');
+        $user->bio = $request->input('bio');
+        $user->save();
 
-        $user->update(['profile_photo' => $imageName]);
-
-        return back()->with('success', 'Foto profil berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }
