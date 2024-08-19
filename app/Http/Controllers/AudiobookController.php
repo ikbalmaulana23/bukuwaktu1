@@ -63,23 +63,42 @@ class AudiobookController extends Controller
 
     public function update(Request $request, Audiobook $audiobook)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'speaker_id' => 'required|integer',
-            'cover' => 'nullable|string|max:255',
-            'file_path' => 'required|string|max:255',
+        $request->validate([
+            'title' => 'nullable|string|max:255',
+            'file' => 'nullable|mimes:mp3,wav|max:20480',
+            'cover' => 'nullable|image|max:3048',
             'description' => 'nullable|string',
         ]);
 
-        $audiobook->update($validated);
+        $user = Auth::user(); // Dapatkan user yang sedang login
+
+        // Update file audio jika ada file baru
+        if ($request->hasFile('file')) {
+            $filePath = $request->file('file')->store('audiobooks', 'public');
+            $audiobook->file_path = $filePath;
+        }
+
+        // Update cover jika ada cover baru
+        if ($request->hasFile('cover')) {
+            $coverPath = $request->file('cover')->store('audiobooks/covers', 'public');
+            $audiobook->cover = $coverPath;
+        }
+
+        // Update field lainnya
+        $audiobook->title = $request->input('title', $audiobook->title);
+        $audiobook->speaker_id = $user->id; // Set speaker_id ke ID user yang sedang login
+        $audiobook->description = $request->input('description', $audiobook->description);
+
+        $audiobook->save(); // Simpan perubahan
 
         return redirect()->route('audiobooks.index')->with('success', 'Audiobook berhasil diupdate!');
     }
+
 
     // Menghapus audiobook dari database
     public function destroy(Audiobook $audiobook)
     {
         $audiobook->delete();
-        return redirect()->route('dashboard')->with('success', 'Audiobook berhasil dihapus!');
+        return redirect('/dashboard/audiobooks')->with('success', 'Audiobook berhasil dihapus!');
     }
 }

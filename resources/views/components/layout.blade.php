@@ -18,18 +18,24 @@
 </head>
 <body class="h-full">
  
-    <div class="min-h-full">
-      <x-navbar></x-navbar>
+  <div class="min-h-full">
+    <x-navbar></x-navbar>
 
-        
-        
-        <main>
-          
-          <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 pt-28">
-           {{$slot}}
-          </div>
-        </main>
-      </div>
+    <main>
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 pt-28">
+            {{$slot}}
+        </div>
+    </main>
+
+    
+</div>
+<footer class="bg-gray-200  py-3">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm">
+          © {{ date('Y') }} bukuwaktu. All rights reserved.
+      </p>
+  </div>
+</footer>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     document.getElementById('notification-button').addEventListener('click', function () {
@@ -81,8 +87,34 @@ document.getElementById('openModal').addEventListener('click', function() {
         }
     });
 
-    
+    document.getElementById('prev').addEventListener('click', function() {
+    document.getElementById('slider').scrollBy({
+        left: -200, // Sesuaikan jarak scroll ke kiri
+        behavior: 'smooth'
+    });
+});
 
+document.getElementById('next').addEventListener('click', function() {
+    document.getElementById('slider').scrollBy({
+        left: 200, // Sesuaikan jarak scroll ke kanan
+        behavior: 'smooth'
+    });
+});
+
+
+document.getElementById('prev-audiobook').addEventListener('click', function() {
+    document.getElementById('audiobook-slider').scrollBy({
+        left: -200, // Sesuaikan jarak scroll ke kiri
+        behavior: 'smooth'
+    });
+});
+
+document.getElementById('next-audiobook').addEventListener('click', function() {
+    document.getElementById('audiobook-slider').scrollBy({
+        left: 200, // Sesuaikan jarak scroll ke kanan
+        behavior: 'smooth'
+    });
+});
 
 
   </script>

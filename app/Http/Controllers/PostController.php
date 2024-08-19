@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Audiobook;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -10,6 +11,18 @@ use Illuminate\Support\Facades\Http;
 
 class PostController extends Controller
 {
+
+    public function home()
+    {
+        $data = [
+            'title' => 'home',
+            'posts' => Post::latest()->take(10)->get(),
+            'audiobooks' => Audiobook::latest()->take(5)->get(),
+
+        ];
+        return view('home', $data);
+    }
+
     public function index()
     {
         $data = [
@@ -21,13 +34,7 @@ class PostController extends Controller
         return view('posts', $data);
     }
 
-    // public function refreshQuote(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         $quote = $this->fetchQuote();
-    //         return response()->json(['quote' => $quote]);
-    //     }
-    // }
+
 
     private function fetchQuote()
     {

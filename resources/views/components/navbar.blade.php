@@ -13,7 +13,6 @@
             <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
             <x-nav-link href="/posts" :active="request()->is('posts')">Buku</x-nav-link>
             <x-nav-link href="/genre" :active="request()->is('genre')">Genre</x-nav-link>
-            
             <x-nav-link href="/audiobooks" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
             
           </div>
@@ -65,8 +64,8 @@
                       id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>
                   <img class="h-8 w-8 rounded-full" 
-                       src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' }}" 
-                       alt="">
+                  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar.png') }}" 
+                  alt="Profile Photo">
               </button>
               
               <!-- User Dropdown -->

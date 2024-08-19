@@ -55,23 +55,11 @@
                    
 
             @forelse ($posts as $post)
-            <article class="flex   flex-col items-start justify-between border rounded-md p-5">
-                
-                {{-- <div class="flex  items-center gap-x-4 text-xs w-full">
-                        <a href="/posts?category={{ $post->category->slug }}" class="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $post->category->name }}</a>
-                  
-                  </div> --}}
-                  
-                  
-                <div>
-                  
-                </div>
-               
-                
-                   
+            <article class="flex   flex-col items-start justify-between border rounded-md p-5">     
                 <div class="w-full mb-2">
-                    <img src="{{ asset('img/bukuasli1.png') }}" class="object-cover h-60 object-left-bottom w-full rounded-lg " alt="gambar">
-                </div>
+                  <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="object-cover h-60 object-left-bottom w-full rounded-lg" alt="gambar">
+              </div>
+              
                
                 <div class="group relative">
                   
@@ -84,7 +72,7 @@
           
                 </div>
                 <a href="/authors/{{ $post->author->username }}" class="text-xs text-gray-600 mb-3  mt-1 " > Summarized by
-                  <span class="absolute  font-semibold text-gray-900 mx-2"> {{ $post->author->name }}   </span>
+                  <span class="absolute  font-semibold text-gray-900 mx-2"> {{ Str::limit( $post->author->name, 20) }}   </span>
                
                 </a>  
               </article>
