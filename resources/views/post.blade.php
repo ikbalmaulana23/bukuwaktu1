@@ -2,11 +2,11 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     
 
-    <article class="py-8 border-b border-gray-300 flex gap-6">
-        <div class="basis-1/4">
+    <article class="pb-8 lg:py-8 border-b border-gray-300 grid grid-cols-1  lg:flex gap-6">
+        <div class="lg:basis-1/4 flex justify-center">
             <img src="{{ asset('img/bukuasli1.png') }}" alt="" class="h-60">
         </div>
-        <div class="basis-3/4">
+        <div class="lg:basis-3/4">
             <h1 class="mb-3 text-3xl tracking-tight font-bold text-gray-900 ">{{ $post['title'] }}</h1>
             <div class="">
                By

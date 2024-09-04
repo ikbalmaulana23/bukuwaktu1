@@ -5,7 +5,7 @@
 
     <h1 class="text-lg font-semibold py-3"></h1>
     
-    <div class="grid grid-cols-5 gap-2 mb">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-2 ">
         @foreach ($category as $item)
         @php
             $randomImage = $images[array_rand($images)];

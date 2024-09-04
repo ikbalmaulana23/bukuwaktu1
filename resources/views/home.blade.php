@@ -19,7 +19,7 @@
       <img class="w-full p-1" src="img/buku6.png" />
     </div>
     <div class="m-2 basis-1/2 " >
-      <div class="text-7xl font-serif p-5 ">
+      <div class="text-2xl lg:text-7xl font-serif p-5 ">
       <h1>SHARE THE</h1>
       <h1>INSIGHT FROM</h1>
       <h1>THE BOOK</h1>

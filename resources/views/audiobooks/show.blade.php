@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="grid grid-cols-4">
+   <div class="grid lg:grid-cols-4 grid-cols-1">
     <div class="p-4 border rounded">
         <h2 class="text-xl font-bold mb-2">{{ $audiobook->title }}</h2>
         <p class="text-gray-600 mb-4">Oleh: {{ $audiobook->speaker->name }}</p>

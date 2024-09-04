@@ -36,17 +36,16 @@
       
 
         
- <div class="mx-auto max-w-screen-md sm:text-center">
-  
-  {{-- @dump(request('search'));  --}}
-</div>
-<a href="/posts" class="text-sm relative rounded-full bg-yellow-300 px-6 py-1.5 font-medium text-gray-600 hover:bg-yellow-400 mx-3">All</a>
+        <div class="sm:text-center flex flex-wrap gap-2 ">
+          <a href="/posts" class="text-sm relative rounded-full bg-yellow-300 px-6 py-1.5 font-medium text-gray-600 hover:bg-yellow-400">All</a>
+      
+          @foreach ($category as $item)
+              <a href="/posts?category={{ $item->slug }}" class="text-sm relative rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $item->name }}</a>
+          @endforeach
+      </div>
+      
+      
 
-@foreach ($category as $item)
-
-<a href="/posts?category={{ $item->slug }}" class="text-sm relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $item->name }}</a>
-
-@endforeach
 
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8   lg:max-w-none lg:grid-cols-4 mt-10">
            
@@ -57,7 +56,7 @@
             @forelse ($posts as $post)
             <article class="flex   flex-col items-start justify-between border rounded-md p-5">     
                 <div class="w-full mb-2">
-                  <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="object-cover h-60 object-left-bottom w-full rounded-lg" alt="gambar">
+                  <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class=" h-auto  w-full rounded-lg" alt="gambar">
               </div>
               
                
