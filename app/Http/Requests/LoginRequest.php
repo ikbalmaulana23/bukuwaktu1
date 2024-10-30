@@ -23,17 +23,18 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|min:5',
+            'password' => 'required|min:8', // Ubah dari min:5 menjadi min:8
         ];
     }
+
 
     public function messages(): array
     {
         return [
-
-            'email.required' => 'email tidak boleh dikosong',
-            'password.min' => 'Minimal password 8 digit',
-            'password.required' => 'password tidak boleh kosong'
+            'email.required' => 'Email tidak boleh dikosongkan',
+            'email.email' => 'Format email tidak valid',
+            'password.min' => 'Minimal password 8 karakter', // Sesuaikan dengan aturan min:8
+            'password.required' => 'Password tidak boleh kosong'
         ];
     }
 }

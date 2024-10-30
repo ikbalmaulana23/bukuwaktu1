@@ -18,18 +18,21 @@ class AuthController extends Controller
     }
     public function login(LoginRequest $r)
     {
+        $user = Auth::user();
+        // Tidak perlu memeriksa $r->validated() karena LoginRequest akan otomatis memvalidasi
+        if (Auth::guard('web')->attempt([
+            'email' => $r->email,
+            'password' => $r->password
+        ])) {
+            // Simpan data pengguna ke dalam sesi
 
-        if ($r->validated()) {
-            if (Auth::guard('web')->attempt([
-                'email' => $r->email,
-                'password' => $r->password
-            ])) {
-                return redirect('/')->with('pesan', 'berhasil login');
-            } else {
-                return back()->with('pesan', 'login gagal');
-            }
+
+            return redirect('/')->with('pesan', 'berhasil login');
+        } else {
+            return back()->with('pesan', 'login gagal');
         }
     }
+
 
 
 
@@ -57,6 +60,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return redirect('/');
+        return redirect('/')->with('pesan', 'berhasil logout');
     }
 }

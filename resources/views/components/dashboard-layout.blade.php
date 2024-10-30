@@ -16,25 +16,25 @@
   <aside class="hidden sm:flex sm:flex-col">
     <a href="/" class="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500">
       <img src="{{ asset('img/logosquare.png') }}" alt="" class="w-16 ">
-      
+
     </a>
     <div class="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
       <nav class="flex flex-col mx-4 my-6 space-y-4">
-       
-      
+
+
         <x-dashboard-link href="/dashboard" :active="request()->is('dashboard')">
             <p><i class="fa-solid fa-book fa-lg my-3"></i></p>
         </x-dashboard-link>
-        
+
         <x-dashboard-link href="/dashboard/audiobooks" :active="request()->is('dashboard/audiobooks')">
             <p><i class="fa-solid fa-headphones fa-lg my-3"></i></p>
         </x-dashboard-link>
-        
+
         <x-dashboard-link href="/dashboard/save" :active="request()->is('dashboard/save')">
             <p><i class="fa-solid fa-bookmark fa-lg my-3"></i></p>
         </x-dashboard-link>
-        
-        
+
+
       </nav>
       <div class="inline-flex items-center justify-center h-20 w-20 border-t border-gray-700">
         <button class="p-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
@@ -61,19 +61,20 @@
         </svg>
         <input type="text" role="search" placeholder="Search..." class="py-2 pl-10 pr-4 w-full border-4 border-transparent placeholder-gray-400 focus:bg-gray-50 rounded-lg" />
       </div>
-      <div class="flex flex-shrink-0 items-center ml-auto">
+      <div class="flex flex-shrink-0 items-center ml-auto" >
         <button class="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
           <span class="sr-only">User Menu</span>
           <div class="hidden md:flex md:flex-col md:items-end md:leading-tight">
-            <span class="font-semibold">Grace Simmons</span>
-            <span class="text-sm text-gray-600">Lecturer</span>
+            <span class="font-semibold">{{ $user->name }}</span>
+            {{-- <span class="text-sm text-gray-600">{{ $user->role }}</span> --}}
+        </div>
+
+          <div class="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden"  style="pointer-events: none;">
+            <div style="width:100%;height:0;padding-bottom:100%;position:relative;" ><iframe src="https://giphy.com/embed/xT77Y1T0zY1gR5qe5O" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
           </div>
-          <span class="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
-            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="user profile photo" class="h-full w-full object-cover">
-          </span>
           <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="hidden sm:block h-6 w-6 text-gray-300">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg> 
+          </svg>
         </button>
         <div class="border-l pl-3 ml-3 space-x-1">
           <button class="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
@@ -94,9 +95,9 @@
       </div>
     </header>
     <main class="p-6 sm:p-10 space-y-6">
-      
+
       {{ $slot }}
-   
+
     </main>
   </div>
 </body>

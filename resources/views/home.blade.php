@@ -2,15 +2,13 @@
 
 <x-layout>
 <x-slot:title>{{ $title }}</x-slot:title>
-  
+
 <div>
     <section id="landing-page">
-      
 
-    <div class="flex flex-row mb-10">
-      <div class="m-2 columns-3 basis-1/2 " >
-      
-    
+
+    <div class="md:flex md:flex-row mb-10">
+      <div class="m-2 columns-3 basis-1/2 hidden md:block" >
       <img class="w-full p-1" src="img/buku1.png" />
       <img class="w-full p-1" src="img/buku2.png" />
       <img class="w-full p-1" src="img/buku3.png" />
@@ -19,7 +17,7 @@
       <img class="w-full p-1" src="img/buku6.png" />
     </div>
     <div class="m-2 basis-1/2 " >
-      <div class="text-2xl lg:text-7xl font-serif p-5 ">
+      <div class=" text-4xl lg:text-7xl font-serif p-5 ">
       <h1>SHARE THE</h1>
       <h1>INSIGHT FROM</h1>
       <h1>THE BOOK</h1>
@@ -27,28 +25,28 @@
       <h1>READ</h1>
 
       </div>
-    
+
       <div class="flex justify-center">
-        <a href="#library" class="px-3 py-2 bg-slate-950 rounded-full  flex justify-between text-white  hover:translate-y-2 duration-300 ease-in-out shadow-md">Scroll  Down  <i class="fa-solid fa-arrow-down m-1" style="color: #ffffff;"></i></a> 
-    
+        <a href="#library" class="px-3 py-2 bg-slate-950 rounded-full  flex justify-between text-white  hover:translate-y-2 duration-300 ease-in-out shadow-md">Scroll  Down  <i class="fa-solid fa-arrow-down m-1" style="color: #ffffff;"></i></a>
+
       </div>
     </div>
 
 
-   
-  
+
+
 
 
 
       </div>
     </section>
 
-     
+
     <section id="library" class="mb-28 my-10 rounded-lg p-2 ">
 
-      
+
         <h1 class="text-3xl font-serif m-6 text-center my-2">Recomended for you</h1>
-        
+
         <div class="relative mt-10">
           <!-- Slider Container -->
           <div id="slider" class="flex overflow-x-scroll scroll-smooth gap-3 ">
@@ -69,7 +67,7 @@
               </article>
               @endforeach
           </div>
-      
+
           <!-- Navigation Buttons -->
           <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-100  p-2 rounded-full hover:bg-gray-200 mx-3 ">
             <i class="fa-solid fa-chevron-left px-2 "></i>
@@ -93,7 +91,7 @@
             </a>
             @endforeach
         </div>
-    
+
         <!-- Navigation Buttons -->
         <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-100  p-2 rounded-full hover:bg-gray-200 mx-3 ">
           <i class="fa-solid fa-chevron-left px-2 "></i>
@@ -102,15 +100,15 @@
           <i class="fa-solid fa-chevron-right px-2"></i>
         </button>
     </div>
-    
+
     </section>
-      
+
       <style>
           #slider {
               -ms-overflow-style: none;  /* Internet Explorer 10+ */
               scrollbar-width: none;  /* Firefox */
           }
-      
+
           #slider::-webkit-scrollbar {
               display: none;  /* Safari and Chrome */
           }
@@ -124,11 +122,11 @@
 }
 
       </style>
-      
-         
 
-          
-    
+
+
+
+
           {{-- <div class="flex flex-col rounded-md border p-3">
             <a href="" class="font-bold text-2xl  hover:underline ">Good Vibes Good Life</a>
             <p class="text-xs mb-2">by: Anonim </p>
@@ -143,16 +141,44 @@
           </div>
 
           --}}
-         
 
-    
+
+
     </section>
 
 
 
 </div>
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if(session('pesan') == 'berhasil login')
+            Swal.fire({
 
+                text: 'Selamat datang kembali!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                width: '400px'
+            });
+        @elseif(session('pesan') == 'login gagal')
+            Swal.fire({
 
-</div>
+                text: 'Email atau password salah!',
+                icon: 'error',
+                confirmButtonText: 'Coba Lagi',
+                width: '400px'
+            });
+        @elseif(session('pesan') == 'berhasil logout')
+            Swal.fire({
+
+                text: 'Anda telah logout.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                width: '400px'
+            });
+        @endif
+    </script>
+    @endsection
+
 
 </x-layout>

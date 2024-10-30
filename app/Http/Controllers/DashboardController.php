@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use App\Models\Audiobook;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -16,16 +17,18 @@ class DashboardController extends Controller
     {
         $userId = Auth::id();
 
-        // Get posts created by the logged-in user
+        $user = Auth::user(); // atau metode lain untuk mendapatkan data pengguna
+
         $posts = Post::where('author_id', $userId)->get();
 
         // Pass data to the view
-        return view('dashboard.index', compact('userId', 'posts'));
+        return view('dashboard.index', compact('userId', 'posts', 'user'));
     }
 
     public function posts()
     {
-        return view('dashboard.posts');
+        $categories = Category::all(); // Ambil semua kategori dari database
+        return view('dashboard.posts', compact('categories'));
     }
     public function uploadbuku(UploadBukuRequest $request)
     {
@@ -56,7 +59,7 @@ class DashboardController extends Controller
             $follower->notify(new NewPostNotification($post));
         }
 
-        return redirect('/')->with('pesan', 'Upload Buku berhasil');
+        return redirect('/posts')->with('pesan', 'Upload Buku berhasil');
     }
 
 

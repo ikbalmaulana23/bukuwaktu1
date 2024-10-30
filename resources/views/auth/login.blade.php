@@ -5,16 +5,9 @@ Halaman Login
 @endsection
 
 @section('content')
-
-@if(session('pesan'))
-<span class="w-full text-red-500">{{ session('pesan') }}</span>
-@endsession
-
-
-<main class=" md:mx-auto md:w-full md:max-w-sm mx-5 pt-32">
-
-  <h1 class="pt-5 font-bold text-2xl ">Login to <span class="underline">bukuwaktu.com</span></h1>
-  <form class="space-y-5 " action="{{ route('login.post') }}" method="POST">
+<main class="md:mx-auto md:w-full md:max-w-sm mx-5 pt-32">
+  <h1 class="pt-5 font-bold text-2xl">Login to <span class="underline">bukuwaktu.com</span></h1>
+  <form class="space-y-5" action="{{ route('login.post') }}" method="POST">
 
     @csrf
     <div>
@@ -44,8 +37,19 @@ Halaman Login
     Already Have Account?
      <a href="{{ "/register" }}" class="font-semibold leading-6 text-slate-800 hover:text-slate-900">Please Register</a>
    </p>
-
 </main>
 
+@endsection
 
-  @endsection
+@section('scripts')
+<script>
+    @if(session('pesan'))
+        Swal.fire({
+            title: 'Notifikasi',
+            text: "{{ session('pesan') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
+@endsection
