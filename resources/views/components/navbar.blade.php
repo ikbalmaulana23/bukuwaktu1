@@ -64,7 +64,7 @@
                       id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>
                   <img class="h-8 w-8 rounded-full"
-                  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar.png') }}"
+                  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
                   alt="Profile Photo">
               </button>
 
@@ -80,11 +80,16 @@
                    x-transition:leave-end="opacity-0 scale-95"
                    class="absolute top-12 right-36 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                    role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                  <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">
-                      {{ auth()->user()->name }}
+                  <a href="{{ route('profile') }}" class="block  text-sm text-gray-700 " role="menuitem" tabindex="-1" id="user-menu-item-0">
+                     <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">{{ auth()->user()->name }}</p>
                   </a>
-                  <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Upload Buku</a>
-                  <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                  <a href="/dashboard" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">
+
+                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Upload Buku</p>
+                    </a>
+                  <a href="{{ route('logout') }}" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
+                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Sign out</p>
+                    </a>
               </div>
           </div>
 

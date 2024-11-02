@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\FavoriteBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,11 +15,11 @@ class ProfileController extends Controller
         $user = Auth::user();
         $posts = Post::where('author_id', auth()->id())->get();
         $audiobooks = $user->audiobooks; // Pastikan ini adalah koleksi atau array, bukan null
-
+        $favoriteBooks = FavoriteBook::all();
         // Debugging
 
 
-        return view('profile.index', compact('user', 'audiobooks', 'posts',));
+        return view('profile.index', compact('user', 'audiobooks', 'posts', 'favoriteBooks'));
     }
     public function update(Request $request)
     {

@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FavoriteBookController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
@@ -52,6 +53,8 @@ Route::middleware('user')->group(function () {
     Route::post('/follow1/{id}', [ProfileController::class, 'follow1'])->name('follow1');
     Route::get('/follower', [FollowerController::class, 'show']);
     Route::post('/uploadbuku', [DashboardController::class, 'uploadbuku'])->name('uploadbuku');
+    Route::post('/favorite_books', [FavoriteBookController::class, 'store'])->name('favorite_books.store');
+
     Route::get('/notifications', function () {
         $notifications = Auth::user()->unreadNotifications;
 
