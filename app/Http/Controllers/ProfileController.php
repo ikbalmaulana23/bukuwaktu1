@@ -13,9 +13,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $posts = Post::where('author_id', auth()->id())->get();
+        $posts = Post::where('author_id', Auth::id())->get();
         $audiobooks = $user->audiobooks; // Pastikan ini adalah koleksi atau array, bukan null
-        $favoriteBooks = FavoriteBook::all();
+        $favoriteBooks = FavoriteBook::where('user_id', Auth::id())->get();
         // Debugging
 
 

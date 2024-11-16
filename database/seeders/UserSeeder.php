@@ -20,9 +20,9 @@ class UserSeeder extends Seeder
 
             'name' => 'Ikbal Maulana',
             'username' => 'ikbalmaulana',
-            'bio' => 'Dingin Tapi Tidak Kejam 🐱‍🏍',
+            'bio' => 'Hidup yang tidak diperjuangkan, tidak pernah dimenangkan',
             'email' => 'ikbalmaulanaalfatih@gmail.com',
-            'password' => '12345678'
+            'password' => 'admin123'
 
         ]);
         User::create([

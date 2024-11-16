@@ -12,16 +12,16 @@
                 <source src="{{ asset('storage/' . $audiobook->file_path) }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            <div>
-                <button onclick="rewindAudio()">-10 Detik</button>
-                <button onclick="forwardAudio()">+10 Detik</button>
-            </div>
+
         </div>
         <div class="p-4 border basis-2/3">
             <p>{{ $audiobook->description }}</p>
         </div>
 
      </div>
+
+
+
 
      <div class="basis-2/3 py-5">
          <p>Others Audiobook</p>
@@ -41,19 +41,6 @@
      </div>
 
  </div>
- <script>
-    const audio = document.getElementById('myAudio');
-
-    function rewindAudio() {
-        // Mundur 10 detik, tapi pastikan tidak kurang dari 0
-        audio.currentTime = Math.max(audio.currentTime - 10, 0);
-    }
-
-    function forwardAudio() {
-        // Maju 10 detik, tapi pastikan tidak melebihi durasi audio
-        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-    }
-</script>
 
 
  </x-layout>

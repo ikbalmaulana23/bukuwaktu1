@@ -28,7 +28,7 @@ class PostController extends Controller
         $data = [
             'quote' => $this->fetchQuote(),
             'title' => 'judul post',
-            'posts' => Post::filter(request(['search', 'category']))->latest()->get(),
+            'posts' => Post::filter(request(['search', 'category']))->latest()->paginate(28),
             'category' => Category::get()
         ];
         return view('posts', $data);

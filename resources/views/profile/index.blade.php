@@ -27,7 +27,7 @@
             <button id="openModal" class="absolute top-0 right-1/4 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
-            <img class="w-40 h-40 rounded-full border-4 border-yellow-500" src="{{ asset('img/avatar1.jpg')  }}" alt="Profile Picture">
+            <img class="w-40 h-40 rounded-full border-4 border-yellow-500"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
 
           <div class=" px-6 pt-16 w-full">
             <h2 class="text-xl font-semibold text-gray-800">{{ $user->name }}</h2>
@@ -64,35 +64,7 @@
     <div class="flex justify-center mb-5 ">
 
 
-        {{-- <div class=" border basis-2/6 p-3 relative bg-yellow-500 rounded-full">
 
-            <div class="flex justify-center mt-4 relative">
-                <img src="{{ $user->profile_photo ? asset('storage/profile_photos/' . $user->profile_photo) : asset('img/avatar1.jpg') }}" class="rounded-full" width="150px" alt="Profile Photo">
-
-                <!-- Tombol untuk membuka modal -->
-
-            </div>
-
-            <p class="text-center mt-2">{{ $user->name }}</p>
-            <p class="italic text-center">{{ $user->bio }}</p>
-
-            <div class="flex justify-around mx-20 mt-2 gap-2">
-                <a href="/follower" class="bg-blue-700 px-2">follower <span></span></a>
-                <a href="/following" class="bg-yellow-500 px-2">following <span></span></a>
-
-                @if (auth()->user()->following->contains($user->id))
-                    <form action="{{ route('unfollow', $user) }}" method="POST">
-                        @csrf
-                        <button type="submit">Unfollow</button>
-                    </form>
-                @else
-                    <form action="{{ route('follow', $user) }}" method="POST">
-                        @csrf
-                        <button type="submit">Follow</button>
-                    </form>
-                @endif
-            </div>
-        </div> --}}
 
         <div class="p-4 border w-full my-2 rounded-lg">
             <div class="flex justify-between">
@@ -105,7 +77,7 @@
                     @foreach($favoriteBooks as $book)
                         <div class="bg-white shadow-md rounded-lg p-4">
                             <!-- Book Image -->
-                            <img src="{{ asset('storage/' . $book->favorite_book_image) }}" alt="{{ $book->favorite_book_title }}" class="w-full h-48 object-cover rounded-md mb-4">
+                            <img src="{{ asset('storage/' . $book->favorite_book_image) }}" alt="{{ $book->favorite_book_title }}" class="w-60 h-60 object-cover rounded-md mb-4">
 
                             <!-- Book Title -->
                             <h2 class="text-lg font-bold mb-2">{{ $book->favorite_book_title }}</h2>
@@ -218,7 +190,7 @@
                 @foreach($posts as $post)
                     <div class="bg-white shadow-md rounded p-4 mb-4">
                         <h2 class="text-xl font-bold">{{ $post->title }}</h2>
-                        <p>{!! $post->body !!}</p>
+                        <p>{!! Str::limit($post->body, 50) !!}</p>
                         <small class="text-gray-500">Posted on {{ $post->created_at->format('d M Y') }}</small>
                     </div>
                 @endforeach

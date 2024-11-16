@@ -21,6 +21,8 @@
             </form>
         </div>
 
+
+
         <div class="container mx-auto pb-4 mb-4">
             <p id="quote" class="text-md leading-8 text-gray-600 border-gray-200">
                 {{ $quote['quote'] ?? 'Quote not found.' }}
@@ -29,6 +31,8 @@
                 — {{ $quote['author'] ?? 'Unknown author' }}
             </p>
         </div>
+
+{{ $posts->links() }}
 
         <div class="sm:text-center flex flex-wrap gap-2">
             <a href="/posts" class="text-sm relative rounded-full bg-yellow-300 px-6 py-1.5 font-medium text-gray-600 hover:bg-yellow-400">All</a>
@@ -72,7 +76,7 @@
             confirmButtonText: 'OK'
         });
     </script>
-@endif  
+@endif
     <style>
         .custom-swal-height {
             height: 250px; /* Atur tinggi sesuai kebutuhan, misalnya 250px */
