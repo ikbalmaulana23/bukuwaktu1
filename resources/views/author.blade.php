@@ -1,17 +1,17 @@
 <x-layout>
-  
-  <div class="p-5 border rounded-md w-1/3"> 
+
+  <div class="p-5 border rounded-md w-1/3">
       <!-- Profil Penulis -->
       <div class="text-center flex">
 
         <div class="flex justify-center items-center ">
-          <img src="{{ $AuthUser->profile_photo ? asset('storage/profile_photos/' . $AuthUser->profile_photo) : asset('img/avatar.png') }}" 
-             alt="Profile Photo" 
+          <img src="{{ $AuthUser->profile_photo ? asset('storage/profile_photos/' . $AuthUser->profile_photo) : asset('img/avatar.png') }}"
+             alt="Profile Photo"
              class="w-48 h-auto rounded-md">
         </div>
         <div class="p-3 text-center">
 
-      
+
           <h2 class="text-2xl font-semibold">{{ $AuthUser->name }}</h2>
           <p class="text-gray-600">{{ $AuthUser->bio }}</p>
           <p class="mt-2 text-sm text-gray-500">Followers: {{ $followerCount }}</p>
@@ -20,9 +20,11 @@
           @if (Auth::check() && Auth::user()->id !== $AuthUser->id)
               <form action="{{ $isFollowing ? route('unfollow', $AuthUser->id) : route('follow', $AuthUser->id) }}" method="POST">
                   @csrf
-                  <button type="submit" class="mt-3 px-4 py-2 bg-blue-500 text-white rounded-md">
-                      {{ $isFollowing ? 'Unfollow' : 'Follow' }}
-                  </button>
+                  <button
+                  type="submit"
+                  class="mt-3 px-4 py-2 text-white rounded-md {{ $isFollowing ? 'bg-gray-500' : 'bg-blue-500' }}">
+                  {{ $isFollowing ? 'Unfollow' : 'Follow' }}
+                </button>
               </form>
           @endif
         </div>
@@ -55,7 +57,7 @@
           <a href="/posts" class="text-center text-blue-600">&laquo Kembali ke halaman bookshelf</a>
       @endforelse
   </div>
- 
+
   <a href="/posts" class="font-medium text-blue-600 hover:underline">&laquo; Back to posts</a>
- 
+
 </x-layout>

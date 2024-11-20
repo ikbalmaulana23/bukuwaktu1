@@ -1,7 +1,10 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-
+    <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+    <div id="progress-percent"> <span class="text-gray-100"> 0% </span> </div>
+    </div>
     <article class="pb-8 lg:py-8 border-b border-gray-300 grid grid-cols-1  lg:flex gap-6">
         <div class="lg:basis-1/4 flex justify-center">
             <img src="{{ asset('storage/' . $post->cover)  }}" alt="" class="h-60">
@@ -17,6 +20,28 @@
         </div>
 
     </article>
+
+    <h1 class="text-lg font-bold *:">Berikan Komentar</h1>
+    <form action="{{ route('comments.store', $post->id) }}" method="POST" >
+        @csrf
+        <textarea class="border w-96 rounded-md" name="content" rows="3" placeholder="Add a comment..." required></textarea>
+        <button type="submit">Post Comment</button>
+    </form>
+    <br>
+    @foreach ($post->comments as $comment)
+    <div>
+        <strong>{{ $comment->user->name }}</strong> <small>{{ $comment->created_at->diffForHumans() }}</small>
+        <p>{{ $comment->content }}</p>
+        @if (auth()->id() === $comment->user_id)
+            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete</button>
+            </form>
+        @endif
+    </div>
+@endforeach
+
 
     <a href="/posts" class="font-medium text-blue-600 hover:underline" > &laquo;Back to posts </a>
 

@@ -16,6 +16,7 @@
 @endif
 
 <div class="">
+
     <div class=" mx-auto w-full bg-white border rounded-lg overflow-hidden">
         <!-- Header Section -->
         <div class="bg-cover bg-center h-24" style="">
@@ -37,6 +38,38 @@
              </div>
 
         </div>
+        <div class="px-7 flex justify-start mt-3 text-sm gap-3 text-center">
+            <!-- Followers Section -->
+            <div x-data="{ showFollowers: false }">
+                <h2
+                    class="bg-blue-300 px-2 py-1 rounded-md cursor-pointer"
+                    @click="showFollowers = !showFollowers"
+                >
+                    Followers ({{ $followers->count() }})
+                </h2>
+                <ul x-show="showFollowers" class="mt-2">
+                    @foreach($followers as $follower)
+                        <li class="py-1 border-b">{{ $follower->name }}</li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <!-- Following Section -->
+            <div x-data="{ showFollowing: false }">
+                <h2
+                    class="bg-yellow-300 px-2 py-1 rounded-md cursor-pointer"
+                    @click="showFollowing = !showFollowing"
+                >
+                    Following ({{ $following->count() }})
+                </h2>
+                <ul x-show="showFollowing" class="mt-2">
+                    @foreach($following as $followedUser)
+                        <li class="py-1 border-b">{{ $followedUser->name }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
         <div class=" px-6 pt-7 mb-10  flex justify-start ">
              <div class=" gap-2 mx-2">
             <h3 class="text-md font-semibold text-gray-800 mb-2">Interest Genre</h3>
@@ -188,7 +221,7 @@
                 <p>You have no posts.</p>
             @else
                 @foreach($posts as $post)
-                    <div class="bg-white shadow-md rounded p-4 mb-4">
+                    <div class="bg-gray-50 shadow-md rounded p-4 mb-4">
                         <h2 class="text-xl font-bold">{{ $post->title }}</h2>
                         <p>{!! Str::limit($post->body, 50) !!}</p>
                         <small class="text-gray-500">Posted on {{ $post->created_at->format('d M Y') }}</small>
@@ -205,7 +238,7 @@
             <div class="space-y-4">
                 @if($audiobooks)
                     @foreach($audiobooks as $audiobook)
-                        <div class="p-4 border rounded">
+                        <div class="p-4 border bg-gray-50 rounded">
                             <h2 class="text-xl font-bold">{{ $audiobook->title }}</h2>
                             <p class="text-gray-600">Oleh: {{ $audiobook->speaker->name ?? 'Unknown' }}</p>
 

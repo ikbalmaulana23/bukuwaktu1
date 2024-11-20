@@ -18,6 +18,6 @@ class AuthorController extends Controller
             'isFollowing' => Auth::check() && Auth::user()->following()->where('user_id', $user->id)->exists(), // Status following
         ];
 
-        return view('category', $data);
+        return view('author', $data);
     }
 }

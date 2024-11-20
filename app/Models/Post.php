@@ -30,7 +30,7 @@ class Post extends Model
         //belajar isset
         // isset($filters['search']) ? $filters['search'] : false
 
-        //sebelum ada when(), artinya bisa mengetahui kondisi dimana kita  
+        //sebelum ada when(), artinya bisa mengetahui kondisi dimana kita
         // if ($filters['search'] ?? false) {
         //     $query->where('title', 'like', '%' . request('search') . '%');
         // }
@@ -46,5 +46,10 @@ class Post extends Model
             fn($query, $category) =>
             $query->whereHas('category', fn($query) => $query->where('slug', $category))
         );
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

@@ -16,10 +16,18 @@ class ProfileController extends Controller
         $posts = Post::where('author_id', Auth::id())->get();
         $audiobooks = $user->audiobooks; // Pastikan ini adalah koleksi atau array, bukan null
         $favoriteBooks = FavoriteBook::where('user_id', Auth::id())->get();
-        // Debugging
+        $followers = $user->followers; // Relasi 'followers' akan mengembalikan daftar followers
+        $following = $user->following;
 
 
-        return view('profile.index', compact('user', 'audiobooks', 'posts', 'favoriteBooks'));
+        return view('profile.index', compact(
+            'user',
+            'audiobooks',
+            'posts',
+            'favoriteBooks',
+            'followers',
+            'following'
+        ));
     }
     public function update(Request $request)
     {

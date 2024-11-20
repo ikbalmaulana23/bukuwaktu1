@@ -21,7 +21,10 @@
             </form>
         </div>
 
-
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        <div id="progress-percent"> 0% </div>
+        </div>
 
         <div class="container mx-auto pb-4 mb-4">
             <p id="quote" class="text-md leading-8 text-gray-600 border-gray-200">
@@ -31,8 +34,7 @@
                 — {{ $quote['author'] ?? 'Unknown author' }}
             </p>
         </div>
-
-{{ $posts->links() }}
+        {{ $posts->links() }}
 
         <div class="sm:text-center flex flex-wrap gap-2">
             <a href="/posts" class="text-sm relative rounded-full bg-yellow-300 px-6 py-1.5 font-medium text-gray-600 hover:bg-yellow-400">All</a>
@@ -45,7 +47,9 @@
             @forelse ($posts as $post)
                 <article class="flex flex-col items-start justify-between border rounded-md p-5">
                     <div class="w-full mb-2">
+                        <a href="/posts/{{ $post['id'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
                         <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="h-auto w-full rounded-lg" alt="gambar">
+                        </a>
                     </div>
                     <div class="group relative">
                     </div>
@@ -75,6 +79,8 @@
             icon: 'success', // Atur icon sesuai kebutuhan: 'success', 'error', 'warning', dll.
             confirmButtonText: 'OK'
         });
+
+
     </script>
 @endif
     <style>
@@ -82,5 +88,21 @@
             height: 250px; /* Atur tinggi sesuai kebutuhan, misalnya 250px */
         }
     </style>
+    <script>
+        document.addEventListener('scroll', function () {
+        const scrollTop = window.scrollY; // Jarak gulir dari atas
+        const documentHeight = document.documentElement.scrollHeight; // Tinggi total dokumen
+        const windowHeight = window.innerHeight; // Tinggi viewport
+
+        // Hitung persentase scroll
+        const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+
+        // Perbarui tinggi progress bar
+        document.getElementById('progress-bar').style.height = scrollPercent + '%';
+
+        // Perbarui teks persentase
+        document.getElementById('progress-percent').textContent = scrollPercent + '%';
+    });
+    </script>
     @endsection
 </x-layout>

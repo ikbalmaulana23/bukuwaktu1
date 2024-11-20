@@ -8,14 +8,91 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script> --}}
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 
   <style>
     #profilePhotoModal {
         transition: opacity 0.3s ease;
     }
+    .book-container {
+    position: relative;
+    width: 165px; /* Ubah sesuai kebutuhan */
+    height: 240px; /* Ubah sesuai kebutuhan */
+    perspective: 1000px; /* Memberikan efek 3D */
 
+
+}
+
+.book {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    backface-visibility: hidden; /* Sembunyikan sisi belakang */
+    transition: transform 0.6s ease-in-out;
+}
+
+.front {
+    transform: rotateY(0deg); /* Awalnya tidak berputar */
+}
+
+.back {
+    transform: rotateY(180deg); /* Sisi belakang */
+}
+
+.book-container:hover .front {
+    transform: rotateY(-180deg); /* Putar ke belakang */
+}
+
+.book-container:hover .back {
+    transform: rotateY(0deg); /* Tampilkan sisi belakang */
+}
+
+#progress-bar-container {
+    position: fixed;
+    top: 150px;
+    right: 50px; /* Sisi kiri halaman */
+    width: 5px; /* Lebar progress bar */
+    height: 465px; /* Tinggi penuh untuk halaman */
+    background: rgba(0, 0, 0, 0.01); /* Warna latar belakang progress bar */
+    z-index: 9999;
+}
+
+#progress-bar {
+    height: 0%; /* Progress bar mulai dari 0% */
+    width: 100%;
+    background: #2d312e; /* Warna progress bar */
+    transition: height 0.2s ease-out;
+}
+
+#progress-percent {
+    position: fixed;
+    top: 100px; /* Atur jarak dari atas */
+    right: 50px; /* Jarak dari progress bar ke teks */
+    font-size: 14px;
+    font-weight: bold;
+    color: #2d312e;
+    z-index: 10000; /* Pastikan terlihat di atas elemen lain */
+}
+#slider {
+              -ms-overflow-style: none;  /* Internet Explorer 10+ */
+              scrollbar-width: none;  /* Firefox */
+          }
+
+          #slider::-webkit-scrollbar {
+              display: none;  /* Safari and Chrome */
+          }
+          #audiobook-slider {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#audiobook-slider::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
 
 </style>
 </head>
@@ -32,6 +109,8 @@
 
 
 </div>
+
+
 <footer class="bg-gray-200  py-3">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <p class="text-center text-sm">
@@ -41,6 +120,7 @@
 </footer>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+
     document.getElementById('notification-button').addEventListener('click', function () {
     fetch('/notifications')
         .then(response => response.json())
@@ -56,23 +136,6 @@
             document.getElementById('notification-count').innerText = data.unread_count;
         });
 });
-// $(document).ready(function() {
-//               $('#refresh-quote').click(function() {
-//                   $.ajax({
-//                       url: '{{ route('quotes.refresh') }}',
-//                       type: 'POST',
-//                       data: {
-//                           _token: '{{ csrf_token() }}'
-//                       },
-//                       success: function(response) {
-//                           $('#quote').text(response.quote.text);
-//                       },
-//                       error: function(xhr) {
-//                           console.log('Error:', xhr.responseText);
-//                       }
-//                   });
-//               });
-//           });
 
 
 document.getElementById('openModal').addEventListener('click', function() {
@@ -118,6 +181,7 @@ document.getElementById('next-audiobook').addEventListener('click', function() {
         behavior: 'smooth'
     });
 });
+
 
 
   </script>
