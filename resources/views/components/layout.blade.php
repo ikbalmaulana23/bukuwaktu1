@@ -14,6 +14,10 @@
 
 
   <style>
+    html {
+  scroll-behavior: smooth;
+}
+
     #profilePhotoModal {
         transition: opacity 0.3s ease;
     }
@@ -77,32 +81,49 @@
     color: #2d312e;
     z-index: 10000; /* Pastikan terlihat di atas elemen lain */
 }
-#slider {
-              -ms-overflow-style: none;  /* Internet Explorer 10+ */
-              scrollbar-width: none;  /* Firefox */
-          }
-
-          #slider::-webkit-scrollbar {
-              display: none;  /* Safari and Chrome */
-          }
-          #audiobook-slider {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+.highlight-text {
+  position: relative;
+  display: inline-block;
+  padding: 0 5px; /* Memberikan sedikit ruang di sekitar teks */
 }
 
-#audiobook-slider::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
+.highlight-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;  /* Mulai dengan warna putih */
+  animation: highlightAnimation 5s ease-in-out forwards;
+  z-index: -1; /* Menjaga background di belakang teks */
+  width: 0%; /* Mulai dengan lebar 0% */
+}
+
+@keyframes highlightAnimation {
+  0% {
+    width: 0%; /* Background tidak terlihat di awal */
+    background-color: white; /* Mulai dengan warna putih */
+  }
+  50% {
+    width: 0; /* Background mengisi lebar teks */
+    background-color: white; /* Tetap putih di tengah animasi */
+  }
+  100% {
+    width: 100%; /* Background tetap penuh */
+    background-color: #FFF9C4; /* Warna kuning pastel di akhir animasi */
+  }
 }
 
 </style>
 </head>
-<body class="h-full">
+<body class="h-full ">
 
   <div class="min-h-full">
     <x-navbar></x-navbar>
 
     <main>
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 pt-28">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 pt-28 overflow-x-hidden">
             {{$slot}}
         </div>
     </main>

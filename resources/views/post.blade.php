@@ -7,7 +7,7 @@
     </div>
     <article class="pb-8 lg:py-8 border-b border-gray-300 grid grid-cols-1  lg:flex gap-6">
         <div class="lg:basis-1/4 flex justify-center">
-            <img src="{{ asset('storage/' . $post->cover)  }}" alt="" class="h-60">
+            <img src="{{ $post->cover ? asset('storage/' . $post->cover)  : asset('img/bukuasli1.png')  }}" alt="" class="h-60">
         </div>
         <div class="lg:basis-3/4">
             <h1 class="mb-3 text-3xl tracking-tight font-bold text-gray-900 ">{{ $post['title'] }}</h1>

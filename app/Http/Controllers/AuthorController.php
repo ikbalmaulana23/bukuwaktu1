@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
@@ -17,6 +18,7 @@ class AuthorController extends Controller
             'followerCount' => $user->followers()->count(), // Jumlah followers
             'isFollowing' => Auth::check() && Auth::user()->following()->where('user_id', $user->id)->exists(), // Status following
         ];
+
 
         return view('author', $data);
     }

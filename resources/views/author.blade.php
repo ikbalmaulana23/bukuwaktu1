@@ -3,11 +3,12 @@
   <div class="p-5 border rounded-md w-1/3">
       <!-- Profil Penulis -->
       <div class="text-center flex">
-
+{{-- @dd($AuthUser) --}}
         <div class="flex justify-center items-center ">
-          <img src="{{ $AuthUser->profile_photo ? asset('storage/profile_photos/' . $AuthUser->profile_photo) : asset('img/avatar.png') }}"
-             alt="Profile Photo"
-             class="w-48 h-auto rounded-md">
+            <img src="{{ $AuthUser->profile_photo ? asset('storage/profile_photos/' . $AuthUser->profile_photo) :  asset('img/avatar1.jpg')  }}"
+            alt="{{ $AuthUser->name }}'s Profile Photo"
+            class="w-48 h-auto rounded-md">
+
         </div>
         <div class="p-3 text-center">
 
@@ -36,7 +37,7 @@
       @forelse ($posts as $post)
           <article class="flex flex-col items-start justify-between border rounded-md p-5">
               <div class="w-full mb-2">
-                  <img src="{{ asset('img/bukuasli1.png') }}" class="object-cover h-60 object-left-bottom w-full rounded-lg" alt="gambar">
+                  <img src="{{ $post->cover ? asset('storage/' . $post->cover)  : asset('img/bukuasli1.png')  }}" class="object-cover h-60 object-left-bottom w-full rounded-lg" alt="gambar">
               </div>
               <div class="group relative">
                   <!-- Deskripsi Post -->
