@@ -76,4 +76,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.save');
     }
+
+    public function baru()
+    {
+        return view('dashboard.baru');
+    }
 }

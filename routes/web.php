@@ -48,6 +48,7 @@ Route::middleware('user')->group(function () {
     Route::get('/dashboard/posts', [DashboardController::class, 'posts']);
     Route::get('/dashboard/audiobooks', [DashboardController::class, 'audiobook']);
     Route::get('/dashboard/save', [DashboardController::class, 'save']);
+    Route::get('/dashboard/baru', [DashboardController::class, 'baru']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/follow/{user}', [FollowerController::class, 'follow'])->name('follow');
     Route::post('/unfollow/{user}', [FollowerController::class, 'unfollow'])->name('unfollow');

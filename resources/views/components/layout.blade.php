@@ -78,9 +78,12 @@
     right: 50px; /* Jarak dari progress bar ke teks */
     font-size: 14px;
     font-weight: bold;
-    color: #2d312e;
+    color: #2d312e; /* Warna teks default */
     z-index: 10000; /* Pastikan terlihat di atas elemen lain */
+    mix-blend-mode: difference; /* Blending untuk menyesuaikan warna dengan latar belakang */
+    pointer-events: none; /* Agar tidak mengganggu klik di bawahnya */
 }
+
 .highlight-text {
   position: relative;
   display: inline-block;
@@ -99,6 +102,10 @@
   z-index: -1; /* Menjaga background di belakang teks */
   width: 0%; /* Mulai dengan lebar 0% */
 }
+
+.custom-swal-height {
+            height: 250px; /* Atur tinggi sesuai kebutuhan, misalnya 250px */
+        }
 
 @keyframes highlightAnimation {
   0% {

@@ -59,8 +59,8 @@
       </div>
     </section>
     <div id="progress-bar-container">
-    <div id="progress-bar"></div>
-    <div id="progress-percent">  0% </div>
+    <div id="progress-bar" class="hidden md:block"></div>
+    <div id="progress-percent" class=" mix-blend-difference">  0% </div>
     </div>
 
     <section id="library" class="mt-10 rounded-lg p-2 ">
@@ -159,8 +159,8 @@
                     @if ($audiobook->cover)
                     <img src="{{ asset('storage/' . $audiobook->cover) }}" alt="Cover of {{ $audiobook->title }}" class="h-46 mb-4 rounded-md">
                     @endif
-                    <h2 class="font-semibold text-md mb-2">{{ $audiobook->title }}</h2>
-                    <p class="text-xs text-gray-600">Speaker: {{ $audiobook->speaker->name }}</p>
+                    <h2 class="font-semibold text-md mb-2 hidden md:block">{{ $audiobook->title }}</h2>
+                    <p class="text-xs text-gray-600 hidden md:block">Speaker: {{ $audiobook->speaker->name }}</p>
                 </a>
                 @endforeach
             </div>

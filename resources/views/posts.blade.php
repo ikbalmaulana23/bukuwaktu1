@@ -21,10 +21,6 @@
             </form>
         </div>
 
-        <div id="progress-bar-container">
-            <div id="progress-bar"></div>
-        <div id="progress-percent"> 0% </div>
-        </div>
 
         <div class="container mx-auto pb-4 mb-4">
             <p id="quote" class="text-md leading-8 text-gray-600 border-gray-200">
@@ -83,26 +79,6 @@
 
     </script>
 @endif
-    <style>
-        .custom-swal-height {
-            height: 250px; /* Atur tinggi sesuai kebutuhan, misalnya 250px */
-        }
-    </style>
-    <script>
-        document.addEventListener('scroll', function () {
-        const scrollTop = window.scrollY; // Jarak gulir dari atas
-        const documentHeight = document.documentElement.scrollHeight; // Tinggi total dokumen
-        const windowHeight = window.innerHeight; // Tinggi viewport
 
-        // Hitung persentase scroll
-        const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
-
-        // Perbarui tinggi progress bar
-        document.getElementById('progress-bar').style.height = scrollPercent + '%';
-
-        // Perbarui teks persentase
-        document.getElementById('progress-percent').textContent = scrollPercent + '%';
-    });
-    </script>
     @endsection
 </x-layout>
