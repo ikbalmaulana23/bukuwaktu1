@@ -19,19 +19,24 @@
 
     <div class=" mx-auto w-full bg-white border rounded-lg overflow-hidden">
         <!-- Header Section -->
-        <div class="bg-cover bg-center h-24" style="">
-            <img src="{{ asset('img/banner.jpg')  }}" alt="">
+        <div class="w-full overflow-hidden">
+            <img
+                src="{{ asset('img/banner.jpg') }}"
+                alt="Banner"
+                class="w-full h-auto max-h-38 md:max-h-38 lg:max-h-48 object-cover">
         </div>
 
+
+
         <!-- Profile Image -->
-        <div class="relative mt-12 ml-5 flex justify-start">
+        <div class="relative  ml-5 flex justify-start lg:-mt-10 mb-5 mx-5">
             <button id="openModal" class="absolute top-0 right-1/4 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
-            <img class="w-40 h-40 rounded-full border-4 border-yellow-500"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
+            <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
 
-          <div class=" px-6 pt-16 w-full">
-            <h2 class="text-xl font-semibold text-gray-800">{{ $user->name }}</h2>
+          <div class=" px-6 lg:pt-1g w-full text-sm ">
+            <h2 class="mt-3 lg:bg text-lg lg:text-xl font-semibold text-gray-800"> <span class="lg:bg-white">{{ $user->name }}</span></h2>
             <p class="text-gray-600">🏳 Indonesia </p>
 
             <p class="text-gray-600 mt-2 italic">{{ $user->bio }}</p>
@@ -69,24 +74,29 @@
                 </ul>
             </div>
         </div>
-
-        <div class=" px-6 pt-7 mb-10  flex justify-start ">
-             <div class=" gap-2 mx-2">
-            <h3 class="text-md font-semibold text-gray-800 mb-2">Interest Genre</h3>
-              <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs  ">Fiction</span>
-              <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Poem</span>
-              <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Bibliography</span>
-              <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">+3 more</span>
+        <div class="px-6 pt-7 mb-10 flex flex-wrap justify-start ">
+            <!-- Genre Section -->
+            <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
+              <h3 class="text-md font-semibold text-gray-800 mb-2">Interest Genre</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Fiction</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Poem</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Bibliography</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">+3 more</span>
+              </div>
             </div>
-            <div class=" gap-2 mx-2">
-                <h3 class="text-md font-semibold text-gray-800 mb-2">Author Kesukaaan</h3>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">JS Khairen</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">JK Rowling</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Franz Kafka</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">+3 more</span>
-                </div>
-
+            <!-- Author Section -->
+            <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
+              <h3 class="text-md font-semibold text-gray-800 mb-2">Author Kesukaan</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">JS Khairen</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">JK Rowling</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Franz Kafka</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">+3 more</span>
+              </div>
+            </div>
           </div>
+
 
 
         <!-- Skills and Languages -->
@@ -101,28 +111,32 @@
 
         <div class="p-4 border w-full my-2 rounded-lg">
             <div class="flex justify-between">
-                <p class="text-center w-full text-xl  font-mono">Favorit books</p>
-                <button onclick="openModal()" class="bg-blue-500 p-1 text-white rounded-md">
-                    Add Your Favorite Books
+                <p class="text-center w-full text-xl">Favorit books</p>
+                <button onclick="openModal()" class="bg-slate-500 px-2 py-1 rounded-full text-white ">
+                    <i class="fa-solid fa-plus"></i>
                 </button> </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                     @foreach($favoriteBooks as $book)
-                        <div class="bg-white shadow-md rounded-lg p-4">
-                            <!-- Book Image -->
-                            <img src="{{ asset('storage/' . $book->favorite_book_image) }}" alt="{{ $book->favorite_book_title }}" class="w-60 h-60 object-cover rounded-md mb-4">
-
-                            <!-- Book Title -->
-                            <h2 class="text-lg font-bold mb-2">{{ $book->favorite_book_title }}</h2>
-
-                            <!-- Book Rate -->
-                            <p class="text-gray-700 mb-2">Rating: {{ $book->favorite_book_rate }} / 5</p>
-
-                            <!-- Book Description -->
-                            {{-- <p class="text-gray-600">{{ $book->favorite_book_description }}</p> --}}
+                    <div class="flex flex-col sm:flex-row sm:gap-4 sm:border-b sm:pb-4 md:flex-col md:gap-0 md:pb-0 bg-white shadow-sm rounded-lg p-3 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                        <!-- Book Image -->
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('storage/' . $book->favorite_book_image) }}"
+                                 alt="{{ $book->favorite_book_title }}"
+                                 class="w-16 h-16 object-cover object-center rounded-md">
                         </div>
+
+                        <!-- Book Details -->
+                        <div class="flex-1 sm:pl-3">
+                            <h2 class="text-md font-medium text-gray-800 truncate">{{ $book->favorite_book_title }}</h2>
+                            <p class="text-sm text-gray-500 mt-1">Rating: {{ $book->favorite_book_rate }} / 5</p>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
+
+
+
 <!-- Trigger Button -->
 
 

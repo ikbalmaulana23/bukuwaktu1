@@ -23,6 +23,7 @@ export default {
             },
             colors: {
                 pastelYellow: "#FFF9C4", // Warna pastel kuning
+                pink: "#F1817B",
             },
             keyframes: {
                 "gradient-move": {

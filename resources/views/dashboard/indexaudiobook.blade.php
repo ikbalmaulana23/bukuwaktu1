@@ -20,7 +20,7 @@
         <div>
 
           <h2>Your Audiobooks</h2>
-          <div class="grid grid-cols-3 w-full gap-2 p-3">
+          <div class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-2 p-3">
             @foreach($audiobooks as $audiobook)
             <div class="bg-white p-3 mb-2 flex justify-between rounded-md shadow-sm">
 

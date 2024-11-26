@@ -28,26 +28,26 @@
 
 <h2>Your Posts</h2>
 
-  <div class="grid grid-cols-3 w-full gap-2 p-3">
-  @foreach($posts as $post)
-  <div class="bg-white p-3 mb-2 flex justify-between rounded-md shadow-sm">
-
-  <div>
-    {{ $post->title }}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-2 p-3">
+    @foreach($posts as $post)
+    <div class="bg-white p-3 mb-2 flex flex-col sm:flex-row justify-between rounded-md shadow-sm">
+      <div class="mb-2 sm:mb-0">
+        {{ $post->title }}
+      </div>
+      <!-- Edit and Delete Buttons -->
+      <div class="flex space-x-2">
+        <a href="{{ route('posts.edit', $post->id) }}"
+           class="text-white bg-blue-600 rounded-md px-3 py-1 text-center hover:bg-blue-700">
+          Edit
+        </a>
+        <a href="{{ route('posts.destroy', $post->id) }}"
+           class="text-white bg-red-600 rounded-md px-3 py-1 text-center hover:bg-red-700">
+          Delete
+        </a>
+      </div>
+    </div>
+    @endforeach
   </div>
-
-  <!-- Edit button -->
-  <div class="">
-    <a href="{{ route('posts.edit', $post->id) }}" class="text-white bg-blue-600 rounded-md px-3 py-1">Edit</a>
-    <a href="{{ route('posts.destroy', $post->id) }}" class="text-white bg-red-600 rounded-md px-3 py-1">Delete</a>
-
-
-
-  </div>
-
-</div>
-  @endforeach
-</div>
 
 
       </div>

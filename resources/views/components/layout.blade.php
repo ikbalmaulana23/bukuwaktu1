@@ -103,6 +103,8 @@
   width: 0%; /* Mulai dengan lebar 0% */
 }
 
+
+
 .custom-swal-height {
             height: 250px; /* Atur tinggi sesuai kebutuhan, misalnya 250px */
         }
@@ -129,8 +131,8 @@
   <div class="min-h-full">
     <x-navbar></x-navbar>
 
-    <main>
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 pt-28 overflow-x-hidden">
+    <main class="">
+        <div class="mx-auto max-w-7xl  sm:px-6 lg:px-8 pt-28 overflow-x-hidden">
             {{$slot}}
         </div>
     </main>
@@ -140,10 +142,11 @@
 
 
 <footer class="bg-gray-200  py-3">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-center">
       <p class="text-center text-sm">
           © {{ date('Y') }} bukuwaktu. All rights reserved.
       </p>
+
   </div>
 </footer>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

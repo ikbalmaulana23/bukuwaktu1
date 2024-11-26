@@ -1,4 +1,4 @@
-{{-- {{ dd($title) }} --}}
+
 
 <x-layout>
 <x-slot:title>{{ $title }}</x-slot:title>
@@ -152,18 +152,23 @@
              <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -top-2  right-5"></i>
              <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -bottom-2  left-5"></i>
 
-             <div class="flex gap-4 justify-center">
+             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
                 @foreach ($audiobooks as $audiobook)
                 <a href="{{ route('audiobooks.show', $audiobook->id) }}"
-                   class=" w-40 p-4 border rounded transform transition-transform duration-300 hover:scale-110 bg-slate-100 hover:bg-slate-200">
+                   class="p-2 border rounded-lg shadow-sm hover:shadow-md transform transition-transform duration-300 hover:scale-105 hover:bg-gray-50">
                     @if ($audiobook->cover)
-                    <img src="{{ asset('storage/' . $audiobook->cover) }}" alt="Cover of {{ $audiobook->title }}" class="h-46 mb-4 rounded-md">
+                    <img src="{{ asset('storage/' . $audiobook->cover) }}"
+                         alt="Cover of {{ $audiobook->title }}"
+                         class="w-40 h-40 object-cover rounded-md mb-2">
                     @endif
-                    <h2 class="font-semibold text-md mb-2 hidden md:block">{{ $audiobook->title }}</h2>
-                    <p class="text-xs text-gray-600 hidden md:block">Speaker: {{ $audiobook->speaker->name }}</p>
+                    <div class="text-center">
+                        <h2 class="text-sm font-medium ">{{ $audiobook->title }}</h2>
+                        <p class="text-xs text-gray-500 ">Speaker: {{ $audiobook->speaker->name }}</p>
+                    </div>
                 </a>
                 @endforeach
             </div>
+
 
     </div>
 

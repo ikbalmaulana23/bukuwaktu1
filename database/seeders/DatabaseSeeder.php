@@ -6,11 +6,12 @@ use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
+use App\Models\Audiobook;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Database\Seeders\FollowerSeeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BukuFavoritSeeder::class);
         $this->call(FollowerSeeder::class);
-        $this->call(AudiobookSeeder::class);
+        Audiobook::factory()->count(100)->create();
     }
 }

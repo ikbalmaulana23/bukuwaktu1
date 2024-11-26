@@ -11,8 +11,12 @@ class AudiobookController extends Controller
     // Menampilkan daftar audiobook
     public function index()
     {
+
+
+        $trendings = Audiobook::orderBy('created_at', 'desc')->take(4)->get();
+
         $audiobooks = Audiobook::all();
-        return view('audiobooks.index', compact('audiobooks'));
+        return view('audiobooks.index', compact('audiobooks', 'trendings'));
     }
 
     // Menampilkan formulir untuk menambah audiobook baru
