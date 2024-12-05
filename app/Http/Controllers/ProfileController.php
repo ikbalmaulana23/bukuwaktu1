@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\playlist;
 use App\Models\FavoriteBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class ProfileController extends Controller
         $favoriteBooks = FavoriteBook::where('user_id', Auth::id())->get();
         $followers = $user->followers; // Relasi 'followers' akan mengembalikan daftar followers
         $following = $user->following;
+        $playlists = playlist::with('audiobooks')->get();
 
 
         return view('profile.index', compact(
@@ -26,7 +28,8 @@ class ProfileController extends Controller
             'posts',
             'favoriteBooks',
             'followers',
-            'following'
+            'following',
+            'playlists'
         ));
     }
     public function update(Request $request)

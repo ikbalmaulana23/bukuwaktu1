@@ -8,6 +8,7 @@ use App\Models\Audiobook;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UploadBukuRequest;
 use App\Notifications\NewPostNotification;
 
@@ -25,10 +26,23 @@ class DashboardController extends Controller
         return view('dashboard.index', compact('userId', 'posts', 'user'));
     }
 
+
+
     public function posts()
     {
         $categories = Category::all(); // Ambil semua kategori dari database
         return view('dashboard.posts', compact('categories'));
+    }
+
+    public function edit($id)
+    {
+        // Find the post by ID
+        $categories = Category::all();
+        $userId = Auth::id();
+        $post = Post::findOrFail($id);
+
+        // Pass the post to the edit view
+        return view('dashboard.edit', compact('post', 'userId', 'categories'));
     }
     public function uploadbuku(UploadBukuRequest $request)
     {
@@ -41,13 +55,16 @@ class DashboardController extends Controller
                 $coverPath = $request->file('cover')->store('covers', 'public');
             }
 
+            // Buat postingan dengan field tambahan
             $post = Post::create([
                 'title' => $request->title,
                 'author_id' => $request->author_id,
                 'category_id' => $request->category_id,
                 'slug' => $slug,
                 'body' => $request->body,
-                'cover' => $coverPath,  // Simpan path cover ke database
+                'cover' => $coverPath, // Simpan path cover ke database
+                'type' => $request->type ?? 'rangkuman', // Gunakan 'rangkuman' sebagai default jika tidak diisi
+                'is_audited' => $request->is_audited ?? true, // Default true jika tidak diisi
             ]);
         }
 
@@ -61,6 +78,43 @@ class DashboardController extends Controller
 
         return redirect('/posts')->with('pesan', 'Upload Buku berhasil');
     }
+
+
+    public function update(Request $request, Post $post)
+    {
+        $request->validate([
+            'title' => 'nullable|string|max:255',
+            'body' => 'nullable|string',
+            'cover' => 'nullable|image|max:2048',
+            'category_id' => 'nullable|integer|exists:categories,id',
+        ]);
+
+        $user = Auth::user(); // Dapatkan user yang sedang login
+
+        // Update cover jika ada cover baru
+        if ($request->hasFile('cover')) {
+            // Hapus cover lama jika ada
+            if ($post->cover) {
+                Storage::disk('public')->delete($post->cover);
+            }
+
+            $coverPath = $request->file('cover')->store('covers', 'public');
+            $post->cover = $coverPath;
+        }
+
+        // Update field lainnya
+        $post->title = $request->input('title', $post->title);
+        $post->body = $request->input('body', $post->body);
+        $post->category_id = $request->input('category_id', $post->category_id);
+        $post->author_id = $user->id; // Tetap set author_id ke ID user yang login
+        $post->slug = Str::slug($post->title); // Update slug jika title berubah
+
+        $post->save(); // Simpan perubahan
+
+
+        return redirect('/posts')->with('pesan', 'Update Buku berhasil');
+    }
+
 
 
 

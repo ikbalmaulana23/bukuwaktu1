@@ -12,18 +12,19 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\playlistController;
 use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteBookController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
-Route::get('/', [PostController::class, 'home']);
+Route::get('/', [PostController::class, 'home'])->name('index');
 Route::get('posts', [PostController::class, 'index']);
 Route::post('/quotes/refresh', [PostController::class, 'refreshQuote'])->name('quotes.refresh');
 Route::get('genre', [GenreController::class, 'index']);
-Route::get('posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
-Route::post('posts/update/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::get('posts/edit/{id}', [DashboardController::class, 'edit'])->name('posts.edit');
+Route::put('posts/update/{id}', [DashboardController::class, 'update'])->name('posts.update');
 Route::get('posts/destroy/{id}', [PostController::class, 'delete'])->name('posts.destroy');
 Route::get('authors/{user:username}', [AuthorController::class, 'index']);
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -56,7 +57,8 @@ Route::middleware('user')->group(function () {
     Route::get('/follower', [FollowerController::class, 'show']);
     Route::post('/uploadbuku', [DashboardController::class, 'uploadbuku'])->name('uploadbuku');
     Route::post('/favorite_books', [FavoriteBookController::class, 'store'])->name('favorite_books.store');
-
+    Route::get('/playlists', [playlistController::class, 'index'])->name('playlists.index');
+    Route::get('/playlists/{playlist}', [playlistController::class, 'show'])->name('playlists.show');
     Route::get('/notifications', function () {
         $notifications = Auth::user()->unreadNotifications;
 

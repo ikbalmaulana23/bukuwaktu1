@@ -24,7 +24,13 @@ class PostFactory extends Factory
             'author_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => Str::slug(fake()->sentence()),
-            'body' => fake()->text(500)
+            'body' => fake()->text(500),
+            'cover' => 'img/' . $this->faker->randomElement([
+                'contoh1.png',
+                'contoh2.png',
+                'contoh3.png',
+                'contoh4.png',
+            ])
         ];
     }
 }

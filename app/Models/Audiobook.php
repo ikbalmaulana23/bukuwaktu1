@@ -21,4 +21,11 @@ class Audiobook extends Model
     {
         return $this->belongsTo(User::class, 'speaker_id');
     }
+
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class, 'playlist_audiobooks')
+            ->withPivot('order', 'added_at')
+            ->withTimestamps();
+    }
 }

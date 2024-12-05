@@ -26,7 +26,9 @@ class UploadBukuRequest extends FormRequest
             'category_id' => 'required',
             'body' => 'required',
             'author_id' => 'required',
-            'cover' => 'nullable|image|mimes:jpg,png|max:2048' // Validasi untuk cover
+            'cover' => 'nullable|image|mimes:jpg,png|max:2048', // Validasi untuk cover
+            'type' => 'nullable|in:rangkuman,resensi', // Validasi tipe
+            'is_audited' => 'nullable|boolean', // Validasi boolean
         ];
     }
 }

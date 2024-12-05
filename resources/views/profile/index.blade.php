@@ -17,9 +17,9 @@
 
 <div class="">
 
-    <div class=" mx-auto w-full bg-white border rounded-lg overflow-hidden">
+    <div class=" mx-auto w-full border rounded-lg overflow-hidden ">
         <!-- Header Section -->
-        <div class="w-full overflow-hidden">
+        <div class="w-full overflow-hidden ">
             <img
                 src="{{ asset('img/banner.jpg') }}"
                 alt="Banner"
@@ -30,20 +30,18 @@
 
         <!-- Profile Image -->
         <div class="relative  ml-5 flex justify-start lg:-mt-10 mb-5 mx-5">
-            <button id="openModal" class="absolute top-0 right-1/4 bg-white text-black p-1 rounded-full shadow-md">
+            <button id="openModal" class="absolute top-0 right-8 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
             <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
 
-          <div class=" px-6 lg:pt-1g w-full text-sm ">
-            <h2 class="mt-3 lg:bg text-lg lg:text-xl font-semibold text-gray-800"> <span class="lg:bg-white">{{ $user->name }}</span></h2>
+          <div class=" px-6 lg:pt-10 w-full text-sm  flex justify-between ">
+            <div>
+            <h2 class="mt-3 lg:bg text-lg lg:text-xl font-semibold text-gray-800"> {{ $user->name }}</h2>
             <p class="text-gray-600">🏳 Indonesia </p>
 
             <p class="text-gray-600 mt-2 italic">{{ $user->bio }}</p>
-             </div>
-
-        </div>
-        <div class="px-7 flex justify-start mt-3 text-sm gap-3 text-center">
+             <div class="mt-5 flex justify-start  text-sm gap-3 text-center ">
             <!-- Followers Section -->
             <div x-data="{ showFollowers: false }">
                 <h2
@@ -62,7 +60,7 @@
             <!-- Following Section -->
             <div x-data="{ showFollowing: false }">
                 <h2
-                    class="bg-yellow-300 px-2 py-1 rounded-md cursor-pointer"
+                    class="bg-yellow-300 ml-2 px-2 py-1 rounded-md cursor-pointer"
                     @click="showFollowing = !showFollowing"
                 >
                     Following ({{ $following->count() }})
@@ -74,7 +72,9 @@
                 </ul>
             </div>
         </div>
-        <div class="px-6 pt-7 mb-10 flex flex-wrap justify-start ">
+
+         </div>
+         <div class="px-6 pt-7 flex flex-row justify-start ">
             <!-- Genre Section -->
             <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
               <h3 class="text-md font-semibold text-gray-800 mb-2">Interest Genre</h3>
@@ -96,50 +96,47 @@
               </div>
             </div>
           </div>
+        </div>
 
+        </div>
 
-
-        <!-- Skills and Languages -->
-
-      </div>
-
-
-    <div class="flex justify-center mb-5 ">
-
-
-
-
-        <div class="p-4 border w-full my-2 rounded-lg">
-            <div class="flex justify-between">
-                <p class="text-center w-full text-xl">Favorit books</p>
-                <button onclick="openModal()" class="bg-slate-500 px-2 py-1 rounded-full text-white ">
-                    <i class="fa-solid fa-plus"></i>
-                </button> </div>
-
-                <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+          <div class="gap-2 mx-2 mb-4  w-full sm:w-auto px-7">
+            <h3 class="text-md font-semibold text-gray-800 mb-2">Favorit Book</h3>
+            <button onclick="openModal()" class="bg-slate-500 px-2 py-1 rounded-full text-white ">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
                     @foreach($favoriteBooks as $book)
-                    <div class="flex flex-col sm:flex-row sm:gap-4 sm:border-b sm:pb-4 md:flex-col md:gap-0 md:pb-0 bg-white shadow-sm rounded-lg p-3 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                        <!-- Book Image -->
-                        <div class="flex-shrink-0">
-                            <img src="{{ asset('storage/' . $book->favorite_book_image) }}"
-                                 alt="{{ $book->favorite_book_title }}"
-                                 class="w-16 h-16 object-cover object-center rounded-md">
-                        </div>
+                    <div class="swiper-slide">
+                        <div class="bg-white shadow-sm rounded-lg p-3 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                            <!-- Book Image -->
+                            <div class="flex justify-center mb-4">
+                                <img src="{{ asset('storage/' . $book->favorite_book_image) }}"
+                                     alt="{{ $book->favorite_book_title }}"
+                                     class="w-full h-48 object-cover object-center rounded-md">
+                            </div>
 
-                        <!-- Book Details -->
-                        <div class="flex-1 sm:pl-3">
-                            <h2 class="text-md font-medium text-gray-800 truncate">{{ $book->favorite_book_title }}</h2>
-                            <p class="text-sm text-gray-500 mt-1">Rating: {{ $book->favorite_book_rate }} / 5</p>
+                            <!-- Book Details -->
+                            <div class="text-center">
+                                <h2 class="text-md font-medium text-gray-800 truncate">{{ $book->favorite_book_title }}</h2>
+                                <p class="text-sm text-gray-500 mt-1">Rating: {{ $book->favorite_book_rate }} / 5</p>
+                            </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+          </div>
 
 
-
-<!-- Trigger Button -->
-
-
+          <div class="p-4  w-full my-2 rounded-lg">
 <!-- Modal Background -->
 <div id="favoriteBookModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex justify-center items-center z-50">
     <!-- Modal Content -->
@@ -179,19 +176,14 @@
                 <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-md">Save</button>
             </div>
         </form>
-    </div>
-</div>
-
-<script>
-    function openModal() {
-        document.getElementById('favoriteBookModal').classList.remove('hidden');
-    }
-    function closeModal() {
-        document.getElementById('favoriteBookModal').classList.add('hidden');
-    }
-</script>
-
         </div>
+        </div>
+        </div>
+
+      </div>
+
+
+    <div class="flex justify-center mb-5 ">
 
         <!-- Modal -->
         <div id="profileModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -226,45 +218,151 @@
 
 
     </div>
-    <div class="flex justify-center gap-2">
-
-        <div class="rounded-md border basis-4/6 p-3">
-            <h2 class="text-center font-semibold text-lg my-3">Rangkuman yang di post</h2>
-            <div class="grid grid-cols-2 gap-2">
-                @if($posts->isEmpty())
-                <p>You have no posts.</p>
-            @else
-                @foreach($posts as $post)
-                    <div class="bg-gray-50 shadow-md rounded p-4 mb-4">
-                        <h2 class="text-xl font-bold">{{ $post->title }}</h2>
-                        <p>{!! Str::limit($post->body, 50) !!}</p>
-                        <small class="text-gray-500">Posted on {{ $post->created_at->format('d M Y') }}</small>
+    <div class="container mx-auto p-4">
+        <!-- Section Wrapper -->
+        <div class="flex flex-col md:flex-row gap-4">
+          <!-- Posts Section -->
+          <div class="rounded-md border p-4 md:w-2/4" x-data="{ showAll: false }">
+            <h2 class="text-center font-semibold text-lg mb-4">Rangkuman yang di Post</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              @if($posts->isEmpty())
+                <p class="col-span-full text-center text-gray-500">You have no posts.</p>
+              @else
+                @foreach($posts as $key => $post)
+                  <div
+                    class="bg-gray-100 shadow-md rounded-md p-4"
+                    x-show="showAll || {{ $key }} < 3"
+                    x-cloak>
+                    <div class="h-60 w-full overflow-hidden rounded-md mb-4">
+                      <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}"
+                           alt="{{ $post->title }}"
+                           class="h-full w-full object-cover">
                     </div>
+                    <h3 class="text-lg font-bold text-gray-800">{{ $post->title }}</h3>
+                    <p class="text-gray-600">{!! Str::limit($post->body, 20) !!}</p>
+                    <small class="text-gray-500 block mt-2">Posted on {{ $post->created_at->format('d M Y') }}</small>
+                  </div>
                 @endforeach
-            @endif
+              @endif
+            </div>
 
+            <div class="text-center mt-4">
+              <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                x-show="!showAll"
+                @click="showAll = true"
+                x-cloak>
+                Show All
+              </button>
+              <button
+                class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+                x-show="showAll"
+                @click="showAll = false"
+                x-cloak>
+                Show Less
+              </button>
+            </div>
+          </div>
+
+
+          <!-- Audiobooks Section -->
+          <div class="rounded-md border p-4 md:w-2/4" x-data="{ showAll: false }">
+            <h2 class="text-center font-semibold text-lg mb-4">Audiobook yang Dipost</h2>
+            <div class="space-y-4 grid grid-cols-2">
+              @if($audiobooks && $audiobooks->isNotEmpty())
+                @foreach($audiobooks as $key => $audiobook)
+                  <div
+                    class="p-4 border bg-gray-50 rounded-md shadow-sm m-2"
+                    x-show="showAll || {{ $key }} < 2"
+                    x-cloak>
+                    <div class="h-46 w-full overflow-hidden rounded-md mb-4">
+                      <img src="{{ asset('storage/' . $audiobook->cover) }}"
+                           alt="Cover of {{ $audiobook->title }}"
+                           class="h-full w-full object-cover">
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800">{{ $audiobook->title }}</h3>
+                  </div>
+                @endforeach
+              @else
+                <p class="text-center text-gray-500 col-span-full">No audiobooks found.</p>
+              @endif
+            </div>
+
+            <div class="text-center mt-4">
+              <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                x-show="!showAll"
+                @click="showAll = true"
+                x-cloak>
+                Show More
+              </button>
+              <button
+                class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+                x-show="showAll"
+                @click="showAll = false"
+                x-cloak>
+                Show Less
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+</div>
+
+<div class="container">
+    <h1 class="mb-4">Playlists</h1>
+    @foreach ($playlists as $playlist)
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3>{{ $playlist->name }}</h3>
+                <p>{{ $playlist->description }}</p>
+                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-primary">
+                    View Playlist
+                </a>
             </div>
         </div>
+    @endforeach
+</div>
 
-        <div class="rounded-md border basis-3/6 p-3">
-            <h1 class="text-center font-semibold text-lg">Audiobook yang dipost</h1>
+<script>
+    function openModal() {
+        document.getElementById('favoriteBookModal').classList.remove('hidden');
+    }
+    function closeModal() {
+        document.getElementById('favoriteBookModal').classList.add('hidden');
+    }
 
-            <div class="space-y-4">
-                @if($audiobooks)
-                    @foreach($audiobooks as $audiobook)
-                        <div class="p-4 border bg-gray-50 rounded">
-                            <h2 class="text-xl font-bold">{{ $audiobook->title }}</h2>
-                            <p class="text-gray-600">Oleh: {{ $audiobook->speaker->name ?? 'Unknown' }}</p>
+    document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.mySwiper', {
+        slidesPerView: 1, // Default untuk mobile
+        spaceBetween: 10, // Jarak antar slide
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: { // Untuk layar lebih dari 640px (tablet kecil)
+                slidesPerView: 2,
+                spaceBetween: 15,
+            },
+            768: { // Untuk layar lebih dari 768px (tablet besar)
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            1024: { // Untuk layar lebih dari 1024px (desktop)
+                slidesPerView: 4,
+                spaceBetween: 25,
+            },
+        },
+    });
+});
 
-                            <p>{{ $audiobook->description }}</p>
 
-                        </div>
-                    @endforeach
-                @else
-                    <p>No audiobooks found.</p>
-                @endif
-            </div>
-        </div>
+</script>
 
-    </div></div>
 </x-layout>

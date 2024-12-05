@@ -52,38 +52,9 @@ class PostController extends Controller
         return ['quote' => 'Quote not found.', 'author' => 'Unknown author'];
     }
 
-    public function edit($id)
-    {
-        // Find the post by ID
-        $userId = Auth::id();
-        $post = Post::findOrFail($id);
 
-        // Pass the post to the edit view
-        return view('dashboard.edit', compact('post', 'userId'));
-    }
 
-    public function update(Request $request, $id)
-    {
-        // Validate the incoming request data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'body' => 'required|string',
-            // Add other fields you want to validate
-        ]);
 
-        // Find the post by ID
-        $post = Post::findOrFail($id);
-
-        // Update the post with new data
-        $post->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            // Add other fields to be updated
-        ]);
-
-        // Redirect back with a success message
-        return redirect()->route('dashboard')->with('pesan', 'Post updated successfully');
-    }
 
     public function delete($id)
     {

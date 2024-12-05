@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Audiobook;
 use Illuminate\Support\Str;
+use App\Models\FavoriteBook;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Database\Seeders\FollowerSeeder;
@@ -27,9 +28,9 @@ class DatabaseSeeder extends Seeder
             Category::all(),
             User::all(),
         ])->create();
-
-        $this->call(BukuFavoritSeeder::class);
+        FavoriteBook::factory()->count(50)->create();
         $this->call(FollowerSeeder::class);
         Audiobook::factory()->count(100)->create();
+        $this->call(PlaylistSeeder::class);
     }
 }

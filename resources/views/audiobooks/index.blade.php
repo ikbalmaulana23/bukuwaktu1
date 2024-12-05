@@ -13,7 +13,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
             @foreach ($trendings->take(4) as $trending)
                 <a href="{{ route('audiobooks.show', $trending->id) }}"
-                   class="flex items-center p-4 border rounded-lg shadow-sm hover:bg-pink transition">
+                   class="flex items-center p-4 border rounded-lg shadow-sm hover:bg-pink hover:text-white transition">
 
                     @if ($trending->cover)
                         <img src="{{ asset('storage/' . $trending->cover) }}"
@@ -23,8 +23,8 @@
 
                     <div class="flex-1">
                         <h2 class="text-lg font-semibold truncate mb-1">{{ $trending->title }}</h2>
-                        <p class="text-sm text-gray-600 truncate">Speaker: {{ $trending->speaker->name }}</p>
-                        <p class="text-xs text-gray-500">Duration: {{ $trending->duration }}</p> <!-- tambahkan jika ada durasi -->
+                        <p class="text-sm  truncate">Speaker: {{ $trending->speaker->name }}</p>
+                        <p class="text-xs ">Duration: {{ $trending->duration }}</p> <!-- tambahkan jika ada durasi -->
                     </div>
 
                     <button class="ml-4 text-gray-500 hover:text-gray-800">

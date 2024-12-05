@@ -11,6 +11,8 @@
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
   <style>
@@ -123,6 +125,9 @@
     background-color: #FFF9C4; /* Warna kuning pastel di akhir animasi */
   }
 }
+[x-cloak] {
+  display: none;
+}
 
 </style>
 </head>
@@ -132,7 +137,7 @@
     <x-navbar></x-navbar>
 
     <main class="">
-        <div class="mx-auto max-w-7xl  sm:px-6 lg:px-8 pt-28 overflow-x-hidden">
+        <div class="mx-auto max-w-7xl  sm:px-6 lg:px-8 p-2 md:p-0 pt-20 md:pt-28 overflow-x-hidden">
             {{$slot}}
         </div>
     </main>

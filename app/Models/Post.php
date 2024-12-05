@@ -12,8 +12,23 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'slug', 'body', 'author_id', 'category_id', 'cover'];
+    protected $fillable = [
+        'title',
+        'author',
+        'slug',
+        'body',
+        'author_id',
+        'category_id',
+        'cover',
+        'type',
+        'is_audited'
+    ];
 
+
+
+    protected $casts = [
+        'is_audited' => 'boolean', // Pastikan tipe data boolean terjaga
+    ];
     protected $with = ['author', 'category'];
 
     public function author(): BelongsTo
