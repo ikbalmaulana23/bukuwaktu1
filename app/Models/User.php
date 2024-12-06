@@ -24,7 +24,7 @@ class User extends Authenticatable
         'bio',
         'email',
         'password',
-        'profile_photo'
+        'profile_photo',
     ];
 
     /**
@@ -50,15 +50,17 @@ class User extends Authenticatable
         ];
     }
 
+    public function socialite()
+    {
+        return $this->hasMany(Socialite::class);
+    }
+
     public function posts(): HasMany
     {
         return  $this->hasMany(Post::class, 'author_id');
     }
 
-    public function bukuFavorit()
-    {
-        return $this->hasMany(BukuFavorit::class, 'id_profile');
-    }
+
 
     public function followers()
     {
