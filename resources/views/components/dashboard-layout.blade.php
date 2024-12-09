@@ -13,11 +13,12 @@
 <body>
 <!-- partial:index.partial.html -->
 <body class="flex bg-gray-100 min-h-screen">
+
   <aside class=" flex flex-col">
     <a href="/" class="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500">
       <img src="{{ asset('img/logosquare.png') }}" alt="" class="w-16 ">
 
-    </a>
+</a>
     <div class="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
       <nav class="flex flex-col mx-4 my-6 space-y-4">
 

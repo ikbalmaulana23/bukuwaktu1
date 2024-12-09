@@ -24,6 +24,7 @@ class User extends Authenticatable
         'bio',
         'email',
         'password',
+        'role',
         'profile_photo',
     ];
 
@@ -60,7 +61,15 @@ class User extends Authenticatable
         return  $this->hasMany(Post::class, 'author_id');
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
 
     public function followers()
     {

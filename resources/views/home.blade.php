@@ -13,30 +13,30 @@
     <div class="m-2  basis-1/2 hidden md:block">
         <div class="flex justify-between mb-3">
         <div class="book-container ">
-            <img class="book front  rounded-md " src="img/buku1.png" />
-            <img class="book back rounded-md" src="img/buku2.png" />
+            <img class="book front  rounded-md " src="{{ asset('img/buku1.png') }}" />
+            <img class="book back rounded-md" src="{{ asset('img/buku2.png') }}" />
         </div>
         <div class="book-container ">
-            <img class="book front rounded-md border" src="img/buku3.png" />
-            <img class="book back rounded-md border" src="img/buku4.png" />
+            <img class="book front rounded-md border" src="{{ asset('img/buku3.png') }}" />
+            <img class="book back rounded-md border" src="{{ asset('img/buku4.pngg') }}" />
         </div>
         <div class="book-container ">
-            <img class="book front rounded-md border" src="img/buku5.png" />
-            <img class="book back rounded-md border" src="img/buku6.png" />
+            <img class="book front rounded-md border" src="{{ asset('img/buku5.png') }}" />
+            <img class="book back rounded-md border" src="{{ asset('img/buku6.png') }}" />
         </div>
     </div>
     <div class="flex justify-between mb-3">
         <div class="book-container  ">
-            <img class="book front rounded-md border" src="img/buku7.jpg" />
-            <img class="book back rounded-md border" src="img/buku8.jpg" />
+            <img class="book front rounded-md border" src="{{ asset('img/buku7.jpg') }}" />
+            <img class="book back rounded-md border" src="{{ asset('img/buku8.jpg') }}" />
         </div>
         <div class="book-container">
-            <img class="book front rounded-md border" src="img/buku9.jpg" />
-            <img class="book back rounded-md border" src="img/buku10.jpg" />
+            <img class="book front rounded-md border" src="{{ asset('img/buku9.jpg') }}" />
+            <img class="book back rounded-md border" src="{{ asset('img/buku10.jpg') }}" />
         </div>
         <div class="book-container">
-            <img class="book front rounded-md border" src="img/buku11.jpg" />
-            <img class="book back rounded-md border" src="img/buku12.jpg" />
+            <img class="book front rounded-md border" src="{{ asset('img/buku11.jpg') }}" />
+            <img class="book back rounded-md border" src="{{ asset('img/buku12.jpg') }}" />
         </div>
     </div>
     </div>

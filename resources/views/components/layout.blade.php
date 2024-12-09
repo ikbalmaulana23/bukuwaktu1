@@ -2,6 +2,7 @@
 <html class="h-full bg-white">
 <head>
   <meta charset="utf-8">
+  <title>BukuWaktu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">

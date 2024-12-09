@@ -25,13 +25,10 @@ return new class extends Migration
             $table->string('cover')->nullable();
             $table->string('slug')->unique();
             $table->text('body');
+            $table->enum('type', ['rangkuman', 'resensi'])->default('rangkuman'); // Tipe dengan nilai default 'rangkuman'
+            $table->boolean('is_audited')->default(true); // Lolos audit dengan nilai default true
             $table->timestamps();
         });
-
-        // $table->unsignedBigInteger('author_id');
-        //     $table->foreign('author_id')->references('id')->on('users');
-
-        //
     }
 
     /**

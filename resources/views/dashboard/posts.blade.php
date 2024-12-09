@@ -2,8 +2,6 @@
 
 <x-dashboard-layout>
 
-
-
     <div class="">
 
         <form action="{{ route('uploadbuku') }}" method="POST" enctype="multipart/form-data">

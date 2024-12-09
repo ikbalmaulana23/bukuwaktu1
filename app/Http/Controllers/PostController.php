@@ -23,17 +23,18 @@ class PostController extends Controller
         return view('home', $data);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $data = [
             'quote' => $this->fetchQuote(),
             'title' => 'judul post',
-            'posts' => Post::filter(request(['search', 'category']))->latest()->paginate(28),
-            'category' => Category::get()
+            'posts' => Post::filter($request->only(['search', 'category']))->latest()->paginate(28),
+            'categories' => Category::all(),
+            'searchQuery' => $request->search, // Tambahkan ini untuk digunakan di view
+            'selectedCategory' => $request->category,
         ];
         return view('posts', $data);
     }
-
 
 
     private function fetchQuote()
@@ -51,10 +52,6 @@ class PostController extends Controller
         // Kembalikan default jika tidak ada quote
         return ['quote' => 'Quote not found.', 'author' => 'Unknown author'];
     }
-
-
-
-
 
     public function delete($id)
     {

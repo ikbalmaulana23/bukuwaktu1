@@ -22,7 +22,7 @@
         </div>
 
 
-        <div class="container mx-auto pb-4 mb-4">
+        <div class="container mx-auto pb-4 ">
             <p id="quote" class="text-md leading-8 text-gray-600 border-gray-200">
                 {{ $quote['quote'] ?? 'Quote not found.' }}
             </p>
@@ -30,34 +30,58 @@
                 — {{ $quote['author'] ?? 'Unknown author' }}
             </p>
         </div>
+ <div class="flex justify-center gap-3 mb-5">
+        @if(request('search'))
+        <div class="flex justify-center ">
+            <p class="px-3 py-1 rounded-md border border-blue-500 bg-blue-50 text-blue-700 ">Kategori: <strong>{{ request('search') }}</strong></p>
+        </div>
+@endif
+
+@if(request('category'))
+<div class="flex justify-center ">
+    <p class="px-3 py-1 rounded-md border border-red-500 bg-red-50 text-red-700 ">Kategori: <strong>{{ request('category') }}</strong></p>
+</div>
+@endif
+</div>
         {{ $posts->links() }}
 
         <div class="sm:text-center flex flex-wrap gap-2">
             <a href="/posts" class="text-sm relative rounded-full bg-yellow-300 px-6 py-1.5 font-medium text-gray-600 hover:bg-yellow-400">All</a>
-            @foreach ($category as $item)
-                <a href="/posts?category={{ $item->slug }}" class="text-sm relative rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $item->name }}</a>
+            @foreach ($categories as $category)
+                <a href="/posts?category={{ $category->slug }}" class="text-sm relative rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $category->name }}</a>
             @endforeach
         </div>
 
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-4 mt-10">
             @forelse ($posts as $post)
+            <div class="relative">
+                <span class="absolute top-0 right-0 inline-flex items-center px-3 py-1 text-xs font-semibold ring-1
+                {{ $post['type'] === 'resensi' ? 'bg-red-50 text-red-700 ring-red-600/20' : 'bg-green-50 text-green-700 ring-green-600/20' }}
+                rounded-tl-none rounded-tr-md rounded-br-none rounded-bl-lg">
+                {{ $post['type'] }}
+            </span>
+
+
+
                 <article class="flex flex-col items-start justify-between border rounded-md p-5">
                     <div class="w-full mb-2">
                         <a href="/posts/{{ $post['id'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
-                        <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="h-auto w-full rounded-lg" alt="gambar">
+                            <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="h-auto w-full rounded-lg" alt="gambar">
                         </a>
                     </div>
-                    <div class="group relative">
-                    </div>
+                    <div class="group relative"></div>
                     <div class="mt-1 items-center gap-x-4 w-full">
                         <h3 class="my-2 text-xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600 inline">
                             <a href="/posts/{{ $post['id'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">{{ Str::limit($post['title'], 20) }}</a>
                         </h3>
                     </div>
-                    <a href="/authors/{{ $post->author->username }}" class="text-xs text-gray-600 mb-3 mt-1">Summarized by
+                    <a href="/authors/{{ $post->author->username }}" class="text-xs text-gray-600 mb-3 mt-1">
+                        Summarized by
                         <span class="absolute font-semibold text-gray-900 mx-2">{{ Str::limit($post->author->name, 20) }}</span>
                     </a>
                 </article>
+            </div>
+
             @empty
                 <p class="text-center">Topik yang anda cari tidak ditemukan</p>
                 <a href="/posts" class="text-center text-blue-600">&laquo Kembali ke halaman bookshelf</a>

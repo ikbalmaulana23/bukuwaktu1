@@ -13,7 +13,39 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+            },
+            rotate: {
+                270: "270deg",
+            },
+            colors: {
+                pastelYellow: "#FFF9C4", // Warna pastel kuning
+                pink: "#F1817B",
+            },
+            keyframes: {
+                "gradient-move": {
+                    "0%": { "background-position": "0% 50%" },
+                    "50%": { "background-position": "100% 50%" },
+                    "100%": { "background-position": "0% 50%" },
+                },
+                fadeIn: {
+                    "0%": { opacity: "0" },
+                    "100%": { opacity: "1" },
+                },
+                fadeOut: {
+                    "0%": { opacity: "1" },
+                    "100%": { opacity: "0" },
+                },
+                highlight: {
+                    "0%": {
+                        opacity: "0",
+                        width: "0%",
+                    },
+                    "100%": {
+                        opacity: "1",
+                        width: "100%",
+                    },
+                },
             },
         },
     },

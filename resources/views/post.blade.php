@@ -15,7 +15,7 @@
                 <a href="/posts?category={{ $post->category->slug }}" class="text-indigo-600 hover:underline">{{ $post->category->name }}</a>
                 | {{ $post->created_at->format('j F Y') }}
             </p>
-            <div class="mt-4 text-gray-700 leading-relaxed">
+            <div class="mt-4 text-gray-700 leading-relaxed space-y-4">
                 {!! $post['body'] !!}
             </div>
         </div>
