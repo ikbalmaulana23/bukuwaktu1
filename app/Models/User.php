@@ -86,7 +86,14 @@ class User extends Authenticatable
         return $this->hasMany(Audiobook::class, 'speaker_id'); // Periksa nama kolom di sini
     }
 
-
+    public function interestGenres()
+    {
+        return $this->hasMany(InterestGenre::class);
+    }
+    public function favoriteAuthor()
+    {
+        return $this->hasMany(FavoriteAuthor::class);
+    }
 
     public function favoriteBooks()
     {

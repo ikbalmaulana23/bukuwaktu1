@@ -17,7 +17,7 @@
 
 <div class="">
 
-    <div class=" mx-auto w-full border rounded-lg overflow-hidden ">
+    <div class=" mx-auto w-full border rounded-lg overflow-hidden border">
         <!-- Header Section -->
         <div class="w-full overflow-hidden ">
             <img
@@ -27,7 +27,7 @@
         </div>
 
 
-
+<div class="flex  w-full border">
         <!-- Profile Image -->
         <div class="relative  ml-5 flex justify-start lg:-mt-10 mb-5 mx-5">
             <button id="openModal" class="absolute top-0 right-8 bg-white text-black p-1 rounded-full shadow-md">
@@ -79,61 +79,32 @@
             <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
               <h3 class="text-md font-semibold text-gray-800 mb-2">Interest Genre</h3>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Fiction</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Poem</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Bibliography</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">+3 more</span>
+                @if ($interestGenres->isEmpty())
+                <p>You have no interest genres yet.</p>
+            @else
+                @foreach ($interestGenres as $genre)
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">{{ $genre->genre }}</span>
+                @endforeach
+                @endif
               </div>
+
             </div>
             <!-- Author Section -->
             <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
               <h3 class="text-md font-semibold text-gray-800 mb-2">Author Kesukaan</h3>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">JS Khairen</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">JK Rowling</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">Franz Kafka</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">+3 more</span>
-              </div>
+              @if ($favoriteAuthors->isEmpty())
+              <p>You have no interest genres yet.</p>
+          @else
+              @foreach ($favoriteAuthors as $author)
+              <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">{{ $author->favorite_author }}</span>
+              @endforeach
+              @endif
             </div>
           </div>
         </div>
+    </div>
+ </div>
 
-        </div>
-
-          <div class="gap-2 mx-2 mb-4  w-full sm:w-auto px-7">
-            <h3 class="text-md font-semibold text-gray-800 mb-2">Favorit Book</h3>
-            <button onclick="openModal()" class="bg-slate-500 px-2 py-1 rounded-full text-white ">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    @foreach($favoriteBooks as $book)
-                    <div class="swiper-slide">
-                        <div class="bg-white shadow-sm rounded-lg p-3 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                            <!-- Book Image -->
-                            <div class="flex justify-center mb-4">
-                                <img src="{{ asset('storage/' . $book->favorite_book_image) }}"
-                                     alt="{{ $book->favorite_book_title }}"
-                                     class="w-full h-48 object-cover object-center rounded-md">
-                            </div>
-
-                            <!-- Book Details -->
-                            <div class="text-center">
-                                <h2 class="text-md font-medium text-gray-800 truncate">{{ $book->favorite_book_title }}</h2>
-                                <p class="text-sm text-gray-500 mt-1">Rating: {{ $book->favorite_book_rate }} / 5</p>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <!-- Navigation Buttons -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <!-- Pagination -->
-                <div class="swiper-pagination"></div>
-            </div>
-
-          </div>
 
 
           <div class="p-4  w-full my-2 rounded-lg">
@@ -310,20 +281,6 @@
       </div>
 </div>
 
-<div class="container">
-    <h1 class="mb-4">Playlists</h1>
-    @foreach ($playlists as $playlist)
-        <div class="card mb-3">
-            <div class="card-body">
-                <h3>{{ $playlist->name }}</h3>
-                <p>{{ $playlist->description }}</p>
-                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-primary">
-                    View Playlist
-                </a>
-            </div>
-        </div>
-    @endforeach
-</div>
 
 <script>
     function openModal() {

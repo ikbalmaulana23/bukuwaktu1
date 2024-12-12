@@ -9,7 +9,8 @@ class InterestGenre extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name'];
+
+    protected $fillable = ['user_id', 'genre'];
 
     public function user()
     {

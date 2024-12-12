@@ -115,9 +115,6 @@ class DashboardController extends Controller
         return redirect('/posts')->with('pesan', 'Update Buku berhasil');
     }
 
-
-
-
     public function audiobook()
     {
         $userId = Auth::id();

@@ -11,13 +11,14 @@ class AudiobookController extends Controller
     // Menampilkan daftar audiobook
     public function index()
     {
+        // Gunakan Eager Loading untuk memuat relasi 'user'
+        $trendings = Audiobook::with('speaker')->orderBy('created_at', 'desc')->take(3)->get();
 
+        $audiobooks = Audiobook::with('speaker')->get();
 
-        $trendings = Audiobook::orderBy('created_at', 'desc')->take(4)->get();
-
-        $audiobooks = Audiobook::all();
         return view('audiobooks.index', compact('audiobooks', 'trendings'));
     }
+
 
     // Menampilkan formulir untuk menambah audiobook baru
     public function create()

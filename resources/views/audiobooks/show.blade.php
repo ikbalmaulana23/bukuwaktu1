@@ -1,7 +1,7 @@
 <x-layout>
 
-    <div class="flex justify-between gap-3">
-        <div class="p-4 border rounded basis-1/3">
+    <div class="lg:flex justify-between gap-3">
+        <div class="p-4 border rounded lg:basis-1/3">
             <h2 class="text-xl font-bold mb-2">{{ $audiobook->title }}</h2>
             <p class="text-gray-600 mb-4">Oleh: {{ $audiobook->speaker->name }}</p>
             @if ($audiobook->cover)
@@ -14,7 +14,7 @@
             </audio>
 
         </div>
-        <div class="p-4 border basis-2/3">
+        <div class="p-4 border lg:basis-2/3">
             <p>{{ $audiobook->description }}</p>
         </div>
 

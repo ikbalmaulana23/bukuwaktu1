@@ -9,7 +9,7 @@ class FavoriteAuthor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'bio'];
+    protected $fillable = ['user_id', 'favorite_author'];
 
     public function user()
     {

@@ -7,59 +7,53 @@ use Illuminate\Http\Request;
 
 class FavoriteAuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $authors = FavoriteAuthor::with('user')->get();
+        return view('favorite-authors.index', compact('authors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('favorite-authors.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'favorite_author' => 'required|string|max:255',
+        ]);
+
+        // Menambahkan author favorit untuk user yang login
+        FavoriteAuthor::create([
+            'user_id' => auth()->id(),
+            'favorite_author' => $request->favorite_author,
+        ]);
+
+        return redirect()->route('favorite-authors.index')->with('success', 'Favorite author added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(FavoriteAuthor $favoriteAuthor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(FavoriteAuthor $favoriteAuthor)
     {
-        //
+        return view('favorite-authors.edit', compact('favoriteAuthor'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, FavoriteAuthor $favoriteAuthor)
     {
-        //
+        $request->validate([
+            'favorite_author' => 'required|string|max:255',
+        ]);
+
+        $favoriteAuthor->update([
+            'favorite_author' => $request->favorite_author,
+        ]);
+
+        return redirect()->route('favorite-authors.index')->with('success', 'Favorite author updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(FavoriteAuthor $favoriteAuthor)
     {
-        //
+        $favoriteAuthor->delete();
+        return redirect()->route('favorite-authors.index')->with('success', 'Favorite author deleted successfully!');
     }
 }

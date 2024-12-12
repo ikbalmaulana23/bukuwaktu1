@@ -18,7 +18,7 @@
         </div>
         <div class="book-container ">
             <img class="book front rounded-md border" src="{{ asset('img/buku3.png') }}" />
-            <img class="book back rounded-md border" src="{{ asset('img/buku4.pngg') }}" />
+            <img class="book back rounded-md border" src="{{ asset('img/buku4.png') }}" />
         </div>
         <div class="book-container ">
             <img class="book front rounded-md border" src="{{ asset('img/buku5.png') }}" />

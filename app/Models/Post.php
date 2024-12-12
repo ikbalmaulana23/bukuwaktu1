@@ -42,13 +42,7 @@ class Post extends Model
     }
     public function scopeFilter(Builder $query, array $filters): void
     {
-        //belajar isset
-        // isset($filters['search']) ? $filters['search'] : false
 
-        //sebelum ada when(), artinya bisa mengetahui kondisi dimana kita
-        // if ($filters['search'] ?? false) {
-        //     $query->where('title', 'like', '%' . request('search') . '%');
-        // }
 
         $query->when(
             $filters['search'] ?? false,
@@ -66,5 +60,9 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

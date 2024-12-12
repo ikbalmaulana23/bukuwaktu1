@@ -24,9 +24,6 @@ class AuthController extends Controller
             'email' => $r->email,
             'password' => $r->password
         ])) {
-            // Simpan data pengguna ke dalam sesi
-
-
             return redirect('/')->with('pesan', 'berhasil login');
         } else {
             return back()->with('pesan', 'login gagal');

@@ -1,0 +1,104 @@
+  @if ($interestGenres->isEmpty())
+        <p>You have no interest genres yet.</p>
+    @else
+        <ul>
+            @foreach ($interestGenres as $genre)
+            <tr>
+                <td>{{ $genre->id }}</td>
+                <td>{{ $genre->user->name }}</td>
+                <td>{{ $genre->genre }}</td>
+                <td>
+                    <a href="{{ route('interest-genre.edit', $genre->id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('interest-genre.destroy', $genre->id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+        </ul>
+    @endif
+
+
+    modal tambah interestgenre
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addGenreModal">Add Genre</button>
+
+     <div class="modal fade" id="addGenreModal" tabindex="-1" aria-labelledby="addGenreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('interest-genre.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addGenreModalLabel">Add New Genre</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <input type="text" name="genre" id="genre" class="form-control" placeholder="Enter genre" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+fitur
+
+
+          <div class="gap-2 mx-2 mb-4  w-full sm:w-auto px-7">
+            <h3 class="text-md font-semibold text-gray-800 mb-2">Favorit Book</h3>
+            <button onclick="openModal()" class="bg-slate-500 px-2 py-1 rounded-full text-white ">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    @foreach($favoriteBooks as $book)
+                    <div class="swiper-slide">
+                        <div class="bg-white shadow-sm rounded-lg p-3 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                            <!-- Book Image -->
+                            <div class="flex justify-center mb-4">
+                                <img src="{{ asset('storage/' . $book->favorite_book_image) }}"
+                                     alt="{{ $book->favorite_book_title }}"
+                                     class="w-full h-48 object-cover object-center rounded-md">
+                            </div>
+
+                            <!-- Book Details -->
+                            <div class="text-center">
+                                <h2 class="text-md font-medium text-gray-800 truncate">{{ $book->favorite_book_title }}</h2>
+                                <p class="text-sm text-gray-500 mt-1">Rating: {{ $book->favorite_book_rate }} / 5</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+          </div>
+
+
+          <div class="container">
+    <h1 class="mb-4">Playlists</h1>
+    @foreach ($playlists as $playlist)
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3>{{ $playlist->name }}</h3>
+                <p>{{ $playlist->description }}</p>
+                <a href="{{ route('playlists.show', $playlist->id) }}" class="btn btn-primary">
+                    View Playlist
+                </a>
+            </div>
+        </div>
+    @endforeach
+</div>
+

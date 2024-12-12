@@ -33,7 +33,7 @@
  <div class="flex justify-center gap-3 mb-5">
         @if(request('search'))
         <div class="flex justify-center ">
-            <p class="px-3 py-1 rounded-md border border-blue-500 bg-blue-50 text-blue-700 ">Kategori: <strong>{{ request('search') }}</strong></p>
+            <p class="px-3 py-1 rounded-md border border-blue-500 bg-blue-50 text-blue-700 ">Hasil Pencarian: <strong>{{ request('search') }}</strong></p>
         </div>
 @endif
 
@@ -65,19 +65,19 @@
 
                 <article class="flex flex-col items-start justify-between border rounded-md p-5">
                     <div class="w-full mb-2">
-                        <a href="/posts/{{ $post['id'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
+                        <a href="/posts/{{ $post['slug'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
                             <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="h-auto w-full rounded-lg" alt="gambar">
                         </a>
                     </div>
                     <div class="group relative"></div>
                     <div class="mt-1 items-center gap-x-4 w-full">
                         <h3 class="my-2 text-xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600 inline">
-                            <a href="/posts/{{ $post['id'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">{{ Str::limit($post['title'], 20) }}</a>
+                            <a href="/posts/{{ $post['slug'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">{{ Str::limit($post['title'], 20) }}</a>
                         </h3>
                     </div>
                     <a href="/authors/{{ $post->author->username }}" class="text-xs text-gray-600 mb-3 mt-1">
                         Summarized by
-                        <span class="absolute font-semibold text-gray-900 mx-2">{{ Str::limit($post->author->name, 20) }}</span>
+                        <span class="absolute font-semibold text-gray-900 mx-2 hover:text-gray-600 ">{{ Str::limit($post->author->name, 20) }}</span>
                     </a>
                 </article>
             </div>
@@ -99,10 +99,8 @@
             icon: 'success', // Atur icon sesuai kebutuhan: 'success', 'error', 'warning', dll.
             confirmButtonText: 'OK'
         });
-
-
     </script>
-@endif
+    @endif
 
     @endsection
 </x-layout>

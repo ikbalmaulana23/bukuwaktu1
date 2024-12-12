@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Post;
-use App\Models\User;
-use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -17,6 +15,8 @@ use App\Http\Controllers\playlistController;
 use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteBookController;
+use App\Http\Controllers\InterestGenreController;
+use App\Http\Controllers\FavoriteAuthorController;
 
 
 Route::get('/dashboard', function () {
@@ -29,6 +29,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::resource('audiobooks', AudiobookController::class);
+Route::resource('interest-genre', InterestGenreController::class);
+Route::resource('favorite-authors', FavoriteAuthorController::class);
 
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,13 +45,7 @@ Route::get('posts/edit/{id}', [DashboardController::class, 'edit'])->name('posts
 Route::put('posts/update/{id}', [DashboardController::class, 'update'])->name('posts.update');
 Route::get('posts/destroy/{id}', [PostController::class, 'delete'])->name('posts.destroy');
 Route::get('authors/{user:username}', [AuthorController::class, 'index']);
-
-
-
-Route::get('posts/{post}', function (Post $post) {
-    return view('post', ['title' => 'Single Post', 'post' => $post]);
-});
-
+Route::get('posts/{post}', [PostController::class, 'post'])->name('show.post');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout1');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

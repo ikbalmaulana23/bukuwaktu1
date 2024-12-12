@@ -17,7 +17,7 @@ class PostController extends Controller
         $data = [
             'title' => 'home',
             'posts' => Post::latest()->take(4)->get(),
-            'audiobooks' => Audiobook::latest()->take(4)->get(),
+            'audiobooks' => Audiobook::with('speaker')->latest()->take(4)->get(),
 
         ];
         return view('home', $data);
@@ -57,7 +57,11 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-
         return redirect()->route('dashboard')->with('pesan', 'post has been deleted');
+    }
+
+    public function post(Post $post)
+    {
+        return view('post', ['title' => 'Single Post', 'post' => $post]);
     }
 }
