@@ -93,7 +93,7 @@
             <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
               <h3 class="text-md font-semibold text-gray-800 mb-2">Author Kesukaan</h3>
               @if ($favoriteAuthors->isEmpty())
-              <p>You have no interest genres yet.</p>
+              <p>You have no favorite author yet.</p>
           @else
               @foreach ($favoriteAuthors as $author)
               <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">{{ $author->favorite_author }}</span>

@@ -23,7 +23,7 @@ class SocialiteController extends Controller
         $authuser = $this->store($socialUser, $provider);
 
         Auth::login($authuser);
-        return redirect('/dashboard');
+        return redirect('/posts');
     }
 
     public function store($socialUser, $provider)

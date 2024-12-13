@@ -1,15 +1,10 @@
 
 
 <x-layout>
-<x-slot:title>{{ $title }}</x-slot:title>
 
 <div>
     <section id="landing-page">
-
-
     <div class="md:flex md:flex-row mb-10">
-
-
     <div class="m-2  basis-1/2 hidden md:block">
         <div class="flex justify-between mb-3">
         <div class="book-container ">
@@ -59,8 +54,8 @@
       </div>
     </section>
     <div id="progress-bar-container">
-    <div id="progress-bar" class="hidden md:block"></div>
-    <div id="progress-percent" class=" mix-blend-difference">  0% </div>
+        <div id="progress-bar" class="hidden md:block"></div>
+        <div id="progress-percent" class=" mix-blend-difference">  0% </div>
     </div>
 
     <section id="library" class="mt-10 rounded-lg p-2 ">
@@ -72,10 +67,6 @@
                </div>
 
         </div>
-        {{-- <div class="flex justify-center">
-        <h1 class="text-center highlight-text font-sans"> - Baca Kapanpun, dan dimanapun -</h1>
-    </div> --}}
-
 
         <div class="flex flex-col lg:flex-row justify-between gap-3 mt-20">
             <!-- Bagian Kiri -->
@@ -180,54 +171,6 @@
 
 
 </div>
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        @if(session('pesan') == 'berhasil login')
-            Swal.fire({
-
-                text: 'Selamat datang kembali!',
-                icon: 'success',
-                confirmButtonText: 'OK',
-                width: '400px'
-            });
-        @elseif(session('pesan') == 'login gagal')
-            Swal.fire({
-
-                text: 'Email atau password salah!',
-                icon: 'error',
-                confirmButtonText: 'Coba Lagi',
-                width: '400px'
-            });
-        @elseif(session('pesan') == 'berhasil logout')
-            Swal.fire({
-
-                text: 'Anda telah logout.',
-                icon: 'success',
-                confirmButtonText: 'OK',
-                width: '400px'
-            });
-        @endif
-
-        document.addEventListener('scroll', function () {
-        const scrollTop = window.scrollY; // Jarak gulir dari atas
-        const documentHeight = document.documentElement.scrollHeight; // Tinggi total dokumen
-        const windowHeight = window.innerHeight; // Tinggi viewport
-
-        // Hitung persentase scroll
-        const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
-
-        // Perbarui tinggi progress bar
-        document.getElementById('progress-bar').style.height = scrollPercent + '%';
-
-        // Perbarui teks persentase
-        document.getElementById('progress-percent').textContent = scrollPercent + '%';
-    });
-
-
-    </script>
-
-    @endsection
 
 
 </x-layout>

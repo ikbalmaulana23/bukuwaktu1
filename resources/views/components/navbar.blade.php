@@ -88,9 +88,17 @@
 
                     <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Upload Buku</p>
                     </a>
-                  <a href="{{ route('logout') }}" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-left  text-sm text-gray-700 w-full">
+                            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">{{ __('Log Out') }}</p>
+
+                        </button>
+                    </form>
+                  {{-- <a href="{{ route('logout') }}" onclick="confirmLogout()" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
                     <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Sign out</p>
-                    </a>
+                    </a> --}}
+
               </div>
           </div>
 

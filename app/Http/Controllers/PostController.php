@@ -31,7 +31,7 @@ class PostController extends Controller
             'posts' => Post::filter($request->only(['search', 'category']))->latest()->paginate(28),
             'categories' => Category::all(),
             'searchQuery' => $request->search, // Tambahkan ini untuk digunakan di view
-            'selectedCategory' => $request->category,
+
         ];
         return view('posts', $data);
     }

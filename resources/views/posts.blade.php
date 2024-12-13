@@ -37,20 +37,27 @@
         </div>
 @endif
 
-@if(request('category'))
-<div class="flex justify-center ">
-    <p class="px-3 py-1 rounded-md border border-red-500 bg-red-50 text-red-700 ">Kategori: <strong>{{ request('category') }}</strong></p>
-</div>
-@endif
 </div>
         {{ $posts->links() }}
 
         <div class="sm:text-center flex flex-wrap gap-2">
-            <a href="/posts" class="text-sm relative rounded-full bg-yellow-300 px-6 py-1.5 font-medium text-gray-600 hover:bg-yellow-400">All</a>
+            <!-- Tombol "All" -->
+            <a
+                href="/posts"
+                class="text-sm relative rounded-full px-6 py-1.5 font-medium text-gray-600 {{ !request('category') ? 'bg-yellow-300 hover:bg-yellow-400 text-white' : 'bg-gray-100 hover:bg-gray-200' }}">
+                All
+            </a>
+
+            <!-- Tombol untuk masing-masing kategori -->
             @foreach ($categories as $category)
-                <a href="/posts?category={{ $category->slug }}" class="text-sm relative rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $category->name }}</a>
+                <a
+                    href="/posts?category={{ $category->slug }}"
+                    class="text-sm relative rounded-full px-3 py-1.5 font-medium text-gray-600 {{ request('category') === $category->slug ? 'bg-yellow-300 hover:bg-yellow-400 text-white' : 'bg-gray-100 hover:bg-gray-200' }}">
+                    {{ $category->name }}
+                </a>
             @endforeach
         </div>
+
 
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-4 mt-10">
             @forelse ($posts as $post)

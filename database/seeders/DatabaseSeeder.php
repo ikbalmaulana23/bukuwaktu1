@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FollowerSeeder::class);
         Audiobook::factory()->count(100)->create();
         $this->call(PlaylistSeeder::class);
-        $this->call(AdminSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(InterestGenreSeeder::class);
         $this->call(FavoriteAuthorSeeder::class);
     }

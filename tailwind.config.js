@@ -14,6 +14,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+                inter: ["Inter", "sans-serif"],
             },
             rotate: {
                 270: "270deg",

@@ -17,6 +17,8 @@ class Audiobook extends Model
         'description',
     ];
 
+    protected $with = 'speaker';
+
     public function speaker()
     {
         return $this->belongsTo(User::class, 'speaker_id');

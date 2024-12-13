@@ -13,19 +13,21 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-cover bg-center" style="background-image: url('{{ asset('img/guest.jpg') }}');">
-            <div>
-                <a href="/">
-                    <x-application-logo />
-                </a>
+    <body class=" text-gray-900 antialiased font-inter">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+
+
+            <div class="w-full  bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <div class=" flex justify-center items-center h-screen ">
+                    <!-- Left: Image -->
+                <div class="w-8/12 h-screen hidden lg:block">
+                  <img src="{{ asset('img/login.jpg') }}" alt="Placeholder Image" class="object-cover w-full h-full">
+                </div>
+                {{ $slot }}
             </div>
-
-            <div class="w-full sm:max-w-md my-6 px-6 py-4 bg-white bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-50 shadow-md overflow-hidden sm:rounded-lg">
-    {{ $slot }}
-</div>
-
+            </div>
         </div>
     </body>
 </html>

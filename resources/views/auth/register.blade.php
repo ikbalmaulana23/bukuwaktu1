@@ -1,5 +1,13 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+<x-auth-layout>
+    <div class= "lg:px-10 md:px-16 sm:20 px-8 w-full lg:w-4/12 mb-10  ">
+
+        <a href="/" class="flex justify-center ">
+        <x-application-logo > </x-application-logo>
+        </a>
+        <h1 class="text-xl font-medium text- my-4 text-center ">Create an Account</h1>
+
+    <div class="">
+        <form method="POST" action="{{ route('register') }}" class="text-sm">
         @csrf
 
         <!-- Name -->
@@ -39,14 +47,25 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
+        <div class="flex items-center justify-center mt-4">
+            <x-primary-button class="px-20 py-3">
                 {{ __('Register') }}
             </x-primary-button>
+
         </div>
+
+        <div class="mt-6 text-slate-800 text-center text-sm mb-2">
+            Already have an account?
+            <a href="/login" class="hover:underline text-blue-700 font-semibold">Log in</a>
+          </div>
+        <div class="">
+            <hr class="my-2">
+            <div class="flex justify-around text-sm">
+                <a href="{{ route('socialite.redirect', 'google') }}" class=" hover:text-gray-800 border bg-gray-100 hover:bg-gray-200 py-2 rounded-lg text-bold px-3">Continue With Google <div class="flex justify-center"><img src="{{ asset('img/google.png') }}" class="h-6" alt=""></div></a>
+                <a href="{{ route('socialite.redirect', 'github') }}" class=" hover:text-gray-800 border bg-gray-100 hover:bg-gray-200 py-2 rounded-lg text-bold px-3">Continue with Github <div class="flex justify-center"><img src="{{ asset('img/github.png') }}" class="h-6" alt=""></div></a>
+            </div>
+             </div>
+
     </form>
-</x-guest-layout>
+</div> </div>
+</x-auth-layout>

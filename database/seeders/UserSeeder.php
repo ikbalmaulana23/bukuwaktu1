@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'bio' => 'Hidup yang tidak diperjuangkan, tidak pernah dimenangkan',
             'profile_photo' => fake()->randomElement(['avatar1.jpg', 'avatar2.jpg', 'avatar3.jpg', 'avatar4.jpg']), // Pilihan acak untuk profile_photo
             'email' => 'ikbalmaulanaalfatih@gmail.com',
-            'password' => 'admin123'
+            'password' =>  bcrypt('password'),
 
         ]);
         User::create([
@@ -33,10 +33,8 @@ class UserSeeder extends Seeder
             'bio' => 'someone',
             'profile_photo' => fake()->randomElement(['avatar1.jpg', 'avatar2.jpg', 'avatar3.jpg', 'avatar4.jpg']), // Pilihan acak untuk profile_photo
             'email' => 'fizi@gmail.com',
-            'password' => '12345678'
-
+            'password' =>  bcrypt('password'),
+            'role' => 'podcaster',
         ]);
-
-        User::factory(10)->create();
     }
 }
