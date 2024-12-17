@@ -1,10 +1,8 @@
 @section('scripts')
-
 <x-dashboard-layout>
-
     <div class="">
 
-        <form action="{{ route('uploadbuku') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="">
                 <div class="border-b border-gray-900/10 pb-12">
@@ -46,29 +44,6 @@
                             </div>
                         </div>
 
-                        <script>
-                            const trixEditor = document.querySelector('trix-editor');
-                            const placeholder = document.getElementById('placeholder');
-
-                            // Menyembunyikan placeholder saat editor diisi
-                            trixEditor.addEventListener("trix-change", function() {
-                                if (trixEditor.editor.getDocument().toString().trim() !== "") {
-                                    placeholder.style.display = "none";
-                                } else {
-                                    placeholder.style.display = "block";
-                                }
-                                // Atur tinggi editor
-                                trixEditor.style.height = "auto"; // Reset tinggi agar bisa disesuaikan
-                                trixEditor.style.height = (trixEditor.scrollHeight) + "px"; // Set tinggi sesuai konten
-                            });
-
-                            // Inisialisasi: Tampilkan placeholder jika editor kosong
-                            if (trixEditor.editor.getDocument().toString().trim() === "") {
-                                placeholder.style.display = "block";
-                            } else {
-                                placeholder.style.display = "none";
-                            }
-                        </script>
 
                         <!-- Input untuk cover buku -->
                         <div class="col-span-full">
@@ -89,5 +64,4 @@
 
     </div>
 
-
-  </x-dashboard-layout>
+   </x-dashboard-layout>

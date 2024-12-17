@@ -8,8 +8,10 @@ use Illuminate\View\View;
 use App\Models\FavoriteBook;
 use Illuminate\Http\Request;
 use App\Models\InterestGenre;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
 
@@ -44,6 +46,30 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'profile_photo' => 'nullable|image|max:2048',
+            'name' => 'required|string|max:255',
+            'bio' => 'nullable|string|max:500',
+        ]);
+
+        if ($request->hasFile('profile_photo')) {
+            if ($user->profile_photo) {
+                Storage::delete('public/profile_photos/' . $user->profile_photo);
+            }
+            $fileName = $request->file('profile_photo')->store('public/profile_photos');
+            $user->profile_photo = basename($fileName);
+        }
+
+        $user->name = $request->input('name');
+        $user->bio = $request->input('bio');
+        $user->save();
+        return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [

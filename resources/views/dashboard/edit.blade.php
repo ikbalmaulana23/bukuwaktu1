@@ -1,61 +1,70 @@
 <x-dashboard-layout>
-    <div class="container mx-auto">
-        <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Update Buku</h2>
+
+        <!-- Form -->
+        <form action="{{ route('books.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-md p-6 space-y-6">
             @csrf
             @method('PUT')
 
-            <!-- Judul -->
+            <!-- Judul Buku -->
             <div>
-                <label for="title" class="block text-sm font-medium text-gray-900">Judul Buku</label>
+                <label for="title" class="block text-sm font-medium text-gray-700">Judul Buku</label>
                 <input type="text" name="title" id="title"
-                    class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    value="{{ old('title', $post->title) }}">
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                       value="{{ old('title', $post->title) }}">
+                @error('title') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
             <!-- Kategori -->
             <div>
-                <label for="category_id" class="block text-sm font-medium text-gray-900">Kategori</label>
+                <label for="category_id" class="block text-sm font-medium text-gray-700">Kategori</label>
                 <select name="category_id" id="category_id"
-                    class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}"
-                            {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
+                        <option value="{{ $category->id }}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
+                @error('category_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
             <!-- Isi Buku -->
             <div>
-                <label for="body" class="block text-sm font-medium text-gray-900">Isi Buku</label>
+                <label for="body" class="block text-sm font-medium text-gray-700">Isi Buku</label>
                 <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
-                <trix-editor input="body"
-                    class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></trix-editor>
+                <trix-editor input="body" class="mt-1"></trix-editor>
+                @error('body') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
             <!-- Cover Buku -->
             <div>
-                <label for="cover" class="block text-sm font-medium text-gray-900">Cover Buku</label>
+                <label for="cover" class="block text-sm font-medium text-gray-700">Cover Buku</label>
                 <div class="flex items-center space-x-4 mt-2">
-                    <!-- Preview Cover Lama -->
+                    <!-- Preview Cover -->
                     @if ($post->cover)
-                        <img src="{{ asset('storage/' . $post->cover) }}" alt="Cover Lama" class="w-24 h-24 object-cover rounded-md">
+                        <img src="{{ asset('storage/' . $post->cover) }}" alt="Cover Buku" class="w-32 h-32 object-cover rounded-md shadow">
                     @else
                         <span class="text-gray-500">Tidak ada cover</span>
                     @endif
 
-                    <!-- Input File Baru -->
+                    <!-- Input File -->
                     <input type="file" name="cover" id="cover" accept="image/*"
-                        class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500">
+                           class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500">
                 </div>
+                @error('cover') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
-            <!-- Tombol -->
+            <!-- Tombol Aksi -->
             <div class="flex justify-end space-x-4">
-                <a href="" class="text-sm font-medium text-gray-900">Cancel</a>
+                <a href="{{ route('posts') }}"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    Cancel
+                </a>
                 <button type="submit"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-indigo-600">
+                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Update Buku
                 </button>
             </div>

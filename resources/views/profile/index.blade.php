@@ -160,7 +160,7 @@
         <div id="profileModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div class="bg-white p-5 rounded-lg shadow-lg w-96">
                 <h2 class="text-center font-semibold text-lg mb-4">Edit Profile</h2>
-                <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('profile.profile') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

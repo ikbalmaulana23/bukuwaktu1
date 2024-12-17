@@ -115,7 +115,7 @@
                         <article class="flex-shrink-0 border rounded-md p-4 bg-slate-100 hover:scale-105 transform transition duration-300 ease-in-out">
                             <!-- Gambar -->
                             <div class="w-full mb-3">
-                                <a href="/posts/{{ $post['id'] }}" class="block">
+                                <a href="/posts/{{ $post['slug'] }}" class="block">
                                     <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}"
                                          class="object-cover w-full h-36 rounded-lg" alt="gambar">
                                 </a>

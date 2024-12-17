@@ -17,7 +17,6 @@ class DashboardController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
         $user = Auth::user(); // atau metode lain untuk mendapatkan data pengguna
 
         $posts = Post::where('author_id', $userId)->get();
@@ -28,56 +27,7 @@ class DashboardController extends Controller
 
 
 
-    public function posts()
-    {
-        $categories = Category::all(); // Ambil semua kategori dari database
-        return view('dashboard.posts', compact('categories'));
-    }
 
-    public function edit($id)
-    {
-        // Find the post by ID
-        $categories = Category::all();
-        $userId = Auth::id();
-        $post = Post::findOrFail($id);
-
-        // Pass the post to the edit view
-        return view('dashboard.edit', compact('post', 'userId', 'categories'));
-    }
-    public function uploadbuku(UploadBukuRequest $request)
-    {
-        if ($request->validated()) {
-            $slug = Str::slug($request->title);
-
-            // Proses upload cover
-            $coverPath = null;
-            if ($request->hasFile('cover')) {
-                $coverPath = $request->file('cover')->store('covers', 'public');
-            }
-
-            // Buat postingan dengan field tambahan
-            $post = Post::create([
-                'title' => $request->title,
-                'author_id' => $request->author_id,
-                'category_id' => $request->category_id,
-                'slug' => $slug,
-                'body' => $request->body,
-                'cover' => $coverPath, // Simpan path cover ke database
-                'type' => $request->type ?? 'rangkuman', // Gunakan 'rangkuman' sebagai default jika tidak diisi
-                'is_audited' => $request->is_audited ?? true, // Default true jika tidak diisi
-            ]);
-        }
-
-        // Ambil followers dari user yang membuat postingan
-        $followers = Auth::user()->followers;
-
-        // Kirim notifikasi hanya kepada followers
-        foreach ($followers as $follower) {
-            $follower->notify(new NewPostNotification($post));
-        }
-
-        return redirect('/posts')->with('pesan', 'Upload Buku berhasil');
-    }
 
 
     public function update(Request $request, Post $post)

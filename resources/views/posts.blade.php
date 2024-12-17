@@ -22,14 +22,14 @@
         </div>
 
 
-        <div class="container mx-auto pb-4 ">
+        {{-- <div class="container mx-auto pb-4 ">
             <p id="quote" class="text-md leading-8 text-gray-600 border-gray-200">
                 {{ $quote['quote'] ?? 'Quote not found.' }}
             </p>
             <p class="text-gray-400">
                 — {{ $quote['author'] ?? 'Unknown author' }}
             </p>
-        </div>
+        </div> --}}
  <div class="flex justify-center gap-3 mb-5">
         @if(request('search'))
         <div class="flex justify-center ">

@@ -1,28 +1,29 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AudiobookController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FavoriteAuthorController;
-use App\Http\Controllers\FavoriteBookController;
-use App\Http\Controllers\FollowerController;
-use App\Http\Controllers\GenreController;
-use App\Http\Controllers\InterestGenreController;
-use App\Http\Controllers\PlaylistController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AuthProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\AudiobookController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthProfileController;
+use App\Http\Controllers\FavoriteBookController;
+use App\Http\Controllers\InterestGenreController;
+use App\Http\Controllers\FavoriteAuthorController;
 
 // Dashboard Routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/posts', [DashboardController::class, 'posts']);
-    Route::get('/dashboard/audiobooks', [DashboardController::class, 'audiobook']);
+    Route::get('/dashboard/audiobooks', [DashboardController::class, 'audiobook'])->name('audiobook');
+    Route::get('/bookmark', [DashboardController::class, 'bookmark'])->name('bookmark');
     Route::get('/dashboard/save', [DashboardController::class, 'save']);
     Route::get('/dashboard/baru', [DashboardController::class, 'baru']);
 });
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Profile Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/update', [ProfileController::class, 'profile'])->name('profile.profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -46,11 +48,8 @@ Route::middleware(['auth'])->group(function () {
 
 // Post Routes
 Route::get('/', [PostController::class, 'home'])->name('index');
-Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/{post}', [PostController::class, 'post'])->name('show.post');
-Route::get('/posts/edit/{id}', [DashboardController::class, 'edit'])->name('posts.edit');
-Route::put('/posts/update/{id}', [DashboardController::class, 'update'])->name('posts.update');
-Route::delete('/posts/{id}', [PostController::class, 'delete'])->name('posts.destroy');
 
 // Genre & Author Routes
 Route::get('/genre', [GenreController::class, 'index']);
@@ -60,6 +59,15 @@ Route::get('/authors/{user:username}', [AuthorController::class, 'index']);
 Route::resource('audiobooks', AudiobookController::class);
 Route::resource('interest-genre', InterestGenreController::class);
 Route::resource('favorite-authors', FavoriteAuthorController::class);
+// Route untuk halaman daftar buku
+Route::get('/dashboard/posts', [BookController::class, 'create'])->name('books.create');
+Route::post('/books', [BookController::class, 'store'])->name('books.store');
+Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
+Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
+
+Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+
 
 // Playlist Routes
 Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
@@ -87,9 +95,6 @@ Route::get('/notifications', function () {
         'unread_count' => Auth::user()->unreadNotifications->count(),
     ]);
 });
-
-// Logout
-// Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth Routes
 require __DIR__ . '/auth.php';
