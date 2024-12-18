@@ -143,25 +143,25 @@
              <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -top-2  right-5"></i>
              <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -bottom-2  left-5"></i>
 
-             <div class="flex justify-center ">
-                <div class="flex justify-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 w-max">
+             <div class="flex justify-center">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-2 sm:p-4 w-full">
                     @foreach ($audiobooks as $audiobook)
                     <a href="{{ route('audiobooks.show', $audiobook->id) }}"
                        class="p-2 border rounded-lg shadow-sm hover:shadow-md transform transition-transform duration-300 hover:scale-105 hover:bg-gray-50">
                         @if ($audiobook->cover)
                         <img src="{{ asset('storage/' . $audiobook->cover) }}"
                              alt="Cover of {{ $audiobook->title }}"
-                             class="w-40 h-40 object-cover rounded-md mb-2">
+                             class="w-full h-40 object-cover rounded-md mb-2">
                         @endif
                         <div class="text-center">
                             <h2 class="text-sm font-medium">{{ Str::limit($audiobook->title, 20, '...') }}</h2>
                             <p class="text-xs text-gray-500">Speaker: {{ Str::limit($audiobook->speaker->name, 15, '...') }}</p>
                         </div>
-
                     </a>
                     @endforeach
                 </div>
             </div>
+
 
 
 
@@ -174,3 +174,4 @@
 
 
 </x-layout>
+<x-footer/>

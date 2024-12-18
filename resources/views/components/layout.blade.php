@@ -132,13 +132,7 @@
         </main>
     </div>
 
-    <footer class="bg-gray-200 py-3">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-center">
-            <p class="text-center text-sm">
-                © {{ date('Y') }} bukuwaktu. All rights reserved.
-            </p>
-        </div>
-    </footer>
+
 
     <script>
         document.getElementById('notification-button')?.addEventListener('click', () => {
