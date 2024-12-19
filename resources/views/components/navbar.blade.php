@@ -9,13 +9,10 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-10">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+             <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
             <x-nav-link href="/posts" :active="request()->is('posts')">Buku</x-nav-link>
             <x-nav-link href="/genre" :active="request()->is('genre')">Genre</x-nav-link>
             <x-nav-link href="/audiobooks" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
-            {{-- <x-nav-link href="/lounge" :active="request()->is('lounge')">Lounge</x-nav-link> --}}
-
           </div>
         </div>
         <div class="hidden md:block">
@@ -95,9 +92,7 @@
 
                         </button>
                     </form>
-                  {{-- <a href="{{ route('logout') }}" onclick="confirmLogout()" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
-                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Sign out</p>
-                    </a> --}}
+
 
               </div>
           </div>
@@ -163,7 +158,7 @@
             @guest
                 <!-- Tampilkan jika belum login -->
 
-                <a href="/login" class=" rounded-md px-3 py-2 text-md font-medium text-gray-700 hover:bg-gray-700 hover:text-white flex justify-between items-center">
+                <a href="/login" class=" rounded-md px-3 py-2 text-md  text-gray-700 hover:bg-gray-700 hover:text-white flex justify-between items-center">
                     <span>Login</span>
                     <i class="fas fa-sign-in-alt ml-2"></i>
                 </a>

@@ -30,13 +30,10 @@ export default {
                     "100%": { "background-position": "0% 50%" },
                 },
                 fadeIn: {
-                    "0%": { opacity: "0" },
-                    "100%": { opacity: "1" },
+                    "0%": { opacity: "0", transform: "translateY(10px)" },
+                    "100%": { opacity: "1", transform: "translateY(0)" },
                 },
-                fadeOut: {
-                    "0%": { opacity: "1" },
-                    "100%": { opacity: "0" },
-                },
+
                 highlight: {
                     "0%": {
                         opacity: "0",
@@ -47,6 +44,9 @@ export default {
                         width: "100%",
                     },
                 },
+            },
+            animation: {
+                fadeIn: "fadeIn 3s ease-in forwards",
             },
         },
     },

@@ -1,0 +1,276 @@
+html {
+    scroll-behavior: smooth;
+}
+
+#profilePhotoModal {
+    transition: opacity 0.3s ease;
+}
+
+.book-container {
+    position: relative;
+    width: 165px;
+    height: 240px;
+    perspective: 1000px;
+}
+
+.book {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.book-container:hover .front {
+    transform: rotateY(-180deg);
+}
+
+.book-container:hover .back {
+    transform: rotateY(0deg);
+}
+
+#progress-bar-container {
+    position: fixed;
+    top: 150px;
+    right: 50px;
+    width: 5px;
+    height: 465px;
+    background: rgba(0, 0, 0, 0.01);
+    z-index: 9999;
+}
+
+#progress-bar {
+    height: 0%;
+    width: 100%;
+    background: #2d312e;
+    transition: height 0.2s ease-out;
+}
+
+#progress-percent {
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2d312e;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    pointer-events: none;
+}
+
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    padding: 0 5px;
+}
+
+.highlight-text::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    animation: highlightAnimation 5s ease-in-out forwards;
+    z-index: -1;
+    width: 0%;
+}
+
+@keyframes highlightAnimation {
+    0% {
+        width: 0%;
+        background-color: white;
+    }
+    50% {
+        width: 0;
+        background-color: white;
+    }
+    100% {
+        width: 100%;
+        background-color: #fff9c4;
+    }
+}
+
+[x-cloak] {
+    display: none;
+}
+
+.parallax {
+    background-image: url("/img/background_home.jpg"); /* Gambar background di public/img */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+}
+
+.container_image {
+    width: 100%;
+}
+
+.image {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 1s ease, opacity 1s ease; /* Perlambat animasi */
+    opacity: 1;
+}
+
+/* Media query untuk layar kecil */
+@media (max-width: 768px) {
+    .container_image {
+        height: 150px;
+    }
+
+    .image {
+        width: 80px; /* Ukuran lebih kecil untuk layar HP */
+        height: 80px;
+    }
+}
+
+/* Gambar ke-1 sampai ke-3 bergerak ke kiri */
+.image:nth-child(1) {
+    z-index: 1;
+    animation: moveLeft1 3s forwards;
+}
+
+.image:nth-child(2) {
+    z-index: 2;
+    animation: moveLeft2 3s forwards;
+}
+
+.image:nth-child(3) {
+    z-index: 3;
+    animation: moveLeft3 3s forwards;
+}
+
+/* Gambar ke-4 berada di tengah */
+.image:nth-child(4) {
+    z-index: 4;
+    animation: stayCenter 3s forwards;
+}
+
+/* Gambar ke-5 sampai ke-7 bergerak ke kanan */
+.image:nth-child(5) {
+    z-index: 5;
+    animation: moveRight1 3s forwards;
+}
+
+.image:nth-child(6) {
+    z-index: 6;
+    animation: moveRight2 3s forwards;
+}
+
+.image:nth-child(7) {
+    z-index: 7;
+    animation: moveRight3 3s forwards;
+}
+
+@keyframes moveLeft1 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% - 250px), -50%) rotate(-20deg) scale(1);
+    }
+}
+
+@keyframes moveLeft2 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% - 150px), -50%) rotate(-15deg) scale(1);
+    }
+}
+
+@keyframes moveLeft3 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% - 50px), -50%) rotate(-10deg) scale(1);
+    }
+}
+
+@keyframes moveRight1 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% + 50px), -50%) rotate(10deg) scale(1);
+    }
+}
+
+@keyframes moveRight2 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% + 150px), -50%) rotate(15deg) scale(1);
+    }
+}
+
+@keyframes moveRight3 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% + 250px), -50%) rotate(20deg) scale(1);
+    }
+}
+
+@keyframes stayCenter {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .image:nth-child(1) {
+        animation: moveLeft1 3s forwards;
+    }
+
+    .image:nth-child(2) {
+        animation: moveLeft2 3s forwards;
+    }
+
+    .image:nth-child(3) {
+        animation: moveLeft3 3s forwards;
+    }
+
+    .image:nth-child(4) {
+        animation: stayCenter 3s forwards;
+    }
+
+    .image:nth-child(5) {
+        animation: moveRight1 3s forwards;
+    }
+
+    .image:nth-child(6) {
+        animation: moveRight2 3s forwards;
+    }
+
+    .image:nth-child(7) {
+        animation: moveRight3 3s forwards;
+    }
+}

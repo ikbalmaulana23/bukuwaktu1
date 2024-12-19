@@ -4,7 +4,7 @@
             <a href="/" class=" mb-3">
                 <img class="h-14  " src="{{ asset('img/logo.png') }}" alt="Your Company">
               </a>
-            <p class="text-sm">We Providing books that you can hear and get the summary with free</p>
+            <p class="text-sm">We provide audiobooks and summaries that you can enjoy for free </p>
 
         </div>
         <div class="basis-2/3 flex justify-around">

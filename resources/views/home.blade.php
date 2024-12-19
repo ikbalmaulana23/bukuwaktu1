@@ -4,53 +4,27 @@
 
 <div>
     <section id="landing-page">
-    <div class="md:flex md:flex-row mb-10">
-    <div class="m-2  basis-1/2 hidden md:block">
-        <div class="flex justify-between mb-3">
-        <div class="book-container ">
-            <img class="book front  rounded-md " src="{{ asset('img/buku1.png') }}" />
-            <img class="book back rounded-md" src="{{ asset('img/buku2.png') }}" />
-        </div>
-        <div class="book-container ">
-            <img class="book front rounded-md border" src="{{ asset('img/buku3.png') }}" />
-            <img class="book back rounded-md border" src="{{ asset('img/buku4.png') }}" />
-        </div>
-        <div class="book-container ">
-            <img class="book front rounded-md border" src="{{ asset('img/buku5.png') }}" />
-            <img class="book back rounded-md border" src="{{ asset('img/buku6.png') }}" />
-        </div>
-    </div>
-    <div class="flex justify-between mb-3">
-        <div class="book-container  ">
-            <img class="book front rounded-md border" src="{{ asset('img/buku7.jpg') }}" />
-            <img class="book back rounded-md border" src="{{ asset('img/buku8.jpg') }}" />
-        </div>
-        <div class="book-container">
-            <img class="book front rounded-md border" src="{{ asset('img/buku9.jpg') }}" />
-            <img class="book back rounded-md border" src="{{ asset('img/buku10.jpg') }}" />
-        </div>
-        <div class="book-container">
-            <img class="book front rounded-md border" src="{{ asset('img/buku11.jpg') }}" />
-            <img class="book back rounded-md border" src="{{ asset('img/buku12.jpg') }}" />
-        </div>
-    </div>
-    </div>
+        <div class="flex justify-center mb-10 mt-5">
+            <h1 class="text-4xl md:text-6xl text-center font-semibold max-w-5xl">
+              A place you can grow with books around you
+            </h1>
+          </div>
 
-    <div class="m-2 basis-1/2 " >
-      <div class=" text-4xl lg:text-7xl font-serif p-3 ">
-        <h1>SHARE THE</h1>
-         <h1>INSIGHT FROM</h1>
-        <h1 class="inline-block relative highlight-text">THE BOOK</h1>
-         <h1>YOU </h1>
-        <h1>READ</h1>
- </div>
-
-      <div class="flex justify-center mt-3">
-        <a href="#library" class="px-3 py-2 bg-slate-950 rounded-full  flex justify-between text-white  hover:translate-y-3 duration-300 ease-in-out shadow-md">Scroll  Down  <i class="fa-solid fa-arrow-down m-1" ></i></a>
-
+    <div class="flex justify-center mt-20">
+      <div class="container_image">
+        <!-- Tambahkan URL gambar di sini -->
+        <div class="image" style="background-image: url('img/1.jpg')"></div>
+        <div class="image" style="background-image: url('img/2.jpg')"></div>
+        <div class="image" style="background-image: url('img/3.jpg')"></div>
+        <div class="image" style="background-image: url('img/4.jpg')"></div>
+        <div class="image" style="background-image: url('img/5.jpg')"></div>
+        <div class="image" style="background-image: url('img/6.png')"></div>
+        <div class="image" style="background-image: url('img/7.png')"></div>
       </div>
-    </div>
-
+      </div>
+      <div class="flex justify-center gap-4 mt-56 ">
+        <button class="bg-slate-900 rounded-full px-3 py-1 text-white shadow-md">Lets Read</button>
+        <button class="border bg-gray-100 rounded-full px-3 py-1 shadow-md">Join Us</button>
       </div>
     </section>
     <div id="progress-bar-container">
@@ -58,119 +32,168 @@
         <div id="progress-percent" class=" mix-blend-difference">  0% </div>
     </div>
 
-    <section id="library" class="mt-10 rounded-lg p-2 ">
-        <div class="flex items-center justify-center ">
-            <div class="relative w-72 h-10 flex justify-center ">
-                <i class="fa-solid fa-star-of-life fa-spin absolute top-0 left-0 text-yellow-500 text-xl"></i>
-                <h1 class="text-center font-bold font-sans text-4xl relative z-10">BUKU WAKTU</h1>
-                <i class="fa-regular fa-bookmark absolute top-5 right-0 transform -translate-y-1/2 text-blue-600 text-2xl"></i>
-               </div>
-
-        </div>
-
-        <div class="flex flex-col lg:flex-row justify-between gap-3 mt-20">
-            <!-- Bagian Kiri -->
-            <div class="basis-full lg:basis-7/12 p-4">
-                <div class="text-lg font-base">
-                    <!-- Rangkuman Buku -->
-                    <div class="flex flex-col sm:flex-row items-start gap-4 py-5 border-b">
-                        <img class="w-36 h-auto" src="img/man&book.png" alt="">
-                        <div>
-                            <h3 class="font-bold">Rangkuman Buku Terbaik</h3>
-                            <p class="text-sm">
-                                Temukan esensi dari buku-buku favorit Anda dalam rangkuman singkat namun padat,
-                                yang mudah dipahami dan relevan untuk kehidupan sehari-hari.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Audiobook -->
-                    <div class="flex flex-col sm:flex-row items-start gap-4 py-5 border-b">
-                        <img class="w-36 h-auto" src="img/listening.png" alt="">
-                        <div>
-                            <h3 class="font-bold">Audiobook yang Memotivasi</h3>
-                            <p class="text-sm">
-                                Dengarkan cerita dan ide-ide hebat kapan saja, di mana saja.
-                                Pilihan sempurna untuk Anda yang ingin belajar sambil beraktivitas.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Belajar Tanpa Batas -->
-                    <div class="flex flex-col sm:flex-row items-start gap-4 py-5">
-                        <img class="w-36 h-auto" src="img/time.png" alt="">
-                        <div>
-                            <h3 class="font-bold">Belajar Tanpa Batas Waktu</h3>
-                            <p class="text-sm">
-                                Maksimalkan waktu Anda dengan konten yang dirancang untuk memperkaya wawasan,
-                                menginspirasi tindakan, dan membantu Anda mencapai tujuan.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+    <section id="library" class="py-10 mt-5" >
+        <div class="flex justify-evenly" data-aos="fade-up">
+        <div >
+            <h1 class="text-4xl font-semibold max-w-xl ">
+                <span class="text-red-700 "> "Curious about something?🧐 </span>Explore with a variety of genres we offer!"
+            </h1>
+            <div  class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto mt-10" data-aos="fade-up" data-aos-delay="100">
+                <p class="text-lg text-gray-700 italic">"Website ini memudahkan saya menemukan buku-buku yang saya cari. Fitur pencarian dan rekomendasinya sangat berguna!"</p>
+                <p class="mt-4 text-sm text-gray-600 text-right">- John Doe, Pengguna Setia</p>
             </div>
-
-            <!-- Bagian Kanan -->
-            <div class="basis-full lg:basis-5/12 p-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    @foreach ($posts as $post)
-                        <article class="flex-shrink-0 border rounded-md p-4 bg-slate-100 hover:scale-105 transform transition duration-300 ease-in-out">
-                            <!-- Gambar -->
-                            <div class="w-full mb-3">
-                                <a href="/posts/{{ $post['slug'] }}" class="block">
-                                    <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}"
-                                         class="object-cover w-full h-36 rounded-lg" alt="gambar">
-                                </a>
-                            </div>
-                            <!-- Teks -->
-                            <a href="/authors/{{ $post->author->username }}" class="text-xs text-gray-600">
-                                Summarized by
-                                <span class="font-semibold text-gray-900 mx-1">
-                                    {{ Str::limit($post->author->name, 20) }}
-                                </span>
-                            </a>
-                        </article>
-                    @endforeach
+        </div>
+            <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <img src="{{ asset('img/1.jpg') }}" alt="Image 1" class="w-full h-48 object-cover rounded-md">
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <img src="{{ asset('img/2.jpg') }}" alt="Image 2" class="w-full h-48 object-cover rounded-md">
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <img src="{{ asset('img/3.jpg') }}" alt="Image 3" class="w-full h-48 object-cover rounded-md">
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <img src="{{ asset('img/4.jpg') }}" alt="Image 4" class="w-full h-48 object-cover rounded-md">
                 </div>
             </div>
         </div>
+    </section>
+<section class="py-10">
+    <div class="flex justify-evenly ">
+        <div class="w-2/4" data-aos="fade-right" data-aos-duration="1000">
+            <h1 class="text-4xl font-semibold text-start pl-10">
+                <span class="text-red-700">Doesn't have free time to read books? 🦊</span>
+            </h1>
+            <p class="text-lg mt-5 text-center"  data-aos="zoom-in" data-aos-duration="500">Chill guys, Just listen our Audiobook
+            </p>
+            <div class="flex justify-center" >
 
 
-     <div class="mb-16 h-96 relative rounded-lg">
-        <div class="flex justify-center">
-            <h1 class="text-4xl font-bold text-center pt-5 inline-block relative highlight-text">#dibacainbuku</h1>
+            <lottie-player
+            src="{{ asset('js/woman-reading-book-under-the-tree.json') }}"
+            background="transparent"
+            speed="1"
+            style="width: 300px; height: 300px;"
+            loop
+            autoplay>
+        </lottie-player>
+    </div>
         </div>
-
-        <p  class="text-center pb-5">baca buku lebih <span class="font-serif italic"> mudah</span>, karena kita lebih<span class="inline-block relative highlight-text">dekat</span></p>
-             <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -top-2  right-5"></i>
-             <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -bottom-2  left-5"></i>
-
-             <div class="flex justify-center">
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-2 sm:p-4 w-full">
-                    @foreach ($audiobooks as $audiobook)
-                    <a href="{{ route('audiobooks.show', $audiobook->id) }}"
-                       class="p-2 border rounded-lg shadow-sm hover:shadow-md transform transition-transform duration-300 hover:scale-105 hover:bg-gray-50">
-                        @if ($audiobook->cover)
-                        <img src="{{ asset('storage/' . $audiobook->cover) }}"
-                             alt="Cover of {{ $audiobook->title }}"
-                             class="w-full h-40 object-cover rounded-md mb-2">
-                        @endif
-                        <div class="text-center">
-                            <h2 class="text-sm font-medium">{{ Str::limit($audiobook->title, 20, '...') }}</h2>
-                            <p class="text-xs text-gray-500">Speaker: {{ Str::limit($audiobook->speaker->name, 15, '...') }}</p>
-                        </div>
-                    </a>
-                    @endforeach
-                </div>
+    <div class="w-2/4 gap-y-3">
+        {{-- <div class="flex items-center gap-4 p-2 rounded-lg shadow-lg bg-slate-900 text-white mb-3" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+            <!-- Gambar Buku -->
+            <div class="w-40">
+                <img src="{{ asset('img/1.jpg') }}" alt="Book Cover" class="w-full h-full object-cover rounded-lg border border-blue-300">
             </div>
+            <!-- Deskripsi Buku -->
+            <div class="flex flex-col">
+                <p class="flex items-center gap-2 text-lg font-bold">
+                    <span class="inline-block w-4 h-4">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </span>
+                    Maulana
+                </p>
+                <p class="flex items-center gap-2 text-sm">
+                    <span class="inline-block w-4 h-4">
+                        <i class="fa-solid fa-clock"></i>
+                    </span>
+                    23 Menit
+                </p>
+                <p class="flex items-center gap-2 text-sm">
+                    <span class="inline-block w-4 h-4">
+                        <!-- Icon Book -->
+                        <i class="fa-solid fa-book-open"></i>
+                    </span>
+                    Menjadi salah satu buku keuangan yang diterbitkan di abad 20 membuat buku ini best seller dan sangat relevan.
+                </p>
+            </div>
+        </div> --}}
 
+        <div x-data="{
+            books: [
+              {
+                id: 1,
+                title: 'The Psychology of Money',
+                author: 'Morgan Housel',
+                duration: '23 Menit',
+                description: 'Menjadi salah satu buku keuangan yang diterbitkan di abad 20 membuat buku ini best seller dan sangat relevan',
+                img: 'img/buku1.png',
+              },
+              {
+                id: 2,
+                title: 'Secrets of Divine Love',
+                author: 'A. Helwa',
+                duration: '30 Menit',
+                description: 'Sebuah buku yang mendalam tentang spiritualitas dan hubungan dengan Tuhan.',
+                img: 'img/buku2.png',
+              },
+              {
+                id: 3,
+                title: 'The Mountain Is You',
+                author: 'Brianna Wiest',
+                duration: '25 Menit',
+                description: 'Sebuah panduan untuk mengatasi hambatan diri dan mencapai potensi maksimal.',
+                img: 'img/buku3.png',
+              },
+              {
+                id: 4,
+                title: 'Love for Imperfect Things',
+                author: 'Haemin Sunim',
+                duration: '20 Menit',
+                description: 'Cara menerima diri sendiri di dunia yang selalu menuntut kesempurnaan.',
+                img: 'img/buku4.png',
+              },
+            ],
+            activeBook: null,
+          }">
+            <div class="flex flex-col items-center space-y-4 relative">
+              <!-- Detail Section -->
+              <div
+                class="bg-purple-500 text-white p-6 rounded-lg w-96 transition-opacity duration-300 absolute top-0"
+                x-show="activeBook"
+                x-transition.opacity
+                style="display: none;">
+                <template x-if="activeBook">
+                  <div>
+                    <!-- Close Button -->
+                    <button
+                      @click="activeBook = null"
+                      class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full text-sm hover:bg-red-600">
+                      ✕
+                    </button>
 
+                    <img :src="activeBook.img" alt="" class="w-24 h-36 object-cover rounded">
+                    <div class="mt-4">
+                      <h2 class="text-lg font-bold" x-text="activeBook.title"></h2>
+                      <p class="text-sm" x-text="'📢 ' + activeBook.author"></p>
+                      <p class="text-sm mt-1" x-text="'⏱ ' + activeBook.duration"></p>
+                      <p class="mt-2 text-sm" x-text="activeBook.description"></p>
+                    </div>
+                  </div>
+                </template>
+              </div>
 
+              <!-- Book List Section -->
+              <div class="flex space-x-4 pt-40">
+                <template x-for="book in books" :key="book.id">
+                  <div class="cursor-pointer" @click="activeBook = book">
+                    <img :src="book.img" alt="" class="w-24 h-36 object-cover rounded border">
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
 
     </div>
 
-    </section>
-
-
 </div>
+</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();  // Inisialisasi AOS
+    </script>
 
 
 </x-layout>
