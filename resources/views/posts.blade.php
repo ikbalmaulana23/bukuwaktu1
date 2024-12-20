@@ -22,14 +22,14 @@
         </div>
 
 
-        {{-- <div class="container mx-auto pb-4 ">
+        <div class="container mx-auto pb-4 ">
             <p id="quote" class="text-md leading-8 text-gray-600 border-gray-200">
                 {{ $quote['quote'] ?? 'Quote not found.' }}
             </p>
             <p class="text-gray-400">
                 — {{ $quote['author'] ?? 'Unknown author' }}
             </p>
-        </div> --}}
+        </div>
  <div class="flex justify-center gap-3 mb-5">
         @if(request('search'))
         <div class="flex justify-center ">
@@ -73,7 +73,7 @@
                 <article class="flex flex-col items-start justify-between border rounded-md p-5">
                     <div class="w-full mb-2">
                         <a href="/posts/{{ $post['slug'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
-                            <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="h-auto w-full rounded-lg" alt="gambar">
+                            <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="w-60 h-60 object-fill rounded-lg" alt="gambar">
                         </a>
                     </div>
                     <div class="group relative"></div>

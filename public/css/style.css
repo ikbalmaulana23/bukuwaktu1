@@ -131,55 +131,59 @@ html {
     transition: transform 1s ease, opacity 1s ease; /* Perlambat animasi */
     opacity: 1;
 }
-
-/* Media query untuk layar kecil */
-@media (max-width: 768px) {
-    .container_image {
-        height: 150px;
-    }
-
-    .image {
-        width: 80px; /* Ukuran lebih kecil untuk layar HP */
-        height: 80px;
-    }
+.image:hover {
+    transform: translateY(-20px); /* Naik ke atas pada sumbu Y */
+    z-index: 10; /* Pastikan elemen berada di depan */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Tambahkan efek bayangan */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animasi halus */
 }
 
 /* Gambar ke-1 sampai ke-3 bergerak ke kiri */
 .image:nth-child(1) {
     z-index: 1;
-    animation: moveLeft1 3s forwards;
+    animation: moveLeft4 3s forwards;
 }
 
 .image:nth-child(2) {
     z-index: 2;
-    animation: moveLeft2 3s forwards;
+    animation: moveLeft3 3s forwards;
 }
 
 .image:nth-child(3) {
     z-index: 3;
-    animation: moveLeft3 3s forwards;
+    animation: moveLeft2 3s forwards;
 }
 
 /* Gambar ke-4 berada di tengah */
 .image:nth-child(4) {
     z-index: 4;
-    animation: stayCenter 3s forwards;
+    animation: moveLeft1 3s forwards;
 }
 
 /* Gambar ke-5 sampai ke-7 bergerak ke kanan */
 .image:nth-child(5) {
     z-index: 5;
-    animation: moveRight1 3s forwards;
+
+    animation: stayCenter 3s forwards;
 }
 
 .image:nth-child(6) {
     z-index: 6;
-    animation: moveRight2 3s forwards;
+    animation: moveRight1 3s forwards;
 }
 
 .image:nth-child(7) {
     z-index: 7;
+    animation: moveRight2 3s forwards;
+}
+.image:nth-child(8) {
+    z-index: 8;
     animation: moveRight3 3s forwards;
+}
+
+.image:nth-child(9) {
+    z-index: 9;
+    animation: moveRight4 3s forwards;
 }
 
 @keyframes moveLeft1 {
@@ -187,7 +191,7 @@ html {
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
-        transform: translate(calc(-50% - 250px), -50%) rotate(-20deg) scale(1);
+        transform: translate(calc(-50% - 75px), -50%) rotate(-5deg) scale(1);
     }
 }
 
@@ -196,7 +200,7 @@ html {
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
-        transform: translate(calc(-50% - 150px), -50%) rotate(-15deg) scale(1);
+        transform: translate(calc(-50% - 150px), -50%) rotate(-8deg) scale(1);
     }
 }
 
@@ -205,7 +209,16 @@ html {
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
-        transform: translate(calc(-50% - 50px), -50%) rotate(-10deg) scale(1);
+        transform: translate(calc(-50% - 250px), -50%) rotate(-12deg) scale(1);
+    }
+}
+
+@keyframes moveLeft4 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% - 300px), -50%) rotate(-15deg) scale(1);
     }
 }
 
@@ -214,7 +227,7 @@ html {
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
-        transform: translate(calc(-50% + 50px), -50%) rotate(10deg) scale(1);
+        transform: translate(calc(-50% + 75px), -50%) rotate(5deg) scale(1);
     }
 }
 
@@ -223,7 +236,7 @@ html {
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
-        transform: translate(calc(-50% + 150px), -50%) rotate(15deg) scale(1);
+        transform: translate(calc(-50% + 150px), -50%) rotate(8deg) scale(1);
     }
 }
 
@@ -232,7 +245,16 @@ html {
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
-        transform: translate(calc(-50% + 250px), -50%) rotate(20deg) scale(1);
+        transform: translate(calc(-50% + 250px), -50%) rotate(12deg) scale(1);
+    }
+}
+
+@keyframes moveRight4 {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50% + 300px), -50%) rotate(15deg) scale(1);
     }
 }
 
@@ -272,5 +294,101 @@ html {
 
     .image:nth-child(7) {
         animation: moveRight3 3s forwards;
+    }
+}
+
+/* Media query untuk layar kecil */
+@media (max-width: 768px) {
+    .container_image {
+        height: 100px;
+    }
+
+    .image {
+        width: 80px; /* Ukuran lebih kecil untuk layar HP */
+        height: 80px;
+        top: 45%;
+        left: 45%;
+    }
+
+    @keyframes moveLeft1 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% - 50px), -50%) rotate(-12deg)
+                scale(1);
+        }
+    }
+
+    @keyframes moveLeft2 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% - 35px), -50%) rotate(-8deg) scale(1);
+        }
+    }
+
+    @keyframes moveLeft3 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% - 20px), -50%) rotate(-5deg) scale(1);
+        }
+    }
+    @keyframes moveLeft4 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% - 75px), -50%) rotate(-15deg)
+                scale(1);
+        }
+    }
+
+    @keyframes moveRight1 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% + 20px), -50%) rotate(5deg) scale(1);
+        }
+    }
+
+    @keyframes moveRight2 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% + 35px), -50%) rotate(8deg) scale(1);
+        }
+    }
+
+    @keyframes moveRight3 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% + 50px), -50%) rotate(12deg) scale(1);
+        }
+    }
+
+    @keyframes moveRight4 {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50% + 75px), -50%) rotate(15deg) scale(1);
+        }
+    }
+
+    @keyframes stayCenter {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        }
     }
 }

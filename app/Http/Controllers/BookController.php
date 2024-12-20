@@ -34,6 +34,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'title' => 'required|string|max:255',
             'author_id' => 'required|integer|exists:users,id',
@@ -42,7 +43,15 @@ class BookController extends Controller
             'cover' => 'nullable|image|max:2048',
         ]);
 
+        // Membuat slug unik
         $slug = Str::slug($request->title);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Post::where('slug', $slug)->exists()) {
+            $slug = "{$originalSlug}-{$counter}";
+            $counter++;
+        }
 
         // Proses upload cover
         $coverPath = null;
@@ -50,6 +59,7 @@ class BookController extends Controller
             $coverPath = $request->file('cover')->store('covers', 'public');
         }
 
+        // Simpan data ke database
         Post::create([
             'title' => $request->title,
             'author_id' => $request->author_id,
@@ -61,8 +71,9 @@ class BookController extends Controller
             'is_audited' => $request->is_audited ?? true,
         ]);
 
-        return  redirect()->route('posts')->with('pesan', 'Upload Buku berhasil');
+        return redirect()->route('posts')->with('pesan', 'Upload Buku berhasil');
     }
+
 
     /**
      * Display the specified resource.
@@ -132,12 +143,12 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
-    {
-        $this->authorize('delete', $post);
 
+    public function destroy($id)
+    {
+        $post = Post::find($id);
         $post->delete();
 
-        return redirect()->route('dashboard')->with('pesan', 'Post berhasil dihapus');
+        return redirect()->route('dashboard')->with('pesan', 'post has been deleted');
     }
 }

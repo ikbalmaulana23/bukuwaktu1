@@ -10,7 +10,10 @@
             <h1 class="mt-3 text-2xl font-bold text-gray-800">{{ $post['title'] }}</h1>
             <p class="text-sm text-gray-600 mt-2">
                 By
-                <a href="/posts?authors={{ $post->author->username }}" class="text-indigo-600 hover:underline">{{ $post->author->name }}</a>
+                <a href="/authors/{{ $post->author->username }}" class="text-indigo-600 hover:underline">
+                {{ $post->author->name }}
+                </a>
+
                 in
                 <a href="/posts?category={{ $post->category->slug }}" class="text-indigo-600 hover:underline">{{ $post->category->name }}</a>
                 | {{ $post->created_at->format('j F Y') }}
