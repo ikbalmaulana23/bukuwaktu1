@@ -26,11 +26,18 @@
 
     <div class="px-4 lg:px-16 mt-6">
         <h2 class="text-lg font-semibold text-gray-800 mb-4">Berikan Komentar</h2>
-        <form action="{{ route('comments.store', $post->id) }}" method="POST" class="mb-8">
-            @csrf
-            <textarea name="content" rows="3" class="w-full border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400" placeholder="Tambahkan komentar..." required></textarea>
-            <button type="submit" class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-400">Post Comment</button>
-        </form>
+        @guest
+            <p class="text-gray-600">
+                <a href="{{ route('login') }}" class="text-indigo-600 hover:underline mb-3">Login untuk memberikan komentar.</a>
+            </p>
+        @endguest
+        @auth
+            <form action="{{ route('comments.store', $post->id) }}" method="POST" class="mb-8">
+                @csrf
+                <textarea name="content" rows="3" class="w-full border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400" placeholder="Tambahkan komentar..." required></textarea>
+                <button type="submit" class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-400">Post Comment</button>
+            </form>
+        @endauth
 
         @foreach ($post->comments as $comment)
             <div class="border-b border-gray-200 pb-4 mb-4">

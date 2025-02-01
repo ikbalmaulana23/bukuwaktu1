@@ -304,9 +304,9 @@ html {
     }
 
     .image {
-        width: 80px; /* Ukuran lebih kecil untuk layar HP */
-        height: 80px;
-        top: 45%;
+        width: 120px; /* Ukuran lebih kecil untuk layar HP */
+        height: 120px;
+        top: 43%;
         left: 45%;
     }
 

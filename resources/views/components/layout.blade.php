@@ -6,7 +6,8 @@
     <title>BukuWaktu</title>
 
     <!-- Stylesheets -->
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css" />
@@ -16,13 +17,13 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest"></script>
 
 </head>
-<body class="h-full">
+<body class="h-full font-inter">
 
     <div class="min-h-full">
         <x-navbar></x-navbar>
 
         <main>
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 p-2 md:p-0 pt-20 md:pt-28 overflow-x-hidden">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 p-2 md:p-0 pt-20 md:pt-28 overflow-x-hidden ">
                 {{$slot}}
             </div>
         </main>

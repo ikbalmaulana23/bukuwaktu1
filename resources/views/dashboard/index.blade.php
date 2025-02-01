@@ -79,12 +79,12 @@
               <p
                 class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
               >
-                New sales
+                BookMark
               </p>
               <p
                 class="text-lg font-semibold text-gray-700 dark:text-gray-200"
               >
-                376
+                0
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@
               <p
                 class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
               >
-                Pending contacts
+                Liked Profile
               </p>
               <p
                 class="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -140,9 +140,11 @@
                   Edit
                 </a>
                 <a href="{{ route('books.destroy', $post->id) }}"
-                   class="text-white bg-red-600 rounded-md px-3 py-1 text-center hover:bg-red-700">
-                  Delete
-                </a>
+                    class="text-white bg-red-600 rounded-md px-3 py-1 text-center hover:bg-red-700"
+                    onclick="return confirm('Are you sure you want to delete this item?');">
+                    Delete
+                 </a>
+
               </div>
             </div>
         @empty

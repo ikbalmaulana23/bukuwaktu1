@@ -40,7 +40,8 @@
 </div>
         {{ $posts->links() }}
 
-        <div class="sm:text-center flex flex-wrap gap-2">
+
+        <div class="sm:text-center flex flex-wrap gap-2 mt-5 md:mt-2">
             <!-- Tombol "All" -->
             <a
                 href="/posts"
@@ -67,13 +68,10 @@
                 rounded-tl-none rounded-tr-md rounded-br-none rounded-bl-lg">
                 {{ $post['type'] }}
             </span>
-
-
-
                 <article class="flex flex-col items-start justify-between border rounded-md p-5">
                     <div class="w-full mb-2">
                         <a href="/posts/{{ $post['slug'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
-                            <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="w-60 h-60 object-fill rounded-lg" alt="gambar">
+                            <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="md:w-60 md:h-60 w-[360px] h-[360px] object-fill rounded-lg" alt="gambar">
                         </a>
                     </div>
                     <div class="group relative"></div>

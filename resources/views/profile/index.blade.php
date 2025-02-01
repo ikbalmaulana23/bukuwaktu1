@@ -33,7 +33,7 @@
             <button id="openModal" class="absolute top-0 right-8 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
-            <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
+            <img class="relative w-20 h-20 lg:w-40 lg:h-40 object-cover rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
 
           <div class=" px-6 lg:pt-10 w-full text-sm  flex justify-between ">
             <div>
@@ -191,104 +191,99 @@
     </div>
     <div class="container mx-auto p-4">
         <!-- Section Wrapper -->
-        <div class="flex flex-col md:flex-row gap-4">
-          <!-- Posts Section -->
-          <div class="rounded-md border p-4 md:w-2/4" x-data="{ showAll: false }">
-            <h2 class="text-center font-semibold text-lg mb-4">Rangkuman yang di Post</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              @if($posts->isEmpty())
-                <p class="col-span-full text-center text-gray-500">You have no posts.</p>
-              @else
-                @foreach($posts as $key => $post)
-                  <div
-                    class="bg-gray-100 shadow-md rounded-md p-4"
-                    x-show="showAll || {{ $key }} < 3"
-                    x-cloak>
-                    <div class="h-60 w-full overflow-hidden rounded-md mb-4">
-                      <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}"
-                           alt="{{ $post->title }}"
-                           class="h-full w-full object-cover">
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800">{{ $post->title }}</h3>
-                    <p class="text-gray-600">{!! Str::limit($post->body, 20) !!}</p>
-                    <small class="text-gray-500 block mt-2">Posted on {{ $post->created_at->format('d M Y') }}</small>
+        <div class="container mx-auto p-4">
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- Posts Section -->
+              <div class="rounded-md border p-4 basis-full md:basis-1/2" x-data="{ showAll: false }">
+                <h2 class="text-center font-semibold text-lg mb-4">Rangkuman yang di Post</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    @if($posts->isEmpty())
+                      <p class="col-span-full text-center text-gray-500">You have no posts.</p>
+                    @else
+                      @foreach($posts as $key => $post)
+                        <div
+                          class="bg-gray-100 shadow-md rounded-md p-4"
+                          x-show="showAll || {{ $key }} < 3"
+                          x-cloak>
+                          <div class="h-60 w-full overflow-hidden rounded-md mb-4">
+                            <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}"
+                                 alt="{{ $post->title }}"
+                                 class="h-full w-full object-cover">
+                          </div>
+                          <h3 class="text-lg font-bold text-gray-800">{{ $post->title }}</h3>
+                          <p class="text-gray-600">{!! Str::limit($post->body, 20) !!}</p>
+                          <small class="text-gray-500 block mt-2">Posted on {{ $post->created_at->format('d M Y') }}</small>
+                        </div>
+                      @endforeach
+                    @endif
                   </div>
-                @endforeach
-              @endif
-            </div>
+              </div>
 
-            <div class="text-center mt-4">
-              <button
-                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                x-show="!showAll"
-                @click="showAll = true"
-                x-cloak>
-                Show All
-              </button>
-              <button
-                class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
-                x-show="showAll"
-                @click="showAll = false"
-                x-cloak>
-                Show Less
-              </button>
+              <!-- Audiobooks Section -->
+              <div class="rounded-md border p-4 basis-full md:basis-1/2" x-data="{ showAll: false }">
+                <h2 class="text-center font-semibold text-lg mb-4">Audiobook yang Dipost</h2>
+                <div class="space-y-4 grid grid-cols-2">
+                    @if($audiobooks && $audiobooks->isNotEmpty())
+                      @foreach($audiobooks as $key => $audiobook)
+                        <div
+                          class="p-4 border bg-gray-50 rounded-md shadow-sm m-2"
+                          x-show="showAll || {{ $key }} < 2"
+                          x-cloak>
+                          <div class="h-46 w-full overflow-hidden rounded-md mb-4">
+                            <img src="{{ asset('storage/' . $audiobook->cover) }}"
+                                 alt="Cover of {{ $audiobook->title }}"
+                                 class="h-full w-full object-cover">
+                          </div>
+                          <h3 class="text-lg font-bold text-gray-800">{{ $audiobook->title }}</h3>
+                        </div>
+                      @endforeach
+                    @else
+                      <p class="text-center text-gray-500 col-span-full">No audiobooks found.</p>
+                    @endif
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <button
+                      class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      x-show="!showAll"
+                      @click="showAll = true"
+                      x-cloak>
+                      Show More
+                    </button>
+                    <button
+                      class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+                      x-show="showAll"
+                      @click="showAll = false"
+                      x-cloak>
+                      Show Less
+                    </button>
+                  </div>
+              </div>
             </div>
           </div>
 
-
-          <!-- Audiobooks Section -->
-          <div class="rounded-md border p-4 md:w-2/4" x-data="{ showAll: false }">
-            <h2 class="text-center font-semibold text-lg mb-4">Audiobook yang Dipost</h2>
-            <div class="space-y-4 grid grid-cols-2">
-              @if($audiobooks && $audiobooks->isNotEmpty())
-                @foreach($audiobooks as $key => $audiobook)
-                  <div
-                    class="p-4 border bg-gray-50 rounded-md shadow-sm m-2"
-                    x-show="showAll || {{ $key }} < 2"
-                    x-cloak>
-                    <div class="h-46 w-full overflow-hidden rounded-md mb-4">
-                      <img src="{{ asset('storage/' . $audiobook->cover) }}"
-                           alt="Cover of {{ $audiobook->title }}"
-                           class="h-full w-full object-cover">
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800">{{ $audiobook->title }}</h3>
-                  </div>
-                @endforeach
-              @else
-                <p class="text-center text-gray-500 col-span-full">No audiobooks found.</p>
-              @endif
-            </div>
-
-            <div class="text-center mt-4">
-              <button
-                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                x-show="!showAll"
-                @click="showAll = true"
-                x-cloak>
-                Show More
-              </button>
-              <button
-                class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
-                x-show="showAll"
-                @click="showAll = false"
-                x-cloak>
-                Show Less
-              </button>
-            </div>
-          </div>
-
-        </div>
       </div>
 </div>
 
 
 <script>
-    function openModal() {
-        document.getElementById('favoriteBookModal').classList.remove('hidden');
-    }
-    function closeModal() {
-        document.getElementById('favoriteBookModal').classList.add('hidden');
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ambil elemen tombol dan modal
+        const openModalButton = document.getElementById('openModal');
+        const profileModal = document.getElementById('profileModal');
+        const closeModalButton = document.getElementById('closeModal');
+
+        // Fungsi untuk membuka modal
+        openModalButton.addEventListener('click', () => {
+            profileModal.classList.remove('hidden');
+        });
+
+        // Fungsi untuk menutup modal
+        closeModalButton.addEventListener('click', () => {
+            profileModal.classList.add('hidden');
+        });
+    });
+
 
     document.addEventListener('DOMContentLoaded', function () {
     new Swiper('.mySwiper', {

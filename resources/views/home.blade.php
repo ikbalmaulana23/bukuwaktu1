@@ -3,36 +3,57 @@
 <x-layout>
 
 <div>
-    <section id="landing-page">
+    <section id="landing-page" >
         <div class="flex justify-center mb-10 mt-5">
             <h1 class="text-4xl md:text-6xl text-center font-semibold max-w-5xl">
               A place you can grow with books around you
             </h1>
           </div>
+          <div class="relative">
+          <div x-data="{ show: false }" x-init="setTimeout(() => show = true, 2000)">
+            <span
+                x-show="show"
+                x-transition:enter="transition transform ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-50"
+                x-transition:enter-end="opacity-100 scale-100"
+                class="absolute hidden md:block -top-10 right-32 sm:top-0 sm:right-24 md:top-0 md:right-44 bg-blue-500 text-white px-3 py-1 text-sm rounded-full rotate-12 z-10"
+            >
+                @fiction
+            </span>
+            <span
+                x-show="show"
+                x-transition:enter="transition transform ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-50"
+                x-transition:enter-end="opacity-100 scale-100"
+                class="absolute -top-3 text-xs  left-12 sm:top-52 sm:left-24 md:top-52 md:left-96 bg-red-700 text-white px-3 py-1 md:text-sm rounded-full -rotate-6 md:rotate-0 "
+            >
+                #Psychology
+            </span>
+        </div>
+    </div>
 
     <div class="flex justify-center mt-20">
-      <div class="container_image">
-        <!-- Tambahkan URL gambar di sini -->
-        <div class="image" style="background-image: url('img/1.jpg')"></div>
-        <div class="image" style="background-image: url('img/2.jpg')"></div>
-        <div class="image" style="background-image: url('img/3.jpg')"></div>
-        <div class="image" style="background-image: url('img/4.jpg')"></div>
-        <div class="image" style="background-image: url('img/5.jpg')"></div>
-        <div class="image" style="background-image: url('img/6.png')"></div>
-        <div class="image" style="background-image: url('img/7.png')"></div>
-        <div class="image" style="background-image: url('img/8.jpg')"></div>
-        <div class="image" style="background-image: url('img/9.jpg')"></div>
+        <div class="container_image">
+            <div class="image" style="background-image: url('{{ asset('img/1.jpg') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/2.jpg') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/3.jpg') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/4.jpg') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/5.jpg') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/6.png') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/7.png') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/8.jpg') }}')"></div>
+            <div class="image" style="background-image: url('{{ asset('img/9.jpg') }}')"></div>
+        </div>
 
       </div>
-      </div>
-      <div class="flex justify-center gap-4 md:mt-56">
+      <div class="flex justify-center gap-4 mt-16 md:mt-36  md:pt-20">
         <a href="#library">
-          <button class="bg-slate-900 rounded-full px-3 py-1 text-white shadow-md hover:bg-slate-700 transform hover:scale-110 transition-all">
+          <button class="bg-slate-800 rounded-lg px-3 py-1 text-white shadow-md hover:bg-slate-900 transform hover:scale-110 transition-all">
             Let's Read
           </button>
         </a>
         <a href="/login">
-          <button class="border bg-gray-100 rounded-full px-3 py-1 shadow-md hover:bg-gray-300 transform hover:scale-110 transition-all">
+          <button class="border bg-white rounded-lg px-3 py-1 shadow-md hover:bg-gray-100 transform hover:scale-110 transition-all">
             Join Us
           </button>
         </a>
@@ -40,7 +61,7 @@
 
     </section>
 
-    <section id="library" class="py-10 mt-10">
+    <section id="library" class="py-10 md:mt-10">
       <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-10 px-4 md:px-8" data-aos="fade-up">
           <!-- Text and Testimonial Section -->
           <div class="text-center lg:text-left max-w-lg">
@@ -53,7 +74,7 @@
               </div>
           </div>
 
-          <!-- Image Grid Section -->
+          <!-- Image Grid Section --> 
           <div class="grid grid-cols-2 gap-4 w-full sm:max-w-sm md:max-w-md lg:max-w-lg">
               <div data-aos="fade-up" data-aos-delay="100">
                   <img src="{{ asset('img/1.jpg') }}" alt="Image 1" class="w-full h-32 sm:h-40 md:h-48 object-cover rounded-md">
@@ -70,145 +91,98 @@
           </div>
       </div>
   </section>
-
-<section class="py-10">
-    <div class="flex justify-evenly ">
-        <div class="w-2/4" data-aos="fade-right" data-aos-duration="1000">
-            <h1 class="text-4xl font-semibold text-start pl-10">
+  <section class="p-10">
+    <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8 px-4 md:px-8">
+        <!-- Text and Animation Section -->
+        <div class="w-full lg:w-1/2 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-semibold">
                 <span class="text-red-700">Doesn't have free time to read books? 🦊</span>
             </h1>
-            <p class="text-lg mt-5 text-center font-inter"  data-aos="zoom-in" data-aos-duration="500">Chill guys , Just listen our Audiobook
+            <p class="text-base md:text-lg mt-4 " data-aos="zoom-in" data-aos-duration="500">
+                Chill guys, just listen to our Audiobook.
             </p>
-            <div class="flex justify-center" >
-
-
-            <lottie-player
-            src="{{ asset('js/woman-reading-book-under-the-tree.json') }}"
-            background="transparent"
-            speed="1"
-            style="width: 300px; height: 300px;"
-            loop
-            autoplay>
-        </lottie-player>
-    </div>
+            <div class="flex justify-center  mt-6">
+                <lottie-player
+                    src="{{ asset('js/woman-reading-book-under-the-tree.json') }}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 300px; height: 300px;"
+                    loop
+                    autoplay>
+                </lottie-player>
+            </div>
         </div>
-    <div class="w-2/4 gap-y-3">
-        {{-- <div class="flex items-center gap-4 p-2 rounded-lg shadow-lg bg-slate-900 text-white mb-3" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-            <!-- Gambar Buku -->
-            <div class="w-40">
-                <img src="{{ asset('img/1.jpg') }}" alt="Book Cover" class="w-full h-full object-cover rounded-lg border border-blue-300">
-            </div>
-            <!-- Deskripsi Buku -->
-            <div class="flex flex-col">
-                <p class="flex items-center gap-2 text-lg font-bold">
-                    <span class="inline-block w-4 h-4">
-                        <i class="fa-solid fa-microphone-lines"></i>
-                    </span>
-                    Maulana
-                </p>
-                <p class="flex items-center gap-2 text-sm">
-                    <span class="inline-block w-4 h-4">
-                        <i class="fa-solid fa-clock"></i>
-                    </span>
-                    23 Menit
-                </p>
-                <p class="flex items-center gap-2 text-sm">
-                    <span class="inline-block w-4 h-4">
-                        <!-- Icon Book -->
-                        <i class="fa-solid fa-book-open"></i>
-                    </span>
-                    Menjadi salah satu buku keuangan yang diterbitkan di abad 20 membuat buku ini best seller dan sangat relevan.
-                </p>
-            </div>
-        </div> --}}
 
-        <div x-data="{
+        <!-- Book List and Detail Section -->
+        <div class="w-full lg:w-1/2" x-data="{
             books: [
-              {
-                id: 1,
-                title: 'The Psychology of Money',
-                author: 'Morgan Housel',
-                duration: '23 Menit',
-                description: 'Menjadi salah satu buku keuangan yang diterbitkan di abad 20 membuat buku ini best seller dan sangat relevan',
-                img: 'img/buku1.png',
-              },
-              {
-                id: 2,
-                title: 'Secrets of Divine Love',
-                author: 'A. Helwa',
-                duration: '30 Menit',
-                description: 'Sebuah buku yang mendalam tentang spiritualitas dan hubungan dengan Tuhan.',
-                img: 'img/buku2.png',
-              },
-              {
-                id: 3,
-                title: 'The Mountain Is You',
-                author: 'Brianna Wiest',
-                duration: '25 Menit',
-                description: 'Sebuah panduan untuk mengatasi hambatan diri dan mencapai potensi maksimal.',
-                img: 'img/buku3.png',
-              },
-              {
-                id: 4,
-                title: 'Love for Imperfect Things',
-                author: 'Haemin Sunim',
-                duration: '20 Menit',
-                description: 'Cara menerima diri sendiri di dunia yang selalu menuntut kesempurnaan.',
-                img: 'img/buku4.png',
-              },
-            ],
+              { id: 1, title: 'The Mountain Is You', author: 'Brianna Wiest', duration: '23 Menit', description: 'Sebuah panduan untuk mengatasi hambatan diri dan mencapai potensi maksimal.', img: 'img/buku1.png', audio: '{{ asset('audio/examplebook1.mp3') }}' },
+              { id: 2, title: 'The First 20 Hours', author: 'Josh Kaufman', duration: '20 Menit', description: 'Buku inspiratif tentang cara menguasai keterampilan baru dengan cepat.', img: 'img/buku2.png', audio: '{{ asset('audio/examplebook2.mp3') }}' },
+              { id: 3, title: 'Factfulness', author: 'Hans Rosling', duration: '25 Menit', description: 'Panduan memahami dunia dengan fakta, mengatasi kesalahpahaman, dan berpikir lebih jernih.', img: 'img/buku3.png', audio: '{{ asset('audio/examplebook3.mp3') }}' },
+              { id: 4, title: 'Secrets of Divine Love', author: 'A. Helwa', duration: '30 Menit', description: 'Sebuah buku yang mendalam tentang spiritualitas dan hubungan dengan Tuhan.', img: 'img/buku4.png', audio: '{{ asset('audio/examplebook4.mp3') }}' },
+
+              ],
             activeBook: null,
+            audioPlayer: null,
+            isPlaying: false,
             init() {
-              // Set buku pertama sebagai default saat halaman dimuat
               this.activeBook = this.books[0];
+              this.audioPlayer = new Audio(this.activeBook.audio); // Init audio player with the first book's audio
+            },
+            playAudio() {
+              if (this.audioPlayer.paused) {
+                this.audioPlayer.play();
+                this.isPlaying = true; // Set isPlaying to true when audio is playing
+              } else {
+                this.audioPlayer.pause();
+                this.isPlaying = false; // Set isPlaying to false when audio is paused
+              }
             }
           }" x-init="init">
-            <div class="flex flex-col items-center space-y-4 relative" >
-              <!-- Detail Section -->
-              <div
-                class="bg-purple-500 text-white p-6 rounded-lg max-w-md transition-opacity duration-300 absolute "
-                x-show="activeBook"
-                x-transition.opacity
-                style="display: none;"
-                data-aos="fade-in" >
+            <!-- Detail Section -->
+            <div class="bg-purple-500 text-white p-6 rounded-lg max-w-lg mx-auto lg:mx-0 mb-6" x-show="activeBook" x-transition.opacity data-aos="fade-in" style="display: none;">
                 <template x-if="activeBook">
-                  <div>
-                    <div class="flex justify-between">
-                      <img :src="activeBook.img" alt="" class="w-24 h-36 object-cover rounded mr-4 ">
-                      <div class="mt-4">
-                        <h2 class="text-lg font-bold" x-text="activeBook.title"></h2>
-                        <p class="text-sm" x-text="'📢 ' + activeBook.author"></p>
-                        <p class="text-sm mt-1" x-text="'⏱ ' + activeBook.duration"></p>
-                        <p class="mt-2 text-sm line-clamp-2" x-text="activeBook.description"></p>
-                      </div>
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start">
+                        <img :src="activeBook.img" alt="" class="w-24 h-36 object-cover rounded mr-4 mb-4 sm:mb-0">
+                        <div class="relative">
+                            <h2 class="text-lg font-bold" x-text="activeBook.title"></h2>
+                            <p class="text-sm mt-1" x-text="'📢 ' + activeBook.author"></p>
+                            <p class="text-sm mt-1" x-text="'⏱ ' + activeBook.duration"></p>
+                            <p class="mt-2 text-sm" x-text="activeBook.description"></p>
+
+                            <!-- Play/Pause Button -->
+                            <button @click="playAudio" class="absolute text-2xl top-2 right-5">
+                                <!-- Toggle play/pause icon -->
+                                <span x-show="!isPlaying">▶</span>
+                                <span x-show="isPlaying">⏸</span>
+                            </button>
+                        </div>
                     </div>
-                  </div>
                 </template>
-              </div>
-
-              <!-- Book List Section -->
-              <div class="flex space-x-4 pt-52" >
-  <template x-for="(book, index) in books" :key="book.id">
-    <div class="cursor-pointer" @click="activeBook = book" data-aos="fade-up" :data-aos-delay="(index + 1) * 100">
-      <img :src="book.img" alt="" class="w-24 h-36 object-cover rounded border">
-    </div>
-  </template>
-</div>
-
             </div>
-          </div>
-
+            <!-- Book List Section -->
+            <div class="flex overflow-x-auto gap-4 py-4">
+                <template x-for="(book, index) in books" :key="book.id">
+                    <div class="flex-none cursor-pointer" @click="activeBook = book; audioPlayer.src = book.audio" data-aos="fade-up" :data-aos-delay="(index + 1) * 100">
+                        <img :src="book.img" alt="" class="w-20 h-28 sm:w-24 sm:h-36 object-cover rounded border">
+                    </div>
+                </template>
+            </div>
+        </div>
     </div>
-
-</div>
 </section>
+
+
+
 
 <section>
 <div class="container mx-auto px-6 pb-12 pt-6">
     <!-- Title Section -->
-    <div class="relative text-center">
-      <p class="text-base font-semibold  text-red-700">Become Story Teller</p>
-      <h1 class="mt-2 text-4xl font-bold tracking-tight">Every single of books <span class="absolute text-lg top-6">✨</span>  <br> tells a story</h1>
+    <div class="text-center">
+      <p class="text-base font-semibold text-red-700">Become Story Teller</p>
+      <h1 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight">
+        Every single of books <span class="relative inline-block text-lg md:text-2xl">✨</span><br> tells a story
+      </h1>
     </div>
 <div class="relative flex justify-center">
     <!-- Content Section -->
@@ -240,7 +214,7 @@
     </div>
       <!-- Icons as Ornaments -->
   <span class="absolute top-24 right-16 text-2xl ">🎨</span>
-  <span class="absolute bottom-16 left-10 text-2xl">📖</span>
+  <span class="absolute bottom-16 left-10 text-2xl hidden md:block">📖</span>
 
 </div>
   </div>

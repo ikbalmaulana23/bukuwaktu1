@@ -48,6 +48,9 @@ export default {
             animation: {
                 fadeIn: "fadeIn 3s ease-in forwards",
             },
+            spacing: {
+                86: "21.5rem", // Menambahkan w-86 dan h-86 dengan nilai 21.5rem
+            },
         },
     },
 
