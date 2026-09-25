@@ -33,7 +33,7 @@
             <button id="openModal" class="absolute top-0 right-8 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
-            <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}" alt="Profile Picture">
+            <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar2.jpg') }}" alt="Profile Picture">
 
           <div class=" px-6 lg:pt-10 w-full text-sm  flex justify-between ">
             <div>

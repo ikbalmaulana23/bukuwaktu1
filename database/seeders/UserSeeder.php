@@ -15,26 +15,24 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-
         User::create([
-
             'name' => 'Ikbal Maulana',
             'username' => 'ikbalmaulana',
             'bio' => 'Hidup yang tidak diperjuangkan, tidak pernah dimenangkan',
-            'profile_photo' => fake()->randomElement(['avatar1.jpg', 'avatar2.jpg', 'avatar3.jpg', 'avatar4.jpg']), // Pilihan acak untuk profile_photo
+            'profile_photo' => 'avatar2.jpg',
             'email' => 'ikbalmaulanaalfatih@gmail.com',
-            'password' => 'admin123'
-
+            'password' => bcrypt('admin123'),
+            'role' => 'admin',
         ]);
+
         User::create([
-
-            'name' => 'fizi',
-            'username' => 'fizi',
-            'bio' => 'someone',
-            'profile_photo' => fake()->randomElement(['avatar1.jpg', 'avatar2.jpg', 'avatar3.jpg', 'avatar4.jpg']), // Pilihan acak untuk profile_photo
-            'email' => 'fizi@gmail.com',
-            'password' => '12345678'
-
+            'name' => 'ferina anggraini',
+            'username' => 'ferina anggraini',
+            'bio' => 'life is choice, i dare to choice',
+            'profile_photo' => 'avatar1.jpg',
+            'email' => 'ferinaanggraini@gmail.com',
+            'password' => bcrypt('admin123'),
+            'role' => 'admin',
         ]);
 
         User::factory(10)->create();

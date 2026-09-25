@@ -104,4 +104,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Playlist::class);
     }
+    public function personalData()
+    {
+        return $this->hasOne(PersonalData::class);
+    }
 }

@@ -34,6 +34,7 @@ class DashboardController extends Controller
         return view('dashboard.posts', compact('categories'));
     }
 
+
     public function edit($id)
     {
         // Find the post by ID

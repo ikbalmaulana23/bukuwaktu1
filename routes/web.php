@@ -17,16 +17,25 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteBookController;
 use App\Http\Controllers\InterestGenreController;
 use App\Http\Controllers\FavoriteAuthorController;
+use App\Http\Controllers\PersonalDataController;
 
 
 Route::get('/dashboard', function () {
-    return view('dashboarcd');
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])
+        ->name('admin.dashboard');
 });
+Route::get('/data-pribadi', [PersonalDataController::class, 'edit'])
+    ->name('personal-data.edit');
+
+Route::put('/data-pribadi', [PersonalDataController::class, 'update'])
+    ->name('personal-data.update');
 
 Route::resource('audiobooks', AudiobookController::class);
 Route::resource('interest-genre', InterestGenreController::class);
