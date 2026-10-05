@@ -64,7 +64,7 @@
                          alt="gambar"
                          class="w-full h-40 object-cover rounded-md mb-2">
                     <h4 class="text-sm font-semibold">
-                        <a href="/posts/{{ $post['id'] }}" class="text-blue-600 hover:underline">
+                        <a href="/posts/{{ $post['slug'] }}" class="text-blue-600 hover:underline">
                             {{ Str::limit($post['title'], 20) }}
                         </a>
                     </h4>

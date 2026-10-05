@@ -174,35 +174,38 @@
         </button>
         <div class="flex flex-col flex-grow p-4 overflow-auto">
             <a
-            class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-            href="#"
-          >
-            <span class="leading-none">Dashboard</span>
-          </a>
+    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
+    href="{{ route('admin.dashboard') }}"
+>
+    <span class="leading-none">Dashboard</span>
+</a>
           <a
-            class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-            href="#"
-          >
-            <span class="leading-none">Audit User</span>
-          </a>
-          <a
-            class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-            href="#"
-          >
-            <span class="leading-none">Audit Postingan</span>
-          </a>
-          <a
-            class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-            href="#"
-          >
-            <span class="leading-none">Audit Audiobook</span>
-          </a>
-          <a
-            class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-            href="#"
-          >
-            <span class="leading-none">Audit Komentar</span>
-          </a>
+    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
+    href="{{ route('admin.users') }}"
+>
+    <span class="leading-none">Audit User</span>
+</a>
+
+<a
+    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
+    href="{{ route('admin.posts') }}"
+>
+    <span class="leading-none">Audit Postingan</span>
+</a>
+
+<a
+    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
+    href="{{ route('admin.audiobooks') }}"
+>
+    <span class="leading-none">Audit Audiobook</span>
+</a>
+
+<a
+    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
+    href="{{ route('admin.comments') }}"
+>
+    <span class="leading-none">Audit Komentar</span>
+</a>
 
           <a
             class="flex items-center flex-shrink-0 h-10 px-3 mt-auto text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
@@ -212,6 +215,8 @@
             <span class="ml-2 leading-none">Log Out</span>
           </a>
         </div>
+
+
       </div>
       <div class="flex flex-col flex-grow">
         <div

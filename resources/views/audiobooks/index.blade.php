@@ -9,7 +9,7 @@
             <a href="" class="font-semibold text-pink-600 hover:underline">Show All</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach ($trendings->take(4) as $trending)
                 <a href="{{ route('audiobooks.show', $trending->id) }}"
                    class="flex items-center p-4 border rounded-lg shadow-sm hover:bg-pink-100 hover:text-gray-900 transition">
@@ -38,24 +38,31 @@
                     </button>
                 </a>
             @endforeach
-        </div>
+        </div> --}}
     </div>
 
     <!-- All Audiobooks Section -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        @foreach ($audiobooks as $audiobook)
-            <a href="{{ route('audiobooks.show', $audiobook->id) }}"
-               class="block p-4 border rounded-lg hover:bg-slate-100 transition">
+    @foreach ($audiobooks as $audiobook)
+    <a href="/audiobook/{{ $audiobook->id }}"
+       class="block p-4 border rounded-lg hover:bg-slate-100 transition">
 
-                @if ($audiobook->cover)
-                    <img src="{{ asset('storage/' . $audiobook->cover) }}"
-                         alt="Cover of {{ $audiobook->title }}"
-                         class="h-46 w-full object-cover mb-4 rounded-md">
-                @endif
-                <h2 class="text-md font-bold mb-2 truncate">{{ $audiobook->title }}</h2>
-                <p class="text-sm text-gray-600 truncate">Speaker: {{ $audiobook->speaker->name }}</p>
-            </a>
-        @endforeach
-    </div>
+        @if ($audiobook->cover)
+            <img src="{{ asset('storage/' . $audiobook->cover) }}"
+                 alt="Cover of {{ $audiobook->title }}"
+                 class="h-46 w-full object-cover mb-4 rounded-md">
+        @endif
+
+        <h2 class="text-md font-bold mb-2 truncate">
+            {{ $audiobook->title }}
+        </h2>
+
+        <p class="text-sm text-gray-600 truncate">
+            Speaker: {{ $audiobook->speaker->name }}
+        </p>
+
+    </a>
+@endforeach
+</div>
 
 </x-layout>

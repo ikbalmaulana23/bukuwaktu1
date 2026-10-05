@@ -31,8 +31,8 @@
 
               <!-- Edit and Delete buttons -->
               <div>
-                <a href="{{ route('audiobooks.edit', $audiobook->id) }}" class="text-white bg-blue-600 rounded-md px-3 py-1">Edit</a>
-                <form action="{{ route('audiobooks.destroy', $audiobook->id) }}" method="POST" style="display:inline-block;">
+                <a href="{{ route('audiobook.edit', $audiobook->id) }}" class="text-white bg-blue-600 rounded-md px-3 py-1">Edit</a>
+                <form action="{{ route('audiobook.destroy', $audiobook->id) }}" method="POST" style="display:inline-block;">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="text-white bg-red-600 rounded-md px-3 py-1" onclick="return confirm('Are you sure you want to delete this audiobook?');">Delete</button>

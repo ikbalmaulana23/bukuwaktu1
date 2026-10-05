@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-
         Schema::create('personal_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->string('full_name');
-            $table->string('phone')->nullable();
-            $table->text('address')->nullable();
-            $table->string('city')->nullable();
+            $table->string('genre')->nullable();
             $table->date('birth_date')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('city')->nullable();
             $table->timestamps();
         });
     }

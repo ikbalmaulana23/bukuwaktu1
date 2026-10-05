@@ -108,4 +108,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(PersonalData::class);
     }
+
+    public function loungePosts()
+    {
+        return $this->hasMany(LoungePost::class);
+    }
+
+    public function loungeComments()
+    {
+        return $this->hasMany(LoungeComment::class);
+    }
 }

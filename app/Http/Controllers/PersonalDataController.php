@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
 class PersonalDataController extends Controller
 {
     public function edit()
@@ -18,23 +17,31 @@ class PersonalDataController extends Controller
     {
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'address' => 'nullable|string',
-            'city' => 'nullable|string|max:100',
+            'genre' => 'nullable|array',
+            'genre.*' => 'string',
             'birth_date' => 'nullable|date',
+            'gender' => 'nullable|string|max:20',
+            'city' => 'nullable|string|max:100',
         ]);
+
+        $genre = $request->genre
+            ? implode(', ', $request->genre)
+            : null;
 
         auth()->user()->personalData()->updateOrCreate(
             ['user_id' => auth()->id()],
-            $request->only([
-                'full_name',
-                'phone',
-                'address',
-                'city',
-                'birth_date',
-            ])
+            [
+                'full_name' => $request->full_name,
+                'genre' => $genre,
+                'birth_date' => $request->birth_date,
+                'gender' => $request->gender,
+                'city' => $request->city,
+            ]
         );
 
-        return back()->with('success', 'Data pribadi berhasil disimpan.');
+
+
+        return redirect('/')
+            ->with('pesan', 'berhasil simpan data');
     }
 }

@@ -27,7 +27,7 @@
          <p>Others Audiobook</p>
          <div class="">
              @foreach ($recomendation as $audiobook)
-             <a href="{{ route('audiobooks.show', $audiobook->id) }}" class="p-4 rounded-sm shadow-sm border flex my-2 hover:bg-slate-100">
+             <a href="{{ route('audiobook.show', $audiobook->id) }}" class="p-4 rounded-sm shadow-sm border flex my-2 hover:bg-slate-100">
                  @if ($audiobook->cover)
                      <img src="{{ asset('storage/' . $audiobook->cover) }}" alt="Cover of {{ $audiobook->title }}" class="h-20 mb-4 rounded-md">
                  @endif

@@ -33,19 +33,45 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
+           <x-primary-button class="m-3">
+                {{ __('Log in') }}
+            </x-primary-button>
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+
         </div>
-        <div>
-            <a href="{{ route('socialite.redirect', 'google') }}" class="text-slate-700">login With Google</a>
-            <a href="{{ route('socialite.redirect', 'github') }}" class="text-slate-700">login with Github</a>
-        </div>
+
+<div class="flex items-center justify-between w-full">
+
+    {{-- Social Login --}}
+    <div class="flex items-center gap-3">
+
+        <a href="{{ route('socialite.redirect', 'google') }}"
+           class="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 transition">
+            <i class="fa-brands fa-google"></i>
+            <span>Login with Google</span>
+        </a>
+
+        <a href="{{ route('socialite.redirect', 'github') }}"
+           class="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 transition">
+            <i class="fa-brands fa-github"></i>
+            <span>Login with GitHub</span>
+        </a>
+
+    </div>
+
+    {{-- Register --}}
+
+
+</div>
+<div class="mt-4 text-sm text-gray-500">
+    Belum punya akun? <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Daftar</a>
+</div>
+
+
     </form>
 </x-guest-layout>

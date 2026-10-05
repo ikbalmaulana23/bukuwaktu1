@@ -13,10 +13,10 @@ class PersonalData extends Model
     protected $fillable = [
         'user_id',
         'full_name',
-        'phone',
-        'address',
-        'city',
+        'genre',
         'birth_date',
+        'gender',
+        'city',
     ];
 
     public function user()

@@ -13,8 +13,8 @@
             <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
             <x-nav-link href="/posts" :active="request()->is('posts')">Buku</x-nav-link>
             <x-nav-link href="/genre" :active="request()->is('genre')">Genre</x-nav-link>
-            <x-nav-link href="/audiobooks" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
-            {{-- <x-nav-link href="/lounge" :active="request()->is('lounge')">Lounge</x-nav-link> --}}
+            <x-nav-link href="/audiobook" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
+            <x-nav-link href="/lounge" :active="request()->is('lounge')">Lounge</x-nav-link>
 
           </div>
         </div>
@@ -23,76 +23,273 @@
             @if(auth()->check())
             <!-- User is logged in -->
 
-            <div x-data="{ isNotificationOpen: false, isUserMenuOpen: false }" class="flex items-center space-x-3">
-              <!-- Notification Button -->
-              <button type="button"
-                      @click="isNotificationOpen = !isNotificationOpen; isUserMenuOpen = false"
-                      class="relative flex max-w-xs items-center rounded-full bg-white border border-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      id="notification-button" aria-expanded="false" aria-haspopup="true">
-                  <span class="sr-only">View notifications</span>
-                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                  </svg>
-              </button>
+           <div x-data="{ isNotificationOpen: false, isUserMenuOpen: false }"
+     class="flex items-center space-x-3">
 
-              <!-- Notification Dropdown -->
-              <div x-show="isNotificationOpen"
-                   x-cloak
-                   @click.away="isNotificationOpen = false"
-                   x-transition:enter="transition ease-out duration-100 transform"
-                   x-transition:enter-start="opacity-0 scale-95"
-                   x-transition:enter-end="opacity-100 scale-100"
-                   x-transition:leave="transition ease-in duration-75 transform"
-                   x-transition:leave-start="opacity-100 scale-100"
-                   x-transition:leave-end="opacity-0 scale-95"
-                   class="absolute top-12 right-48 mt-2 w-48 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 px-5 ring-black ring-opacity-5 focus:outline-none"
-                   role="menu" aria-orientation="vertical" aria-labelledby="notification-button" tabindex="-1">
-                  <div>Notifications <span id="notification-count" class="badge bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span></div>
-                  <hr>
-                  @foreach(Auth::user()->unreadNotifications as $notification)
-                      <li class="list-group-item">
-                          <a href="{{ url('/posts/' . $notification->data['post_id']) }}" class="text-sm">
-                              {{ $notification->data['author_name'] }} uploaded a new post: {{ $notification->data['post_title'] }}
-                          </a>
-                      </li>
-                  @endforeach
-              </div>
+    <!-- Notification Button -->
+    <button
+        type="button"
+        @click="isNotificationOpen = !isNotificationOpen; isUserMenuOpen = false"
+        class="relative flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-700 text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+        id="notification-button"
+        aria-expanded="false"
+        aria-haspopup="true"
+    >
+        <span class="sr-only">View notifications</span>
 
-              <!-- User Menu Button -->
-              <button type="button"
-                      @click="isUserMenuOpen = !isUserMenuOpen; isNotificationOpen = false"
-                      class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                  <span class="sr-only">Open user menu</span>
-                  <img class="h-8 w-8 rounded-full"
-                  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
-                  alt="Profile Photo">
-              </button>
+        <!-- Bell Icon -->
+        <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+            />
+        </svg>
 
-              <!-- User Dropdown -->
-              <div x-show="isUserMenuOpen"
-                   x-cloak
-                   @click.away="isUserMenuOpen = false"
-                   x-transition:enter="transition ease-out duration-100 transform"
-                   x-transition:enter-start="opacity-0 scale-95"
-                   x-transition:enter-end="opacity-100 scale-100"
-                   x-transition:leave="transition ease-in duration-75 transform"
-                   x-transition:leave-start="opacity-100 scale-100"
-                   x-transition:leave-end="opacity-0 scale-95"
-                   class="absolute top-12 right-36 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                   role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                  <a href="{{ route('profile') }}" class="block  text-sm text-gray-700 " role="menuitem" tabindex="-1" id="user-menu-item-0">
-                     <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">{{ auth()->user()->name }}</p>
-                  </a>
-                  <a href="/dashboard" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">
+        <!-- Unread Badge -->
+        @if (auth()->user()->unreadNotifications->count() > 0)
+            <span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 flex items-center justify-center rounded-full bg-red-600 text-white text-[11px] font-bold">
+                {{ auth()->user()->unreadNotifications->count() }}
+            </span>
+        @endif
+    </button>
 
-                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Upload Buku</p>
-                    </a>
-                  <a href="{{ route('logout') }}" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
-                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Sign out</p>
-                    </a>
-              </div>
-          </div>
+
+    <!-- Notification Dropdown -->
+    <div
+        x-show="isNotificationOpen"
+        x-cloak
+        @click.away="isNotificationOpen = false"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+        x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+        class="absolute top-12 right-48 mt-2 w-80 max-w-[calc(100vw-2rem)] origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden z-50"
+        role="menu"
+    >
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
+            <div class="flex items-center gap-2">
+                <h3 class="font-semibold text-gray-800">
+                    Notifications
+                </h3>
+
+                @if (auth()->user()->unreadNotifications->count() > 0)
+                    <span class="px-2 py-0.5 rounded-full bg-red-100 text-red-600 text-xs font-semibold">
+                        {{ auth()->user()->unreadNotifications->count() }} baru
+                    </span>
+                @endif
+            </div>
+
+            @if (auth()->user()->unreadNotifications->count() > 0)
+                <form
+                    action="{{ route('notifications.readAll') }}"
+                    method="POST"
+                >
+                    @csrf
+
+                    <button
+                        type="submit"
+                        class="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                        Tandai semua dibaca
+                    </button>
+                </form>
+            @endif
+        </div>
+
+
+        <!-- Notification List -->
+        <!-- Notification List -->
+<div class="max-h-96 overflow-y-auto">
+
+    @forelse (auth()->user()->notifications->take(10) as $notification)
+
+        @php
+            $isUnread = is_null($notification->read_at);
+
+            $type = $notification->data['type'] ?? 'new_post';
+
+            $postId = $notification->data['post_id'] ?? null;
+
+            $authorName = $notification->data['author_name'] ?? null;
+            $postTitle = $notification->data['post_title'] ?? null;
+
+            $message = $notification->data['message'] ?? null;
+        @endphp
+
+        @if ($postId)
+
+            <a
+                href="{{ route('notifications.read', $notification->id) }}"
+                class="block px-4 py-3 border-b transition
+                    {{ $isUnread
+                        ? 'bg-blue-50 hover:bg-blue-100'
+                        : 'bg-white hover:bg-gray-50' }}"
+            >
+
+                <div class="flex gap-3">
+
+                    <!-- Status Dot -->
+                    <div class="pt-1.5">
+                        <span
+                            class="block w-2.5 h-2.5 rounded-full
+                                {{ $isUnread ? 'bg-blue-600' : 'bg-gray-300' }}"
+                        ></span>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="min-w-0 flex-1">
+
+                        @if ($type === 'new_comment')
+
+                            {{-- NOTIFIKASI KOMENTAR --}}
+
+                            <p class="text-sm text-gray-800 leading-5">
+                                <span class="font-semibold">
+                                    {{ $message
+                                        ?? ($notification->data['user_name'] ?? 'Seseorang') }}
+                                </span>
+                            </p>
+
+                            @if ($postTitle)
+                                <p class="mt-1 text-sm font-medium text-gray-600 truncate">
+                                    "{{ $postTitle }}"
+                                </p>
+                            @endif
+
+                        @else
+
+                            {{-- NOTIFIKASI POSTINGAN BARU --}}
+
+                            <p class="text-sm text-gray-800 leading-5">
+                                <span class="font-semibold">
+                                    {{ $authorName ?? 'Seseorang' }}
+                                </span>
+                                mengupload postingan baru
+                            </p>
+
+                            @if ($postTitle)
+                                <p class="mt-1 text-sm font-medium text-gray-600 truncate">
+                                    "{{ $postTitle }}"
+                                </p>
+                            @endif
+
+                        @endif
+
+                        <p class="mt-1 text-xs text-gray-400">
+                            {{ $notification->created_at->diffForHumans() }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        @endif
+
+    @empty
+
+        <div class="px-4 py-10 text-center">
+
+            <div class="text-3xl mb-2">
+                🔔
+            </div>
+
+            <p class="text-sm font-medium text-gray-600">
+                Belum ada notifikasi
+            </p>
+
+            <p class="text-xs text-gray-400 mt-1">
+                Notifikasi baru akan muncul di sini.
+            </p>
+
+        </div>
+
+    @endforelse
+
+</div>
+
+    </div>
+
+
+    <!-- User Menu Button -->
+    <button
+        type="button"
+        @click="isUserMenuOpen = !isUserMenuOpen; isNotificationOpen = false"
+        class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+        id="user-menu-button"
+        aria-expanded="false"
+        aria-haspopup="true"
+    >
+        <span class="sr-only">Open user menu</span>
+
+        <img
+            class="h-8 w-8 rounded-full"
+            src="{{ Auth::user()->profile_photo
+                ? asset('storage/' . Auth::user()->profile_photo)
+                : asset('img/avatar1.jpg') }}"
+            alt="Profile Photo"
+        >
+    </button>
+
+
+    <!-- User Dropdown -->
+    <div
+        x-show="isUserMenuOpen"
+        x-cloak
+        @click.away="isUserMenuOpen = false"
+        x-transition:enter="transition ease-out duration-100 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75 transform"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="absolute top-12 right-36 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+        role="menu"
+    >
+
+        <a
+            href="{{ route('profile') }}"
+            class="block text-sm text-gray-700"
+        >
+            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                {{ auth()->user()->name }}
+            </p>
+        </a>
+
+        <a
+            href="/dashboard"
+            class="block text-sm text-gray-700"
+        >
+            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                Upload Buku
+            </p>
+        </a>
+
+        <a
+            href="{{ route('logout') }}"
+            class="block text-sm text-gray-700"
+        >
+            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                Sign out
+            </p>
+        </a>
+
+    </div>
+
+</div>
 
         @else
             <!-- User is not logged in -->
@@ -131,7 +328,8 @@
         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
         <x-nav-link href="/posts" :active="request()->is('posts')">Buku</x-nav-link>
         <x-nav-link href="/genre" :active="request()->is('genre')">Genre</x-nav-link>
-        <x-nav-link href="/audiobooks" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
+        <x-nav-link href="/audiobook" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
+        <x-nav-link href="/lounge" :active="request()->is('lounge')">Lounge</x-nav-link>
 
       </div>
       <div class="border-t border-gray-700 pb-3 pt-4">

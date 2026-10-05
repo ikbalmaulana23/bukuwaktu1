@@ -33,7 +33,7 @@
             <button id="openModal" class="absolute top-0 right-8 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
-            <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar2.jpg') }}" alt="Profile Picture">
+            <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('img/avatar2.jpg') }}" alt="Profile Picture">
 
           <div class=" px-6 lg:pt-10 w-full text-sm  flex justify-between ">
             <div>
@@ -161,29 +161,46 @@
             <div class="bg-white p-5 rounded-lg shadow-lg w-96">
                 <h2 class="text-center font-semibold text-lg mb-4">Edit Profile</h2>
                 <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+    @csrf
+    @method('PATCH')
 
-                    <div class="mb-4">
-                        <label for="profile_photo" class="block text-sm font-medium text-gray-700">Foto Profil</label>
-                        <input type="file" name="profile_photo" id="profile_photo" class="mt-1 block w-full">
-                    </div>
+    <div class="mb-4">
+        <label for="profile_photo" class="block text-sm font-medium text-gray-700">
+            Foto Profil
+        </label>
+        <input type="file" name="profile_photo" id="profile_photo"
+               class="mt-1 block w-full">
+    </div>
 
-                    <div class="mb-4">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
-                        <input type="text" name="name" id="name" value="{{ $user->name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    </div>
+    <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-700">
+            Nama
+        </label>
+        <input type="text" name="name" id="name"
+               value="{{ $user->name }}"
+               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+    </div>
 
-                    <div class="mb-4">
-                        <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
-                        <textarea name="bio" id="bio" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ $user->bio }}</textarea>
-                    </div>
+    <div class="mb-4">
+        <label for="bio" class="block text-sm font-medium text-gray-700">
+            Bio
+        </label>
+        <textarea name="bio" id="bio" rows="3"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ $user->bio }}</textarea>
+    </div>
 
-                    <div class="flex justify-end">
-                        <button type="button" id="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">Batal</button>
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">Simpan</button>
-                    </div>
-                </form>
+    <div class="flex justify-end">
+        <button type="button" id="closeModal"
+                class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">
+            Batal
+        </button>
+
+        <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-md">
+            Simpan
+        </button>
+    </div>
+</form>
             </div>
         </div>
 
