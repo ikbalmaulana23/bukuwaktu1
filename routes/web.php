@@ -3,7 +3,7 @@
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
@@ -37,6 +37,9 @@ Route::get('/', [PostController::class, 'home'])
 // Posts
 Route::get('/posts', [PostController::class, 'index']);
 
+Route::get('/search', [SearchController::class, 'index'])
+    ->name('search');
+
 Route::get('/posts/{post}', [PostController::class, 'post'])
     ->name('posts.show');
 
@@ -44,7 +47,11 @@ Route::get('/posts/{post}', [PostController::class, 'post'])
 Route::get('/genre', [GenreController::class, 'index']);
 
 // Authors
-Route::get('/authors/{user:username}', [AuthorController::class, 'index']);
+
+// Authors
+Route::get('/authors/{user:username}', [AuthorController::class, 'index'])
+    ->name('authors');
+
 
 // Lounge - bisa dilihat tanpa login
 Route::get('/lounge', [LoungeController::class, 'index'])

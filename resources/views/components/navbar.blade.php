@@ -1,384 +1,477 @@
-<nav class="shadow-md border-b bg-gray-50  fixed w-full z-20"  x-data="{isOpen : false}   ">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
-      <div class="flex h-16 items-center justify-between">
-        <div class="flex items-center">
-          <a href="/" class="flex-shrink-0">
-            <img class="h-14  " src="{{ asset('img/logo.png') }}" alt="Your Company">
-          </a>
+<nav class="shadow-md border-b bg-gray-50 fixed w-full z-20" x-data="{ isOpen: false }">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
 
-        </div>
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-10">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-            <x-nav-link href="/posts" :active="request()->is('posts')">Buku</x-nav-link>
-            <x-nav-link href="/genre" :active="request()->is('genre')">Genre</x-nav-link>
-            <x-nav-link href="/audiobook" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
-            <x-nav-link href="/lounge" :active="request()->is('lounge')">Lounge</x-nav-link>
-
-          </div>
-        </div>
-        <div class="hidden md:block">
-          <div class=" flex items-center  ml-24">
-            @if(auth()->check())
-            <!-- User is logged in -->
-
-           <div x-data="{ isNotificationOpen: false, isUserMenuOpen: false }"
-     class="flex items-center space-x-3">
-
-    <!-- Notification Button -->
-    <button
-        type="button"
-        @click="isNotificationOpen = !isNotificationOpen; isUserMenuOpen = false"
-        class="relative flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-700 text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-        id="notification-button"
-        aria-expanded="false"
-        aria-haspopup="true"
-    >
-        <span class="sr-only">View notifications</span>
-
-        <!-- Bell Icon -->
-        <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-        >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-            />
-        </svg>
-
-        <!-- Unread Badge -->
-        @if (auth()->user()->unreadNotifications->count() > 0)
-            <span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 flex items-center justify-center rounded-full bg-red-600 text-white text-[11px] font-bold">
-                {{ auth()->user()->unreadNotifications->count() }}
-            </span>
-        @endif
-    </button>
-
-
-    <!-- Notification Dropdown -->
-    <div
-        x-show="isNotificationOpen"
-        x-cloak
-        @click.away="isNotificationOpen = false"
-        x-transition:enter="transition ease-out duration-150"
-        x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
-        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-100"
-        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-        x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
-        class="absolute top-12 right-48 mt-2 w-80 max-w-[calc(100vw-2rem)] origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden z-50"
-        role="menu"
-    >
-
-        <!-- Header -->
-        <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
-            <div class="flex items-center gap-2">
-                <h3 class="font-semibold text-gray-800">
-                    Notifications
-                </h3>
-
-                @if (auth()->user()->unreadNotifications->count() > 0)
-                    <span class="px-2 py-0.5 rounded-full bg-red-100 text-red-600 text-xs font-semibold">
-                        {{ auth()->user()->unreadNotifications->count() }} baru
-                    </span>
-                @endif
+            {{-- LOGO --}}
+            <div class="flex items-center">
+                <a href="/" class="flex-shrink-0">
+                    <img class="h-14" src="{{ asset('img/logo.png') }}" alt="Your Company">
+                </a>
             </div>
 
-            @if (auth()->user()->unreadNotifications->count() > 0)
-                <form
-                    action="{{ route('notifications.readAll') }}"
-                    method="POST"
+            {{-- DESKTOP NAVIGATION --}}
+           <div class="hidden md:flex flex-1 justify-center">
+    <div class="flex items-baseline space-x-7">
+
+                    <x-nav-link href="/" :active="request()->is('/')">
+                        Home
+                    </x-nav-link>
+
+                    <x-nav-link href="/posts" :active="request()->is('posts*')">
+                        Buku
+                    </x-nav-link>
+
+                    <x-nav-link href="/genre" :active="request()->is('genre*')">
+                        Genre
+                    </x-nav-link>
+
+                    <x-nav-link href="/audiobook" :active="request()->is('audiobook*')">
+                        Audiobook
+                    </x-nav-link>
+
+                    <x-nav-link href="/lounge" :active="request()->is('lounge*')">
+                        Lounge
+                    </x-nav-link>
+
+                </div>
+            </div>
+
+            {{-- DESKTOP SEARCH --}}
+
+<div class="hidden lg:flex items-center ml-4">
+    <form action="{{ route('search') }}" method="GET" class="relative">
+        <input
+            type="search"
+            name="q"
+            value="{{ request('q') }}"
+            placeholder="Cari..."
+            class="w-40 xl:w-48 rounded-full border border-gray-300 bg-white py-2 pl-4 pr-9 text-sm text-gray-700 outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+        >
+
+        <button
+            type="submit"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+            aria-label="Cari"
+        >
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+</div>
+
+            {{-- DESKTOP AUTHENTICATION --}}
+            <div class="hidden md:block">
+                <div class="flex items-center ml-6">
+
+                    @if(auth()->check())
+
+                        <div x-data="{ isNotificationOpen: false, isUserMenuOpen: false }"
+                            class="flex items-center space-x-3">
+
+                            {{-- NOTIFICATION BUTTON --}}
+                            <button
+                                type="button"
+                                @click="isNotificationOpen = !isNotificationOpen; isUserMenuOpen = false"
+                                class="relative flex items-center justify-center h-10 w-10 rounded-full bg-white border border-gray-700 text-gray-700 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                id="notification-button"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                            >
+                                <span class="sr-only">View notifications</span>
+
+                                <svg
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                                    />
+                                </svg>
+
+                                @if (auth()->user()->unreadNotifications->count() > 0)
+                                    <span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 flex items-center justify-center rounded-full bg-red-600 text-white text-[11px] font-bold">
+                                        {{ auth()->user()->unreadNotifications->count() }}
+                                    </span>
+                                @endif
+                            </button>
+
+                            {{-- NOTIFICATION DROPDOWN --}}
+                            <div
+                                x-show="isNotificationOpen"
+                                x-cloak
+                                @click.away="isNotificationOpen = false"
+                                x-transition:enter="transition ease-out duration-150"
+                                x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                                x-transition:leave="transition ease-in duration-100"
+                                x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+                                class="absolute top-12 right-48 mt-2 w-80 max-w-[calc(100vw-2rem)] origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden z-50"
+                                role="menu"
+                            >
+
+                                {{-- HEADER --}}
+                                <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="font-semibold text-gray-800">
+                                            Notifications
+                                        </h3>
+
+                                        @if (auth()->user()->unreadNotifications->count() > 0)
+                                            <span class="px-2 py-0.5 rounded-full bg-red-100 text-red-600 text-xs font-semibold">
+                                                {{ auth()->user()->unreadNotifications->count() }} baru
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    @if (auth()->user()->unreadNotifications->count() > 0)
+                                        <form action="{{ route('notifications.readAll') }}" method="POST">
+                                            @csrf
+
+                                            <button
+                                                type="submit"
+                                                class="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                                            >
+                                                Tandai semua dibaca
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+
+                                {{-- NOTIFICATION LIST --}}
+                                <div class="max-h-96 overflow-y-auto">
+
+                                    @forelse (auth()->user()->notifications->take(10) as $notification)
+
+                                        @php
+                                            $isUnread = is_null($notification->read_at);
+                                            $type = $notification->data['type'] ?? 'new_post';
+                                            $postId = $notification->data['post_id'] ?? null;
+                                            $authorName = $notification->data['author_name'] ?? null;
+                                            $postTitle = $notification->data['post_title'] ?? null;
+                                            $message = $notification->data['message'] ?? null;
+                                        @endphp
+
+                                        @if ($postId)
+
+                                            <a
+                                                href="{{ route('notifications.read', $notification->id) }}"
+                                                class="block px-4 py-3 border-b transition {{ $isUnread ? 'bg-blue-50 hover:bg-blue-100' : 'bg-white hover:bg-gray-50' }}"
+                                            >
+                                                <div class="flex gap-3">
+
+                                                    {{-- STATUS DOT --}}
+                                                    <div class="pt-1.5">
+                                                        <span class="block w-2.5 h-2.5 rounded-full {{ $isUnread ? 'bg-blue-600' : 'bg-gray-300' }}"></span>
+                                                    </div>
+
+                                                    {{-- CONTENT --}}
+                                                    <div class="min-w-0 flex-1">
+
+                                                        @if ($type === 'new_comment')
+
+                                                            <p class="text-sm text-gray-800 leading-5">
+                                                                <span class="font-semibold">
+                                                                    {{ $message ?? ($notification->data['user_name'] ?? 'Seseorang') }}
+                                                                </span>
+                                                            </p>
+
+                                                            @if ($postTitle)
+                                                                <p class="mt-1 text-sm font-medium text-gray-600 truncate">
+                                                                    "{{ $postTitle }}"
+                                                                </p>
+                                                            @endif
+
+                                                        @else
+
+                                                            <p class="text-sm text-gray-800 leading-5">
+                                                                <span class="font-semibold">
+                                                                    {{ $authorName ?? 'Seseorang' }}
+                                                                </span>
+                                                                mengupload postingan baru
+                                                            </p>
+
+                                                            @if ($postTitle)
+                                                                <p class="mt-1 text-sm font-medium text-gray-600 truncate">
+                                                                    "{{ $postTitle }}"
+                                                                </p>
+                                                            @endif
+
+                                                        @endif
+
+                                                        <p class="mt-1 text-xs text-gray-400">
+                                                            {{ $notification->created_at->diffForHumans() }}
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                        @endif
+
+                                    @empty
+
+                                        <div class="px-4 py-10 text-center">
+                                            <div class="text-3xl mb-2">
+                                                🔔
+                                            </div>
+
+                                            <p class="text-sm font-medium text-gray-600">
+                                                Belum ada notifikasi
+                                            </p>
+
+                                            <p class="text-xs text-gray-400 mt-1">
+                                                Notifikasi baru akan muncul di sini.
+                                            </p>
+                                        </div>
+
+                                    @endforelse
+
+                                </div>
+                            </div>
+
+                            {{-- USER MENU BUTTON --}}
+                            <button
+                                type="button"
+                                @click="isUserMenuOpen = !isUserMenuOpen; isNotificationOpen = false"
+                                class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                id="user-menu-button"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                            >
+                                <span class="sr-only">Open user menu</span>
+
+                                <img
+                                    class="h-8 w-8 rounded-full object-cover"
+                                    src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
+                                    alt="Profile Photo"
+                                >
+                            </button>
+
+                            {{-- USER DROPDOWN --}}
+                            <div
+                                x-show="isUserMenuOpen"
+                                x-cloak
+                                @click.away="isUserMenuOpen = false"
+                                x-transition:enter="transition ease-out duration-100 transform"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75 transform"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-95"
+                                class="absolute top-12 right-36 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                                role="menu"
+                            >
+
+                                <a href="{{ route('profile') }}" class="block text-sm text-gray-700">
+                                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                                        {{ auth()->user()->name }}
+                                    </p>
+                                </a>
+
+                                <a href="/dashboard" class="block text-sm text-gray-700">
+                                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                                        Upload Buku
+                                    </p>
+                                </a>
+
+                                <a href="{{ route('logout') }}" class="block text-sm text-gray-700">
+                                    <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                                        Sign out
+                                    </p>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    @else
+
+                        {{-- GUEST LOGIN --}}
+                        <div>
+                            <a href="{{ route('login') }}" class="flex items-center space-x-2 text-gray-800">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Login</span>
+                            </a>
+                        </div>
+
+                    @endif
+
+                </div>
+            </div>
+
+            {{-- MOBILE MENU BUTTON --}}
+            <div class="-mr-2 flex md:hidden">
+                <button
+                    type="button"
+                    @click="isOpen = !isOpen"
+                    class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    aria-controls="mobile-menu"
+                    aria-expanded="false"
                 >
-                    @csrf
+                    <span class="absolute -inset-0.5"></span>
+                    <span class="sr-only">Open main menu</span>
 
-                    <button
-                        type="submit"
-                        class="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                    {{-- MENU OPEN --}}
+                    <svg
+                        :class="{ 'hidden': isOpen, 'block': !isOpen }"
+                        class="block h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
                     >
-                        Tandai semua dibaca
-                    </button>
-                </form>
-            @endif
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+
+                    {{-- MENU CLOSE --}}
+                    <svg
+                        :class="{ 'block': isOpen, 'hidden': !isOpen }"
+                        class="hidden h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- MOBILE MENU --}}
+    <div x-show="isOpen" class="md:hidden" id="mobile-menu" x-cloak>
+
+        {{-- MOBILE SEARCH --}}
+        <div class="px-4 py-3">
+            <form action="{{ route('search') }}" method="GET" class="relative">
+                <input
+                    type="search"
+                    name="q"
+                    value="{{ request('q') }}"
+                    placeholder="Cari buku, audiobook, pengguna..."
+                    class="w-full rounded-full border border-gray-300 bg-white py-2 pl-4 pr-10 text-sm text-gray-700 outline-none focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+                >
+
+                <button
+                    type="submit"
+                    class="absolute right-7 top-1/2 -translate-y-1/2 text-gray-500"
+                    aria-label="Cari"
+                >
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
 
+        {{-- MOBILE NAVIGATION --}}
+        <div class="ml-10 flex items-baseline space-x-10">
 
-        <!-- Notification List -->
-        <!-- Notification List -->
-<div class="max-h-96 overflow-y-auto">
+            <x-nav-link href="/" :active="request()->is('/')">
+                Home
+            </x-nav-link>
 
-    @forelse (auth()->user()->notifications->take(10) as $notification)
+            <x-nav-link href="/posts" :active="request()->is('posts*')">
+                Buku
+            </x-nav-link>
 
-        @php
-            $isUnread = is_null($notification->read_at);
+            <x-nav-link href="/genre" :active="request()->is('genre*')">
+                Genre
+            </x-nav-link>
 
-            $type = $notification->data['type'] ?? 'new_post';
+            <x-nav-link href="/audiobook" :active="request()->is('audiobook*')">
+                Audiobook
+            </x-nav-link>
 
-            $postId = $notification->data['post_id'] ?? null;
+            <x-nav-link href="/lounge" :active="request()->is('lounge*')">
+                Lounge
+            </x-nav-link>
 
-            $authorName = $notification->data['author_name'] ?? null;
-            $postTitle = $notification->data['post_title'] ?? null;
+        </div>
 
-            $message = $notification->data['message'] ?? null;
-        @endphp
+        {{-- MOBILE USER MENU --}}
+        <div class="border-t border-gray-700 pb-3 pt-4">
 
-        @if ($postId)
+            @auth
+                <div class="flex items-center px-5">
+                    <div class="flex-shrink-0"></div>
+                </div>
+            @endauth
 
-            <a
-                href="{{ route('notifications.read', $notification->id) }}"
-                class="block px-4 py-3 border-b transition
-                    {{ $isUnread
-                        ? 'bg-blue-50 hover:bg-blue-100'
-                        : 'bg-white hover:bg-gray-50' }}"
-            >
+            <div class="space-y-1 px-2">
 
-                <div class="flex gap-3">
+                @guest
 
-                    <!-- Status Dot -->
-                    <div class="pt-1.5">
-                        <span
-                            class="block w-2.5 h-2.5 rounded-full
-                                {{ $isUnread ? 'bg-blue-600' : 'bg-gray-300' }}"
-                        ></span>
-                    </div>
+                    {{-- GUEST LOGIN --}}
+                    <a
+                        href="/login"
+                        class="rounded-md px-3 py-2 text-md font-medium text-gray-700 hover:bg-gray-700 hover:text-white flex justify-between items-center"
+                    >
+                        <span>Login</span>
+                        <i class="fas fa-sign-in-alt ml-2"></i>
+                    </a>
 
-                    <!-- Content -->
-                    <div class="min-w-0 flex-1">
+                @else
 
-                        @if ($type === 'new_comment')
+                    {{-- USER PROFILE --}}
+                    <a
+                        href="{{ route('profile') }}"
+                        class="block text-sm text-gray-700"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="user-menu-item-0"
+                    >
+                        <div class="flex justify-start hover:bg-gray-600 hover:text-white rounded-lg m-2">
+                            <img
+                                class="h-8 w-8 rounded-full mx-3 object-cover"
+                                src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
+                                alt="Profile Photo"
+                            >
 
-                            {{-- NOTIFIKASI KOMENTAR --}}
-
-                            <p class="text-sm text-gray-800 leading-5">
-                                <span class="font-semibold">
-                                    {{ $message
-                                        ?? ($notification->data['user_name'] ?? 'Seseorang') }}
-                                </span>
+                            <p class="py-2 mx-2">
+                                {{ auth()->user()->name }}
                             </p>
+                        </div>
+                    </a>
 
-                            @if ($postTitle)
-                                <p class="mt-1 text-sm font-medium text-gray-600 truncate">
-                                    "{{ $postTitle }}"
-                                </p>
-                            @endif
-
-                        @else
-
-                            {{-- NOTIFIKASI POSTINGAN BARU --}}
-
-                            <p class="text-sm text-gray-800 leading-5">
-                                <span class="font-semibold">
-                                    {{ $authorName ?? 'Seseorang' }}
-                                </span>
-                                mengupload postingan baru
-                            </p>
-
-                            @if ($postTitle)
-                                <p class="mt-1 text-sm font-medium text-gray-600 truncate">
-                                    "{{ $postTitle }}"
-                                </p>
-                            @endif
-
-                        @endif
-
-                        <p class="mt-1 text-xs text-gray-400">
-                            {{ $notification->created_at->diffForHumans() }}
+                    {{-- UPLOAD BOOK --}}
+                    <a
+                        href="/dashboard"
+                        class="block text-sm text-gray-700"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="user-menu-item-1"
+                    >
+                        <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                            Upload Buku
                         </p>
+                    </a>
 
-                    </div>
+                    {{-- SIGN OUT --}}
+                    <a
+                        href="{{ route('logout') }}"
+                        class="block text-sm text-gray-700"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="user-menu-item-2"
+                    >
+                        <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
+                            Sign out
+                        </p>
+                    </a>
 
-                </div>
-
-            </a>
-
-        @endif
-
-    @empty
-
-        <div class="px-4 py-10 text-center">
-
-            <div class="text-3xl mb-2">
-                🔔
-            </div>
-
-            <p class="text-sm font-medium text-gray-600">
-                Belum ada notifikasi
-            </p>
-
-            <p class="text-xs text-gray-400 mt-1">
-                Notifikasi baru akan muncul di sini.
-            </p>
-
-        </div>
-
-    @endforelse
-
-</div>
-
-    </div>
-
-
-    <!-- User Menu Button -->
-    <button
-        type="button"
-        @click="isUserMenuOpen = !isUserMenuOpen; isNotificationOpen = false"
-        class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-        id="user-menu-button"
-        aria-expanded="false"
-        aria-haspopup="true"
-    >
-        <span class="sr-only">Open user menu</span>
-
-        <img
-            class="h-8 w-8 rounded-full"
-            src="{{ Auth::user()->profile_photo
-                ? asset('storage/' . Auth::user()->profile_photo)
-                : asset('img/avatar1.jpg') }}"
-            alt="Profile Photo"
-        >
-    </button>
-
-
-    <!-- User Dropdown -->
-    <div
-        x-show="isUserMenuOpen"
-        x-cloak
-        @click.away="isUserMenuOpen = false"
-        x-transition:enter="transition ease-out duration-100 transform"
-        x-transition:enter-start="opacity-0 scale-95"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-75 transform"
-        x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95"
-        class="absolute top-12 right-36 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
-        role="menu"
-    >
-
-        <a
-            href="{{ route('profile') }}"
-            class="block text-sm text-gray-700"
-        >
-            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
-                {{ auth()->user()->name }}
-            </p>
-        </a>
-
-        <a
-            href="/dashboard"
-            class="block text-sm text-gray-700"
-        >
-            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
-                Upload Buku
-            </p>
-        </a>
-
-        <a
-            href="{{ route('logout') }}"
-            class="block text-sm text-gray-700"
-        >
-            <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
-                Sign out
-            </p>
-        </a>
-
-    </div>
-
-</div>
-
-        @else
-            <!-- User is not logged in -->
-            <div>
-                <a href="{{ route('login') }}" class="flex items-center space-x-2 text-gray-800 ">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span>Login</span>
-                </a>
-            </div>
-        @endif
-
-          </div>
-        </div>
-        <div class="-mr-2 flex md:hidden">
-          <!-- Mobile menu button -->
-          <button type="button" @click="isOpen = !isOpen" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="absolute -inset-0.5"></span>
-            <span class="sr-only">Open main menu</span>
-            <!-- Menu open: "hidden", Menu closed: "block" -->
-            <svg  :class="{'hidden': isOpen, 'block': !isOpen }" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <!-- Menu open: "block", Menu closed: "hidden" -->
-            <svg :class="{'block': isOpen, 'hidden': !isOpen }" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div x-show="isOpen" class="md:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-        <x-nav-link href="/posts" :active="request()->is('posts')">Buku</x-nav-link>
-        <x-nav-link href="/genre" :active="request()->is('genre')">Genre</x-nav-link>
-        <x-nav-link href="/audiobook" :active="request()->is('audiobooks')">Audiobook</x-nav-link>
-        <x-nav-link href="/lounge" :active="request()->is('lounge')">Lounge</x-nav-link>
-
-      </div>
-      <div class="border-t border-gray-700 pb-3 pt-4">
-        @auth
-        <div class="flex items-center px-5">
-
-            <div class="flex-shrink-0">
+                @endguest
 
             </div>
-
-          {{-- <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">View notifications</span>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
-          </button> --}}
         </div>
-        @endauth
-        <div class=" space-y-1 px-2">
-            @guest
-                <!-- Tampilkan jika belum login -->
-
-                <a href="/login" class=" rounded-md px-3 py-2 text-md font-medium text-gray-700 hover:bg-gray-700 hover:text-white flex justify-between items-center">
-                    <span>Login</span>
-                    <i class="fas fa-sign-in-alt ml-2"></i>
-                </a>
-
-            @else
-
-            <a href="{{ route('profile') }}" class="block  text-sm text-gray-700 " role="menuitem" tabindex="-1" id="user-menu-item-0">
-                <div class="flex justify-start hover:bg-gray-600 hover:text-white rounded-lg m-2">
-                    <img class="h-8 w-8 rounded-full mx-3 "
-                    src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
-                    alt="Profile Photo">
-                    <p class=" py-2 mx-2  d">{{ auth()->user()->name }}</p>
-                </div>
-
-             </a>
-             <a href="/dashboard" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">
-
-               <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Upload Buku</p>
-               </a>
-             <a href="{{ route('logout') }}" class="block  text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
-               <p class="hover:bg-gray-600 hover:text-white p-2 mx-2  rounded-md">Sign out</p>
-               </a>
-            @endguest
-        </div>
-
-      </div>
     </div>
-  </nav>
+</nav>
+

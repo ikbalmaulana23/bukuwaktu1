@@ -1,9 +1,13 @@
 <x-layout>
     <!-- Profil Pengguna -->
     <div class="py-10 border rounded-lg mx-auto max-w-md lg:max-w-lg text-center bg-slate-100 shadow-md">
-        <img src="{{ $AuthUser->profile_photo ? asset('storage/profile_photos/' . $AuthUser->profile_photo) : asset('img/avatar1.jpg') }}"
-             alt="{{ $AuthUser->name }}"
-             class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full mx-auto">
+        <img
+    src="{{ $AuthUser->profile_photo
+        ? asset('storage/' . $AuthUser->profile_photo)
+        : asset('img/avatar1.jpg') }}"
+    alt="{{ $AuthUser->name }}"
+    class="rounded-full object-cover  justify-center mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
+
         <h2 class="text-lg md:text-xl font-semibold mt-3">{{ $AuthUser->name }}</h2>
         <p class="text-gray-600 text-sm md:text-base">{{ $AuthUser->bio }}</p>
         <p class="text-sm text-gray-500 mt-1">Followers: {{ $followerCount }}</p>
