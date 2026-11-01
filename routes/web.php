@@ -46,7 +46,15 @@ Route::get('/posts/{post}', [PostController::class, 'post'])
 // Genre
 Route::get('/genre', [GenreController::class, 'index']);
 
-// Authors
+// About, Contact, Privacy Policy
+Route::view('/about', 'pages.about')
+    ->name('about');
+
+Route::view('/contact', 'pages.contact')
+    ->name('contact');
+
+Route::view('/privacy-policy', 'pages.privacy-policy')
+    ->name('privacy-policy');
 
 // Authors
 Route::get('/authors/{user:username}', [AuthorController::class, 'index'])

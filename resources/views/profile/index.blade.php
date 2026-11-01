@@ -17,7 +17,7 @@
 
 <div class="">
 
-    <div class=" mx-auto w-full border rounded-lg overflow-hidden border">
+    <div class=" mx-auto w-full border rounded-lg overflow-hidden">
         <!-- Header Section -->
         <div class="w-full overflow-hidden ">
             <img
@@ -27,10 +27,10 @@
         </div>
 
 
-<div class="flex  w-full border">
+<div class="flex  w-full ">
         <!-- Profile Image -->
-        <div class="relative  ml-5 flex justify-start lg:-mt-10 mb-5 mx-5">
-            <button id="openModal" class="absolute top-0 right-8 bg-white text-black p-1 rounded-full shadow-md">
+        <div class="relative w-full  ml-5 flex justify-start lg:-mt-10  mx-5">
+            <button id="openModal" class="absolute bottom-40 right-8 bg-white text-black p-1 rounded-full shadow-md">
                 <i class="fas fa-edit m-1"></i>
             </button>
             <img class="relative w-20 h-20 lg:w-40 lg:h-40 rounded-full  border-1 lg:border-4 border-yellow-500 -top-6"  src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('img/avatar2.jpg') }}" alt="Profile Picture">
@@ -74,40 +74,34 @@
         </div>
 
          </div>
-         <div class="px-6 pt-7 flex flex-row justify-start ">
-            <!-- Genre Section -->
-            <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
-              <h3 class="text-md font-semibold text-gray-800 mb-2">Interest Genre</h3>
-              <div class="flex flex-wrap gap-2">
-                @if ($interestGenres->isEmpty())
-                <p>You have no interest genres yet.</p>
-            @else
-                @foreach ($interestGenres as $genre)
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">{{ $genre->genre }}</span>
-                @endforeach
-                @endif
-              </div>
+       <div class="px-6 pt-7 pb-4 flex flex-wrap justify-start items-center gap-2">
 
-            </div>
-            <!-- Author Section -->
-            <div class="gap-2 mx-2 mb-4  w-full sm:w-auto">
-              <h3 class="text-md font-semibold text-gray-800 mb-2">Author Kesukaan</h3>
-              @if ($favoriteAuthors->isEmpty())
-              <p>You have no interest genres yet.</p>
-          @else
-              @foreach ($favoriteAuthors as $author)
-              <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">{{ $author->favorite_author }}</span>
-              @endforeach
-              @endif
-            </div>
-          </div>
+@php
+    $badges = [
+        1 => 'Rookie.jpg',
+        2 => 'Explorer.jpg',
+        3 => 'Scholar.jpg',
+        4 => 'Sage.jpg',
+        5 => 'Grandmaster.jpg',
+    ];
+@endphp
+
+@if ($user->hasBadge() && isset($badges[$user->level]))
+    <img
+        src="{{ asset('img/badges/' . $badges[$user->level]) }}"
+        alt="{{ $user->level_name }}"
+        title="{{ $user->level_name }}"
+        class="inline-block w-24 h-24 object-contain shrink-0 align-middle"
+    >
+@endif
+</div>
         </div>
     </div>
  </div>
 
 
 
-          <div class="p-4  w-full my-2 rounded-lg">
+          <div class="pt-4  w-full my-2 rounded-lg">
 <!-- Modal Background -->
 <div id="favoriteBookModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex justify-center items-center z-50">
     <!-- Modal Content -->

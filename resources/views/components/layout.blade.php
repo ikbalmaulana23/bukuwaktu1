@@ -147,13 +147,34 @@
 </div>
 
 
-<footer class="bg-gray-200  py-3">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-center">
-      <p class="text-center text-sm">
-          © {{ date('Y') }} bukuwaktu. All rights reserved.
-      </p>
 
-  </div>
+
+<footer class="bg-gray-200 p-4">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-sm">
+
+            <span class="text-gray-500">
+                © {{ date('Y') }} Bukuwaktu.
+            </span>
+
+            <a href="{{ route('about') }}"
+               class="text-gray-600 hover:text-indigo-600 transition">
+                About Us
+            </a>
+
+            <a href="{{ route('contact') }}"
+               class="text-gray-600 hover:text-indigo-600 transition">
+                Contact Us
+            </a>
+
+            <a href="{{ route('privacy-policy') }}"
+               class="text-gray-600 hover:text-indigo-600 transition">
+                Privacy Policy
+            </a>
+
+        </div>
+
 </footer>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>

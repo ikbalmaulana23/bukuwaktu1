@@ -11,7 +11,7 @@
 
             {{-- DESKTOP NAVIGATION --}}
            <div class="hidden md:flex flex-1 justify-center">
-    <div class="flex items-baseline space-x-7">
+    <div class="flex items-baseline space-x-8">
 
                     <x-nav-link href="/" :active="request()->is('/')">
                         Home
@@ -50,7 +50,7 @@
 
         <button
             type="submit"
-            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+            class="absolute right-10 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 p-1"
             aria-label="Cari"
         >
             <i class="fas fa-search"></i>

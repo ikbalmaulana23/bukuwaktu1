@@ -118,4 +118,35 @@ class User extends Authenticatable
     {
         return $this->hasMany(LoungeComment::class);
     }
+    // Menghitung level berdasarkan jumlah postingan
+    public function getLevelAttribute(): int
+    {
+        $totalPosts = $this->posts_count ?? $this->posts()->count();
+
+        return match (true) {
+            $totalPosts >= 40 => 5,
+            $totalPosts >= 20 => 4,
+            $totalPosts >= 10 => 3,
+            $totalPosts >= 5  => 2,
+            default           => 1,
+        };
+    }
+
+    // Mengambil nama gelar berdasarkan level
+    public function getLevelNameAttribute(): string
+    {
+        return match ($this->level) {
+            5 => 'Grandmaster',
+            4 => 'Sage',
+            3 => 'Scholar',
+            2 => 'Explorer',
+            default => 'Rookie',
+        };
+    }
+
+    // Badge hanya muncul mulai level 3
+    public function hasBadge(): bool
+    {
+        return true;
+    }
 }

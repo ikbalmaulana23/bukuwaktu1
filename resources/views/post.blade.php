@@ -19,8 +19,8 @@
 
             <p class="text-sm text-gray-600 mt-2">
                 By
-                <a href="/posts?authors={{ $post->author->username }}" class="text-indigo-600 hover:underline">
-                    {{ $post->author->name }}
+                <a href="/authors/{{ $post->author->username }}" class="text-indigo-600 hover:underline">
+                {{ $post->author->name }}
                 </a>
                 in
                 <a href="/posts?category={{ $post->category->slug }}" class="text-indigo-600 hover:underline">

@@ -1,3 +1,4 @@
+
 <x-layout>
 
     <div class="bg-white">
@@ -30,19 +31,21 @@
                 — {{ $quote['author'] ?? 'Unknown author' }}
             </p>
         </div>
- <div class="flex justify-center gap-3 mb-5">
-        @if(request('search'))
-        <div class="flex justify-center ">
-            <p class="px-3 py-1 rounded-md border border-blue-500 bg-blue-50 text-blue-700 ">Hasil Pencarian: <strong>{{ request('search') }}</strong></p>
-        </div>
-@endif
 
-@if(request('category'))
-<div class="flex justify-center ">
-    <p class="px-3 py-1 rounded-md border border-red-500 bg-red-50 text-red-700 ">Kategori: <strong>{{ request('category') }}</strong></p>
-</div>
-@endif
-</div>
+        <div class="flex justify-center gap-3 mb-5">
+            @if(request('search'))
+            <div class="flex justify-center ">
+                <p class="px-3 py-1 rounded-md border border-blue-500 bg-blue-50 text-blue-700 ">Hasil Pencarian: <strong>{{ request('search') }}</strong></p>
+            </div>
+            @endif
+
+            @if(request('category'))
+            <div class="flex justify-center ">
+                <p class="px-3 py-1 rounded-md border border-red-500 bg-red-50 text-red-700 ">Kategori: <strong>{{ request('category') }}</strong></p>
+            </div>
+            @endif
+        </div>
+
         {{ $posts->links() }}
 
         <div class="sm:text-center flex flex-wrap gap-2">
@@ -61,24 +64,40 @@
                 {{ $post['type'] }}
             </span>
 
-
-
                 <article class="flex flex-col items-start justify-between border rounded-md p-5">
                     <div class="w-full mb-2">
                         <a href="/posts/{{ $post['slug'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">
                             <img src="{{ $post->cover ? asset('storage/' . $post->cover) : asset('img/bukuasli1.png') }}" class="h-auto w-full rounded-lg" alt="gambar">
                         </a>
                     </div>
+
                     <div class="group relative"></div>
+
                     <div class="mt-1 items-center gap-x-4 w-full">
                         <h3 class="my-2 text-xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600 inline">
                             <a href="/posts/{{ $post['slug'] }}" class="mb-3 text-xl tracking-tight font-bold text-gray-900 hover:text-gray-700 inline">{{ Str::limit($post['title'], 20) }}</a>
                         </h3>
                     </div>
-                    <a href="/authors/{{ $post->author->username }}" class="text-xs text-gray-600 mb-3 mt-1">
-                        Summarized by
-                        <span class="absolute font-semibold text-gray-900 mx-2 hover:text-gray-600 ">{{ Str::limit($post->author->name, 20) }}</span>
-                    </a>
+
+                    <div class="text-xs text-gray-600 mb-3 mt-1 flex items-center flex-wrap gap-1">
+                        <span>Summarized by</span>
+
+                        <a href="/authors/{{ $post->author->username }}" class="inline-flex items-center gap-1 font-semibold text-gray-900 hover:text-gray-600">
+                            {{ Str::limit($post->author->name, 20) }}
+
+                            @if ($post->author->hasBadge())
+                                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold ring-1
+                                    {{ match ($post->author->level) {
+                                        5 => 'bg-yellow-100 text-yellow-800 ring-yellow-300',
+                                        4 => 'bg-purple-100 text-purple-800 ring-purple-300',
+                                        3 => 'bg-blue-100 text-blue-800 ring-blue-300',
+                                        default => 'bg-gray-100 text-gray-700 ring-gray-300',
+                                    } }}">
+                                    {{ $post->author->level_name }}
+                                </span>
+                            @endif
+                        </a>
+                    </div>
                 </article>
             </div>
 
@@ -96,7 +115,7 @@
         Swal.fire({
             title: 'Notifikasi',
             text: "{{ session('pesan') }}",
-            icon: 'success', // Atur icon sesuai kebutuhan: 'success', 'error', 'warning', dll.
+            icon: 'success',
             confirmButtonText: 'OK'
         });
     </script>

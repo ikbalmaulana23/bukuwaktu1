@@ -8,7 +8,23 @@
     alt="{{ $AuthUser->name }}"
     class="rounded-full object-cover  justify-center mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
 
-        <h2 class="text-lg md:text-xl font-semibold mt-3">{{ $AuthUser->name }}</h2>
+        <div class="flex items-center justify-center gap-2 mt-3 flex-wrap">
+    <h2 class="text-lg md:text-xl font-semibold">
+        {{ $AuthUser->name }}
+    </h2>
+
+    @if ($AuthUser->hasBadge())
+        <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold ring-1
+            {{ match ($AuthUser->level) {
+                5 => 'bg-yellow-100 text-yellow-800 ring-yellow-300',
+                4 => 'bg-purple-100 text-purple-800 ring-purple-300',
+                3 => 'bg-blue-100 text-blue-800 ring-blue-300',
+                default => 'bg-gray-100 text-gray-700 ring-gray-300',
+            } }}">
+            {{ $AuthUser->level_name }}
+        </span>
+    @endif
+</div>
         <p class="text-gray-600 text-sm md:text-base">{{ $AuthUser->bio }}</p>
         <p class="text-sm text-gray-500 mt-1">Followers: {{ $followerCount }}</p>
 
@@ -21,6 +37,8 @@
             </form>
         @endif
     </div>
+
+
 
     <!-- Audiobooks -->
     <div class="mt-10 px-4 lg:px-8">
