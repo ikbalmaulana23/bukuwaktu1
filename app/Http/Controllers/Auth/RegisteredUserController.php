@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+
+
 
 class RegisteredUserController extends Controller
 {
@@ -27,24 +30,45 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Membuat username berdasarkan nama
+        $baseUsername = Str::slug($request->name);
+
+        // Fallback jika nama tidak menghasilkan slug
+        if (empty($baseUsername)) {
+            $baseUsername = 'user';
+        }
+
+        $username = $baseUsername;
+        $counter = 1;
+
+        // Memastikan username unik
+        while (User::where('username', $username)->exists()) {
+            $username = $baseUsername . '-' . $counter;
+            $counter++;
+        }
+
+        // Membuat akun baru
         $user = User::create([
             'name' => $request->name,
+            'username' => $username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('personal-data.edit', absolute: false));
+        return redirect(route('i', absolute: false))->with('pesan', 'berhasil registrasi');
     }
 }

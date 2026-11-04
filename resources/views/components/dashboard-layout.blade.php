@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
   <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -96,6 +96,40 @@
 
     </main>
   </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        @if (session('pesan'))
+            @if (session('pesan') === 'berhasil login')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Selamat Datang!',
+                    text: 'Senang melihatmu kembali di Bukuwaktu.',
+                    confirmButtonColor: '#eab308',
+                });
+            @elseif (session('pesan') === 'berhasil registrasi')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrasi Berhasil!',
+                    text: 'Selamat bergabung dengan komunitas Bukuwaktu.',
+                    confirmButtonColor: '#eab308',
+                });
+            @endif
+        @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: @json($errors->first()),
+                confirmButtonColor: '#eab308',
+            });
+        @endif
+
+    });
+</script>
+
 </body>
 <!-- partial -->
 

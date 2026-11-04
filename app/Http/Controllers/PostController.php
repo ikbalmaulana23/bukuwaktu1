@@ -26,7 +26,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $data = [
-            'quote' => $this->fetchQuote(),
+
             'title' => 'judul post',
             'posts' => Post::filter($request->only(['search', 'category']))->latest()->paginate(28),
             'categories' => Category::all(),
@@ -37,21 +37,7 @@ class PostController extends Controller
     }
 
 
-    private function fetchQuote()
-    {
-        $response = Http::get('https://dummyjson.com/quotes');
-        $quotes = $response->json();
 
-        // Periksa apakah 'quotes' ada dan tidak kosong
-        if (isset($quotes['quotes']) && count($quotes['quotes']) > 0) {
-            // Pilih quote secara acak
-            $randomIndex = array_rand($quotes['quotes']);
-            return $quotes['quotes'][$randomIndex];
-        }
-
-        // Kembalikan default jika tidak ada quote
-        return ['quote' => 'Quote not found.', 'author' => 'Unknown author'];
-    }
 
     public function delete($id)
     {

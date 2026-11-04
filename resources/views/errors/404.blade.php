@@ -21,12 +21,12 @@
             </p>
 
             <h1 class="text-xl md:text-2xl font-medium tracking-tight">
-                You've drifted off the fairway.
+                Kamu Jalan di luar jalur.
             </h1>
 
             <p class="text-sm md:text-base text-gray-500 max-w-2xl mt-2 leading-relaxed">
-                The page you were looking for isn't here,
-                or it has moved. Let us guide you back.
+                Halaman yang Anda cari tidak ditemukan,
+                atau telah dipindahkan. Biarkan kami membantu Anda kembali.
             </p>
 
             <!-- Navigation Buttons -->
@@ -35,16 +35,16 @@
                 <a href="{{ url('/') }}"
                    class="rounded-lg bg-[#292929] text-white px-5 py-3
                           text-sm font-medium hover:bg-black transition">
-                    Back to home
+                    Kembali ke beranda
                 </a>
 
-                <a href="{{ url('/buku') }}"
+                <a href="{{ url('/posts') }}"
                    class="rounded-lg bg-[#f3f3f3] px-5 py-3
                           text-sm font-medium hover:bg-gray-200 transition">
-                    Explore books
+                    Jelajahi buku
                 </a>
 
-                <a href="mailto:admin@example.com"
+                <a href="mailto:bukuwaktuofficial@gmail.com"
                    class="rounded-lg bg-[#f3f3f3] px-5 py-3
                           text-sm font-medium hover:bg-gray-200 transition">
                     Contact support

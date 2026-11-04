@@ -19,6 +19,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.10/tailwind.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
 
@@ -288,7 +289,43 @@
       <span class="text-sm ml-1 leading-none">@lofiui</span>
     </a>
     <!-- partial -->
-  </body>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        @if (session('pesan'))
+            @if (session('pesan') === 'berhasil login')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Selamat Datang!',
+                    text: 'Senang melihatmu kembali di Bukuwaktu.',
+                    confirmButtonColor: '#eab308',
+                });
+            @elseif (session('pesan') === 'berhasil registrasi')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrasi Berhasil!',
+                    text: 'Selamat bergabung dengan komunitas Bukuwaktu.',
+                    confirmButtonColor: '#eab308',
+                });
+            @endif
+        @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: @json($errors->first()),
+                confirmButtonColor: '#eab308',
+            });
+        @endif
+
+    });
+</script>
+
+</body>
+
 </html>
 
 

@@ -12,7 +12,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
-use App\Http\Controllers\playlistController;
+
 use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteBookController;
@@ -94,7 +94,7 @@ Route::middleware('auth')->group(function () {
     */
 
     Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
+        ->name('user.dashboard');
 
     Route::get('/dashboard/posts', [DashboardController::class, 'posts']);
 

@@ -1,250 +1,360 @@
 <!doctype html>
 <html class="h-full bg-white">
 <head>
-  <meta charset="utf-8">
-  <title>BukuWaktu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
-  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
-  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script> --}}
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <meta charset="utf-8">
+    <title>BukuWaktu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    {{-- Vite --}}
+    @vite(['resources/css/app.css'])
 
-  <style>
-    html {
-  scroll-behavior: smooth;
-}
+    {{-- External stylesheets --}}
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-    #profilePhotoModal {
-        transition: opacity 0.3s ease;
-    }
-    .book-container {
-    position: relative;
-    width: 165px; /* Ubah sesuai kebutuhan */
-    height: 240px; /* Ubah sesuai kebutuhan */
-    perspective: 1000px; /* Memberikan efek 3D */
+    {{-- External scripts --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+    {{-- Previously used Howler.js script; kept commented out as in the original --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script> --}}
 
-}
-
-.book {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    backface-visibility: hidden; /* Sembunyikan sisi belakang */
-    transition: transform 0.6s ease-in-out;
-}
-
-.front {
-    transform: rotateY(0deg); /* Awalnya tidak berputar */
-}
-
-.back {
-    transform: rotateY(180deg); /* Sisi belakang */
-}
-
-.book-container:hover .front {
-    transform: rotateY(-180deg); /* Putar ke belakang */
-}
-
-.book-container:hover .back {
-    transform: rotateY(0deg); /* Tampilkan sisi belakang */
-}
-
-#progress-bar-container {
-    position: fixed;
-    top: 150px;
-    right: 50px; /* Sisi kiri halaman */
-    width: 5px; /* Lebar progress bar */
-    height: 465px; /* Tinggi penuh untuk halaman */
-    background: rgba(0, 0, 0, 0.01); /* Warna latar belakang progress bar */
-    z-index: 9999;
-}
-
-#progress-bar {
-    height: 0%; /* Progress bar mulai dari 0% */
-    width: 100%;
-    background: #2d312e; /* Warna progress bar */
-    transition: height 0.2s ease-out;
-}
-
-#progress-percent {
-    position: fixed;
-    top: 100px; /* Atur jarak dari atas */
-    right: 50px; /* Jarak dari progress bar ke teks */
-    font-size: 14px;
-    font-weight: bold;
-    color: #2d312e; /* Warna teks default */
-    z-index: 10000; /* Pastikan terlihat di atas elemen lain */
-    mix-blend-mode: difference; /* Blending untuk menyesuaikan warna dengan latar belakang */
-    pointer-events: none; /* Agar tidak mengganggu klik di bawahnya */
-}
-
-.highlight-text {
-  position: relative;
-  display: inline-block;
-  padding: 0 5px; /* Memberikan sedikit ruang di sekitar teks */
-}
-
-.highlight-text::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: white;  /* Mulai dengan warna putih */
-  animation: highlightAnimation 5s ease-in-out forwards;
-  z-index: -1; /* Menjaga background di belakang teks */
-  width: 0%; /* Mulai dengan lebar 0% */
-}
-
-
-
-.custom-swal-height {
-            height: 250px; /* Atur tinggi sesuai kebutuhan, misalnya 250px */
+    <style>
+        html {
+            scroll-behavior: smooth;
         }
 
-@keyframes highlightAnimation {
-  0% {
-    width: 0%; /* Background tidak terlihat di awal */
-    background-color: white; /* Mulai dengan warna putih */
-  }
-  50% {
-    width: 0; /* Background mengisi lebar teks */
-    background-color: white; /* Tetap putih di tengah animasi */
-  }
-  100% {
-    width: 100%; /* Background tetap penuh */
-    background-color: #FFF9C4; /* Warna kuning pastel di akhir animasi */
-  }
-}
-[x-cloak] {
-  display: none;
-}
+        #profilePhotoModal {
+            transition: opacity 0.3s ease;
+        }
 
-</style>
+        .book-container {
+            position: relative;
+            width: 165px; /* Ubah sesuai kebutuhan */
+            height: 240px; /* Ubah sesuai kebutuhan */
+            perspective: 1000px; /* Memberikan efek 3D */
+        }
+
+        .book {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Sembunyikan sisi belakang */
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .front {
+            transform: rotateY(0deg); /* Awalnya tidak berputar */
+        }
+
+        .back {
+            transform: rotateY(180deg); /* Sisi belakang */
+        }
+
+        .book-container:hover .front {
+            transform: rotateY(-180deg); /* Putar ke belakang */
+        }
+
+        .book-container:hover .back {
+            transform: rotateY(0deg); /* Tampilkan sisi belakang */
+        }
+
+        #progress-bar-container {
+            position: fixed;
+            top: 150px;
+            right: 50px; /* Sisi kanan halaman */
+            width: 5px; /* Lebar progress bar */
+            height: 465px; /* Tinggi penuh untuk halaman */
+            background: rgba(0, 0, 0, 0.01);
+            z-index: 9999;
+        }
+
+        #progress-bar {
+            height: 0%; /* Progress bar mulai dari 0% */
+            width: 100%;
+            background: #2d312e;
+            transition: height 0.2s ease-out;
+        }
+
+        #progress-percent {
+            position: fixed;
+            top: 100px;
+            right: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2d312e;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            pointer-events: none;
+        }
+
+        .highlight-text {
+            position: relative;
+            display: inline-block;
+            padding: 0 5px;
+        }
+
+        .highlight-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            animation: highlightAnimation 5s ease-in-out forwards;
+            z-index: -1;
+            width: 0%;
+        }
+
+        .custom-swal-height {
+            height: 250px; /* Atur tinggi sesuai kebutuhan */
+        }
+
+        @keyframes highlightAnimation {
+            0% {
+                width: 0%;
+                background-color: white;
+            }
+
+            50% {
+                width: 0;
+                background-color: white;
+            }
+
+            100% {
+                width: 100%;
+                background-color: #FFF9C4;
+            }
+        }
+
+        [x-cloak] {
+            display: none;
+        }
+
+        /*
+         * Marquee:
+         * Disembunyikan secara default untuk mencegah flash sebelum status dibaca.
+         * JavaScript di bawah marquee akan menampilkan elemen jika diperlukan.
+         */
+        #announcement-bar {
+            display: none;
+        }
+
+        #announcement-bar.show-announcement {
+            display: block;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+    </style>
 </head>
-<body class="h-full ">
 
-  <div class="min-h-full">
-    <x-navbar></x-navbar>
+<body class="h-full">
+    <div class="min-h-full">
+        <x-navbar></x-navbar>
 
-    <main class="">
-        <div class="mx-auto max-w-7xl  sm:px-6 lg:px-8 p-2 md:p-0 pt-20 md:pt-28 overflow-x-hidden">
-            {{$slot}}
+        <main>
+            <div class="mx-auto max-w-7xl overflow-x-hidden p-2 pt-20 md:p-0 md:pt-24 sm:px-6 lg:px-8">
+
+                {{-- Announcement marquee --}}
+                <div
+                    id="announcement-bar"
+                    class="relative overflow-hidden bg-yellow-300 py-3 pr-14"
+                >
+                    <div class="marquee-track whitespace-nowrap">
+                        @foreach (range(1, 2) as $item)
+                            <span class="shrink-0 px-6 text-sm font-semibold text-gray-800">
+                                ✦ Welcome to BookShelf
+                                — Discover Your Next Favorite Book
+                                — Read More, Learn More ✦
+                            </span>
+                        @endforeach
+                    </div>
+
+                    <button
+                        type="button"
+                        onclick="closeAnnouncement()"
+                        aria-label="Tutup pengumuman"
+                        class="absolute right-3 top-1/2 z-50 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white text-lg font-bold text-gray-800 shadow transition hover:bg-red-500 hover:text-white"
+                    >
+                        &times;
+                    </button>
+                </div>
+
+                {{--
+                    Logika marquee:
+                    - Di halaman Home (/), status close di-reset dan marquee ditampilkan.
+                    - Di halaman lain, marquee mengikuti status close selama sesi tab.
+                    - Tombol X menyimpan status close sampai user kembali ke Home.
+                --}}
+                <script>
+                    (function () {
+                        const announcement = document.getElementById('announcement-bar');
+                        const currentPath = window.location.pathname;
+
+                        if (!announcement) {
+                            return;
+                        }
+
+                        if (currentPath === '/') {
+                            sessionStorage.removeItem('announcementClosed');
+                            announcement.classList.add('show-announcement');
+                            return;
+                        }
+
+                        if (sessionStorage.getItem('announcementClosed') !== 'true') {
+                            announcement.classList.add('show-announcement');
+                        }
+                    })();
+
+                    function closeAnnouncement() {
+                        sessionStorage.setItem('announcementClosed', 'true');
+                        document.getElementById('announcement-bar')?.remove();
+                    }
+                </script>
+
+                {{ $slot }}
+            </div>
+        </main>
+    </div>
+
+    {{-- Footer --}}
+    <footer class="mt-10 w-full bg-gray-100 py-6">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-sm">
+                <span class="mx-1 font-semibold text-gray-500">
+                    © {{ date('Y') }} Bukuwaktu.
+                </span>
+
+                <a href="{{ route('about') }}" class="mx-1 transition hover:text-blue-500">
+                    About Us
+                </a>
+
+                <a href="{{ route('contact') }}" class="mx-1 transition hover:text-blue-500">
+                    Contact Us
+                </a>
+
+                <a href="{{ route('privacy-policy') }}" class="mx-1 transition hover:text-blue-500">
+                    Privacy Policy
+                </a>
+            </div>
         </div>
-    </main>
+    </footer>
 
+    {{-- jQuery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-</div>
+    {{-- Existing page interactions; guarded so missing elements do not stop other scripts --}}
+    <script>
+        // Notification button
+        const notificationButton = document.getElementById('notification-button');
 
+        notificationButton?.addEventListener('click', function () {
+            fetch('/notifications')
+                .then(response => response.json())
+                .then(data => {
+                    const notificationList = document.getElementById('notification-list');
+                    const notificationCount = document.getElementById('notification-count');
 
+                    if (!notificationList || !notificationCount) {
+                        return;
+                    }
 
+                    notificationList.innerHTML = '';
 
-<footer class="bg-gray-200 p-4">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    data.notifications.forEach(notification => {
+                        const li = document.createElement('li');
+                        li.className = 'list-group-item';
 
-        <div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-sm">
+                        const link = document.createElement('a');
+                        link.href = `/posts/${notification.data.post_id}`;
+                        link.textContent = `${notification.data.author_name} uploaded a new post: ${notification.data.post_title}`;
 
-            <span class="text-gray-500">
-                © {{ date('Y') }} Bukuwaktu.
-            </span>
+                        li.appendChild(link);
+                        notificationList.appendChild(li);
+                    });
 
-            <a href="{{ route('about') }}"
-               class="text-gray-600 hover:text-indigo-600 transition">
-                About Us
-            </a>
-
-            <a href="{{ route('contact') }}"
-               class="text-gray-600 hover:text-indigo-600 transition">
-                Contact Us
-            </a>
-
-            <a href="{{ route('privacy-policy') }}"
-               class="text-gray-600 hover:text-indigo-600 transition">
-                Privacy Policy
-            </a>
-
-        </div>
-
-</footer>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-
-    document.getElementById('notification-button').addEventListener('click', function () {
-    fetch('/notifications')
-        .then(response => response.json())
-        .then(data => {
-            let notificationList = document.getElementById('notification-list');
-            notificationList.innerHTML = '';  // Kosongkan daftar sebelumnya
-            data.notifications.forEach(notification => {
-                let li = document.createElement('li');
-                li.className = 'list-group-item';
-                li.innerHTML = `<a href="/posts/${notification.data.post_id}">${notification.data.author_name} uploaded a new post: ${notification.data.post_title}</a>`;
-                notificationList.appendChild(li);
-            });
-            document.getElementById('notification-count').innerText = data.unread_count;
+                    notificationCount.innerText = data.unread_count;
+                })
+                .catch(error => {
+                    console.error('Gagal memuat notifikasi:', error);
+                });
         });
-});
 
+        // Profile modal
+        document.getElementById('openModal')?.addEventListener('click', function () {
+            document.getElementById('profileModal')?.classList.remove('hidden');
+        });
 
-document.getElementById('openModal').addEventListener('click', function() {
-        document.getElementById('profileModal').classList.remove('hidden');
-    });
+        document.getElementById('closeModal')?.addEventListener('click', function () {
+            document.getElementById('profileModal')?.classList.add('hidden');
+        });
 
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('profileModal').classList.add('hidden');
-    });
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('profileModal');
 
-    window.addEventListener('click', function(event) {
-        const modal = document.getElementById('profileModal');
-        if (event.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
+            if (modal && event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
 
-    document.getElementById('prev').addEventListener('click', function() {
-    document.getElementById('slider').scrollBy({
-        left: -200, // Sesuaikan jarak scroll ke kiri
-        behavior: 'smooth'
-    });
-});
+        // Book slider
+        document.getElementById('prev')?.addEventListener('click', function () {
+            document.getElementById('slider')?.scrollBy({
+                left: -200,
+                behavior: 'smooth'
+            });
+        });
 
-document.getElementById('next').addEventListener('click', function() {
-    document.getElementById('slider').scrollBy({
-        left: 200, // Sesuaikan jarak scroll ke kanan
-        behavior: 'smooth'
-    });
-});
+        document.getElementById('next')?.addEventListener('click', function () {
+            document.getElementById('slider')?.scrollBy({
+                left: 200,
+                behavior: 'smooth'
+            });
+        });
 
+        // Audiobook slider
+        document.getElementById('prev-audiobook')?.addEventListener('click', function () {
+            document.getElementById('audiobook-slider')?.scrollBy({
+                left: -200,
+                behavior: 'smooth'
+            });
+        });
 
-document.getElementById('prev-audiobook').addEventListener('click', function() {
-    document.getElementById('audiobook-slider').scrollBy({
-        left: -200, // Sesuaikan jarak scroll ke kiri
-        behavior: 'smooth'
-    });
-});
+        document.getElementById('next-audiobook')?.addEventListener('click', function () {
+            document.getElementById('audiobook-slider')?.scrollBy({
+                left: 200,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
-document.getElementById('next-audiobook').addEventListener('click', function() {
-    document.getElementById('audiobook-slider').scrollBy({
-        left: 200, // Sesuaikan jarak scroll ke kanan
-        behavior: 'smooth'
-    });
-});
-
-
-
-  </script>
     @yield('scripts')
-    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
 
+    {{-- Plyr --}}
+    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
 </body>
 </html>
