@@ -61,7 +61,7 @@
 
                                 @foreach($posts as $post)
                                     <a
-                                        href="{{ url('posts.show', $post->slug) }}"
+                                        href="{{ url('posts', $post->slug) }}"
                                         class="group"
                                     >
                                         <img

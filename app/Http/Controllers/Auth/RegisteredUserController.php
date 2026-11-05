@@ -69,6 +69,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('i', absolute: false))->with('pesan', 'berhasil registrasi');
+        return redirect(route('user.dashboard', absolute: false))->with('pesan', 'berhasil registrasi');
     }
 }

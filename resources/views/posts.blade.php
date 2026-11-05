@@ -44,8 +44,8 @@
         {{ $posts->links() }}
 
 
-<div class="sm:text-center flex flex-wrap justify-center gap-2 mt-5">
-    {{-- Tombol All --}}
+{{-- <div class="sm:text-center flex flex-wrap justify-center gap-2 mt-5">
+
     <a href="/posts"
         class="text-sm relative rounded-full px-6 py-1.5 font-medium transition-colors
         {{ !request('category') ? 'bg-yellow-300 text-gray-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
@@ -53,7 +53,7 @@
     </a>
 
     {{-- Tombol kategori --}}
-    @foreach ($categories as $category)
+    {{-- @foreach ($categories as $category)
         <a href="/posts?category={{ $category->slug }}"
             class="text-sm relative rounded-full px-3 py-1.5 font-medium transition-colors
             {{ request('category') === $category->slug
@@ -62,7 +62,7 @@
             {{ $category->name }}
         </a>
     @endforeach
-</div>
+{{-- </div> --}}
 
 
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-4 mt-10">

@@ -17,7 +17,7 @@ class PostController extends Controller
         $data = [
             'title' => 'home',
             'posts' => Post::latest()->take(4)->get(),
-            'audiobooks' => Audiobook::with('speaker')->latest()->take(4)->get(),
+            'audiobooks' => Audiobook::with('speaker')->latest()->take(8)->get(),
 
         ];
         return view('home', $data);

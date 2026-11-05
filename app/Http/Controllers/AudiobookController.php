@@ -11,11 +11,10 @@ class AudiobookController extends Controller
     // Menampilkan daftar audiobook
     public function index()
     {
-        $audiobooks = Audiobook::with('speaker')->get();
+        $audiobooks = Audiobook::with('speaker')->latest()->get();
 
         return view('audiobooks.index', compact('audiobooks'));
     }
-
 
     // Menampilkan formulir untuk menambah audiobook baru
     public function create()

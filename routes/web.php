@@ -12,7 +12,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
-
+use App\Http\Controllers\playlistController;
 use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteBookController;
@@ -79,11 +79,7 @@ Route::get('/profile', [ProfileController::class, 'index'])
     ->name('profile');
 
 
-/*
-|--------------------------------------------------------------------------
-| Authentication Routes
-|--------------------------------------------------------------------------
-*/
+
 
 Route::middleware('auth')->group(function () {
 

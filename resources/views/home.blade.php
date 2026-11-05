@@ -57,19 +57,7 @@
         </section>
 
         <section id="library" class="mt-10 rounded-lg p-2">
-            <div class="flex items-center justify-center">
-                <div class="relative flex h-10 w-72 justify-center">
-                    <i class="fa-solid fa-star-of-life fa-spin absolute left-0 top-0 text-xl text-yellow-500"></i>
-                    <h1 class="relative z-10 text-center font-sans text-4xl font-bold">BUKU WAKTU</h1>
-                    <i class="fa-regular fa-bookmark absolute right-0 top-5 -translate-y-1/2 transform text-2xl text-blue-600"></i>
-                </div>
-            </div>
 
-            {{--
-            <div class="flex justify-center">
-                <h1 class="highlight-text text-center font-sans">- Baca Kapanpun, dan dimanapun -</h1>
-            </div>
-            --}}
 
             <div class="mt-20 flex flex-col justify-between gap-3 lg:flex-row">
                 {{-- Bagian Kiri --}}
@@ -140,47 +128,117 @@
                 </div>
             </div>
 
-            <div class="relative mb-16 h-96 rounded-lg">
-                <div class="flex justify-center">
-                    <h1 class="highlight-text relative inline-block pt-5 text-center text-4xl font-bold">
-                        #dibacainbuku
-                    </h1>
-                </div>
 
-                <p class="pb-5 text-center">
-                    baca buku lebih <span class="font-serif italic">mudah</span>, karena kita lebih
-                    <span class="highlight-text relative inline-block">dekat</span>
-                </p>
 
-                <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -right-2 -top-2"></i>
-                <i class="fa-solid fa-hourglass-start fa-spin-pulse absolute -bottom-2 left-5"></i>
 
-                <div class="flex justify-center">
-                    <div class="grid-cols-2 flex w-max justify-center gap-4 p-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                        @foreach ($audiobooks as $audiobook)
+    <div class="mx-auto max-w-7xl rounded-xl p-4 sm:p-6">
+
+        {{-- Header --}}
+        <div class="mb-8 text-center">
+            <h1 class="highlight-text inline-block pt-3 text-4xl font-bold">
+                #dibacainbuku
+            </h1>
+
+            <p class="mt-2 text-sm text-gray-700">
+                baca buku lebih <span class="font-serif italic">mudah</span>,
+                karena kita lebih dekat
+            </p>
+        </div>
+
+        @php
+            $backgrounds = [
+                '#ff792b',
+                '#485000',
+                '#4895e8',
+                '#99009b',
+                '#55b9c9',
+                '#ffffbd',
+                '#00455b',
+                '#ffc400',
+            ];
+        @endphp
+
+        {{-- Library Grid --}}
+        <div class="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+
+            @foreach ($audiobooks as $index => $audiobook)
+
+                <article class="group min-w-0">
+
+                    {{-- Cover Area --}}
+                    <a href="{{ route('audiobook.show', $audiobook->id) }}"
+                       class="relative flex h-48 items-center justify-center overflow-hidden transition-opacity duration-300 hover:opacity-90"
+                       style="background-color: {{ $backgrounds[$index % count($backgrounds)] }}">
+
+                        @if ($audiobook->cover)
+                            <img
+                                src="{{ asset('storage/' . $audiobook->cover) }}"
+                                alt="{{ $audiobook->title }}"
+                                class="h-36 w-28 object-cover shadow-lg transition-transform duration-500 group-hover:scale-105"
+                            >
+                        @else
+                            <div class="flex h-36 w-28 items-center justify-center bg-white/20 p-3 text-center text-sm font-bold text-white shadow-lg">
+                                {{ $audiobook->title }}
+                            </div>
+                        @endif
+
+                    </a>
+
+                    {{-- Book Information --}}
+                    <div class="pt-3">
+
+                        <div class="flex items-start justify-between gap-2">
+
                             <a href="{{ route('audiobook.show', $audiobook->id) }}"
-                               class="transform rounded-lg border p-2 shadow-sm transition-transform duration-300 hover:scale-105 hover:bg-gray-50 hover:shadow-md">
-                                @if ($audiobook->cover)
-                                    <img
-                                        src="{{ asset('storage/' . $audiobook->cover) }}"
-                                        alt="Cover of {{ $audiobook->title }}"
-                                        class="mb-2 h-40 w-40 rounded-md object-cover"
-                                    >
-                                @endif
-
-                                <div class="text-center">
-                                    <h2 class="text-sm font-medium">
-                                        {{ Str::limit($audiobook->title, 20, '...') }}
-                                    </h2>
-                                    <p class="text-xs text-gray-500">
-                                        Speaker: {{ Str::limit($audiobook->speaker->name, 15, '...') }}
-                                    </p>
-                                </div>
+                               class="text-sm font-bold leading-snug text-gray-900 transition-colors hover:text-[#737500]">
+                                {{ $audiobook->title }}
                             </a>
-                        @endforeach
+
+                            {{-- Bookmark --}}
+                            <button
+                                type="button"
+                                aria-label="Bookmark buku"
+                                class="shrink-0 text-gray-500 transition-colors hover:text-[#737500]">
+                                <i class="fa-regular fa-bookmark text-lg"></i>
+                            </button>
+
+                        </div>
+
+                        {{-- Description --}}
+                        <p class="mt-2 text-xs leading-relaxed text-gray-700">
+                            {{ Str::limit($audiobook->description ?? 'Temukan pengalaman mendengarkan buku yang menarik dan inspiratif.', 180) }}
+                        </p>
+
+                        {{-- Author / Speaker --}}
+                        <div class="mt-4">
+                            <p class="text-[11px] font-bold uppercase tracking-wide text-gray-900">
+                                {{ $audiobook->speaker->name ?? 'Unknown Speaker' }}
+                            </p>
+
+                            <p class="mt-0.5 text-[10px] font-semibold uppercase text-gray-600">
+                                {{ optional($audiobook->created_at)->format('d M Y') }}
+                            </p>
+                        </div>
+
                     </div>
-                </div>
+
+                </article>
+
+            @endforeach
+
+        </div>
+
+        {{-- Empty State --}}
+        @if ($audiobooks->isEmpty())
+            <div class="py-16 text-center text-gray-500">
+                <i class="fa-solid fa-book-open mb-3 text-3xl"></i>
+                <p>Belum ada buku di library.</p>
             </div>
+        @endif
+
+    </div>
+</div>
+
         </section>
     </div>
 </x-layout>
