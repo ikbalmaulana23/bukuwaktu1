@@ -20,16 +20,21 @@ class PostController extends Controller
             'title' => 'home',
             'posts' => Post::latest()->take(5)->get(),
             'audiobooks' => Audiobook::with('speaker')->latest()->take(4)->get(),
-            'mostRead' => $badgeService->mostRead(8),
+            'mostRead' => $badgeService->mostRead(1),
+            'trending' => $badgeService->trending(2),
         ]);
     }
 
 
     public function index(Request $request, ContentBadgeService $badgeService)
     {
+
+
         $data = [
             'title' => 'judul post',
-            'posts' => Post::filter($request->only(['search', 'category']))
+
+            'posts' => Post::with(['badges', 'author'])
+                ->filter($request->only(['search', 'category']))
                 ->latest()
                 ->paginate(28),
 
@@ -37,8 +42,17 @@ class PostController extends Controller
             'searchQuery' => $request->search,
             'selectedCategory' => $request->category,
 
-            'mostRead' => $badgeService->mostRead(8),
+            'newArrival' => Post::whereHas('author', function ($query) {
+                $query->has('posts', '>=', 11);
+            })
+                ->latest()
+                ->take(1)
+                ->pluck('id'),
+
+            'mostRead' => $badgeService->mostRead(1),
+            'trending' => $badgeService->trending(2),
         ];
+
 
         return view('posts', $data);
     }

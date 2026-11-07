@@ -3,7 +3,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
@@ -23,6 +22,8 @@ use App\Http\Controllers\PersonalDataController;
 use App\Http\Controllers\LoungeController;
 use App\Http\Controllers\LoungeCommentController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ContentBadgeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -208,6 +209,33 @@ Route::middleware('auth')->group(function () {
         ]);
     });
 
+    Route::middleware(['auth', 'role:admin'])
+        ->prefix('admin')
+        ->name('admin.')
+        ->group(function () {
+
+            // Artikel
+            Route::post(
+                '/posts/{post}/editors-choice',
+                [ContentBadgeController::class, 'storePost']
+            )->name('posts.editors-choice.store');
+
+            Route::delete(
+                '/posts/{post}/editors-choice',
+                [ContentBadgeController::class, 'destroyPost']
+            )->name('posts.editors-choice.destroy');
+
+            // Audiobook
+            Route::post(
+                '/audiobooks/{audiobook}/editors-choice',
+                [ContentBadgeController::class, 'storeAudiobook']
+            )->name('audiobooks.editors-choice.store');
+
+            Route::delete(
+                '/audiobooks/{audiobook}/editors-choice',
+                [ContentBadgeController::class, 'destroyAudiobook']
+            )->name('audiobooks.editors-choice.destroy');
+        });
 
     // Logout
     Route::get('/logout', [AuthController::class, 'logout'])

@@ -30,4 +30,36 @@ class ContentBadgeService
             ->take($limit)
             ->values();
     }
+
+    public function trending(int $limit = 2): Collection
+    {
+        $posts = Post::withCount([
+            'views as recent_views_count' => function ($query) {
+                $query->where('viewed_at', '>=', now()->subDays(7));
+            }
+        ])
+            ->get()
+            ->map(function ($item) {
+                $item->content_type = 'post';
+                return $item;
+            });
+
+        $audiobooks = Audiobook::withCount([
+            'views as recent_views_count' => function ($query) {
+                $query->where('viewed_at', '>=', now()->subDays(7));
+            }
+        ])
+            ->get()
+            ->map(function ($item) {
+                $item->content_type = 'audiobook';
+                return $item;
+            });
+
+        return $posts
+            ->concat($audiobooks)
+            ->filter(fn($item) => $item->recent_views_count > 0)
+            ->sortByDesc('recent_views_count')
+            ->take($limit)
+            ->values();
+    }
 }
