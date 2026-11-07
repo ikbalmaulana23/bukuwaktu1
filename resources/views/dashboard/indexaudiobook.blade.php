@@ -4,7 +4,7 @@
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
           <div class="mr-6">
             <h1 class="text-4xl font-semibold mb-2">Dashboard Buku Waktu</h1>
-            <h2 class="text-gray-600 ml-0.5 italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+
           </div>
           <div class="flex flex-wrap items-start justify-end -mb-3">
             <a href="/audiobook/create" class="inline-flex px-5 py-3 text-white bg-amber-600 hover:bg-amber-700  rounded-md ml-6 mb-3">

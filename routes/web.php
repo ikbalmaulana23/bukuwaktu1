@@ -1,8 +1,9 @@
+
 <?php
 
-use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
-use App\Http\Controllers\playlistController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\AudiobookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteBookController;
@@ -22,7 +23,6 @@ use App\Http\Controllers\PersonalDataController;
 use App\Http\Controllers\LoungeController;
 use App\Http\Controllers\LoungeCommentController;
 use App\Http\Controllers\NotificationController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -35,18 +35,30 @@ Route::get('/', [PostController::class, 'home'])
     ->name('index');
 
 // Posts
-Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index'])
+    ->name('posts.index');
 
+Route::get('/posts/{post}', [PostController::class, 'post'])
+    ->name('posts.show')
+    ->middleware('record.content.view');
+
+// Audiobook
+Route::get('/audiobook/{audiobook}', [AudiobookController::class, 'show'])
+    ->name('audiobook.show')
+    ->middleware('record.content.view');
+
+Route::resource('audiobook', AudiobookController::class)
+    ->except(['show']);
+
+// Search
 Route::get('/search', [SearchController::class, 'index'])
     ->name('search');
 
-Route::get('/posts/{post}', [PostController::class, 'post'])
-    ->name('posts.show');
-
 // Genre
-Route::get('/genre', [GenreController::class, 'index']);
+Route::get('/genre', [GenreController::class, 'index'])
+    ->name('genre.index');
 
-// About, Contact, Privacy Policy
+// Static Pages
 Route::view('/about', 'pages.about')
     ->name('about');
 
@@ -60,13 +72,9 @@ Route::view('/privacy-policy', 'pages.privacy-policy')
 Route::get('/authors/{user:username}', [AuthorController::class, 'index'])
     ->name('authors');
 
-
-// Lounge - bisa dilihat tanpa login
+// Lounge - Public
 Route::get('/lounge', [LoungeController::class, 'index'])
     ->name('lounge.index');
-
-// Audiobook
-Route::resource('audiobook', AudiobookController::class);
 
 // Interest Genre
 Route::resource('interest-genre', InterestGenreController::class);
@@ -79,16 +87,15 @@ Route::get('/profile', [ProfileController::class, 'index'])
     ->name('profile');
 
 
-
+/*
+|--------------------------------------------------------------------------
+| Authenticated User Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware('auth')->group(function () {
 
-    /*
-    |--------------------------------------------------------------------------
-    | Dashboard
-    |--------------------------------------------------------------------------
-    */
-
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('user.dashboard');
 
@@ -104,12 +111,7 @@ Route::middleware('auth')->group(function () {
         ->name('uploadbuku');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Post Management
-    |--------------------------------------------------------------------------
-    */
-
+    // Post Management
     Route::get('/posts/edit/{id}', [DashboardController::class, 'edit'])
         ->name('posts.edit');
 
@@ -120,13 +122,7 @@ Route::middleware('auth')->group(function () {
         ->name('posts.destroy');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Comments
-    |--------------------------------------------------------------------------
-    | Hanya user login yang boleh komentar
-    */
-
+    // Comments
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
         ->name('comments.store');
 
@@ -134,12 +130,7 @@ Route::middleware('auth')->group(function () {
         ->name('comments.destroy');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Lounge
-    |--------------------------------------------------------------------------
-    */
-
+    // Lounge
     Route::post('/lounge', [LoungeController::class, 'store'])
         ->name('lounge.store');
 
@@ -147,12 +138,7 @@ Route::middleware('auth')->group(function () {
         ->name('lounge.comments.store');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Personal Data
-    |--------------------------------------------------------------------------
-    */
-
+    // Personal Data
     Route::get('/data-pribadi', [PersonalDataController::class, 'edit'])
         ->name('personal-data.edit');
 
@@ -160,12 +146,7 @@ Route::middleware('auth')->group(function () {
         ->name('personal-data.update');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Profile
-    |--------------------------------------------------------------------------
-    */
-
+    // Profile
     Route::get('/profile/edit', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
@@ -175,17 +156,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
-    // Route lama tetap dipertahankan
+    // Legacy route
     Route::put('/profile/update', [ProfileController::class, 'update'])
         ->name('profil.update');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Follow / Unfollow
-    |--------------------------------------------------------------------------
-    */
-
+    // Follow / Unfollow
     Route::post('/follow/{user}', [FollowerController::class, 'follow'])
         ->name('follow');
 
@@ -198,67 +174,42 @@ Route::middleware('auth')->group(function () {
     Route::get('/follower', [FollowerController::class, 'show']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Favorite Books
-    |--------------------------------------------------------------------------
-    */
-
+    // Favorite Books
     Route::post('/favorite_books', [FavoriteBookController::class, 'store'])
         ->name('favorite_books.store');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Playlists
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/playlists', [playlistController::class, 'index'])
+    // Playlists
+    Route::get('/playlists', [PlaylistController::class, 'index'])
         ->name('playlists.index');
 
-    Route::get('/playlists/{playlist}', [playlistController::class, 'show'])
+    Route::get('/playlists/{playlist}', [PlaylistController::class, 'show'])
         ->name('playlists.show');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Notifications
-    |--------------------------------------------------------------------------
-    */
-
+    // Notifications
     Route::get('/notifications/{notification}', [NotificationController::class, 'read'])
         ->name('notifications.read');
 
     Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])
         ->name('notifications.readAll');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Notification JSON
-    |--------------------------------------------------------------------------
-    */
-
     Route::get('/notifications', function () {
 
-        $notifications = Auth::user()->unreadNotifications;
+        $user = Auth::user();
 
-        // Tandai semua notification sebagai sudah dibaca
-        Auth::user()->unreadNotifications->markAsRead();
+        $notifications = $user->unreadNotifications;
+
+        $notifications->markAsRead();
 
         return response()->json([
             'notifications' => $notifications,
-            'unread_count' => Auth::user()->unreadNotifications->count(),
+            'unread_count' => $user->unreadNotifications()->count(),
         ]);
     });
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Logout
-    |--------------------------------------------------------------------------
-    */
-
+    // Logout
     Route::get('/logout', [AuthController::class, 'logout'])
         ->name('logout1');
 });
@@ -270,28 +221,28 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])
-        ->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])
+        ->name('dashboard');
 
-    Route::get('/admin/users', [AdminController::class, 'users'])
-        ->name('admin.users');
+    Route::get('/users', [AdminController::class, 'users'])
+        ->name('users');
 
-    Route::get('/admin/posts', [AdminController::class, 'posts'])
-        ->name('admin.posts');
+    Route::get('/posts', [AdminController::class, 'posts'])
+        ->name('posts');
 
-    Route::get('/admin/audiobooks', [AdminController::class, 'audiobooks'])
-        ->name('admin.audiobooks');
+    Route::get('/audiobooks', [AdminController::class, 'audiobooks'])
+        ->name('audiobooks');
 
-    Route::get('/admin/comments', [AdminController::class, 'comments'])
-        ->name('admin.comments');
+    Route::get('/comments', [AdminController::class, 'comments'])
+        ->name('comments');
 });
 
 
 /*
 |--------------------------------------------------------------------------
-| Auth Routes
+| Authentication Routes
 |--------------------------------------------------------------------------
 */
 

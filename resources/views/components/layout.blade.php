@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {{-- Vite --}}
-    @vite(['resources/css/app.css'])
 
+@vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- External stylesheets --}}
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -141,34 +141,22 @@
          * Disembunyikan secara default untuk mencegah flash sebelum status dibaca.
          * JavaScript di bawah marquee akan menampilkan elemen jika diperlukan.
          */
-        #announcement-bar {
-            display: none;
-        }
 
-        #announcement-bar.show-announcement {
-            display: block;
-        }
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+}
 
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            animation: marquee 25s linear infinite;
-            will-change: transform;
-        }
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
 
-        @keyframes marquee {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
     </style>
 </head>
 
@@ -180,61 +168,9 @@
             <div class="mx-auto max-w-7xl overflow-x-hidden p-2 pt-20 md:p-0 md:pt-24 sm:px-6 lg:px-8">
 
                 {{-- Announcement marquee --}}
-                <div
-                    id="announcement-bar"
-                    class="relative overflow-hidden bg-yellow-300 py-3 pr-14"
-                >
-                    <div class="marquee-track whitespace-nowrap">
-                        @foreach (range(1, 2) as $item)
-                            <span class="shrink-0 px-6 text-sm font-semibold text-gray-800">
-                                ✦ Welcome to BookShelf
-                                — Discover Your Next Favorite Book
-                                — Read More, Learn More ✦
-                            </span>
-                        @endforeach
-                    </div>
 
-                    <button
-                        type="button"
-                        onclick="closeAnnouncement()"
-                        aria-label="Tutup pengumuman"
-                        class="absolute right-3 top-1/2 z-50 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white text-lg font-bold text-gray-800 shadow transition hover:bg-red-500 hover:text-white"
-                    >
-                        &times;
-                    </button>
-                </div>
+{{--   --}}
 
-                {{--
-                    Logika marquee:
-                    - Di halaman Home (/), status close di-reset dan marquee ditampilkan.
-                    - Di halaman lain, marquee mengikuti status close selama sesi tab.
-                    - Tombol X menyimpan status close sampai user kembali ke Home.
-                --}}
-                <script>
-                    (function () {
-                        const announcement = document.getElementById('announcement-bar');
-                        const currentPath = window.location.pathname;
-
-                        if (!announcement) {
-                            return;
-                        }
-
-                        if (currentPath === '/') {
-                            sessionStorage.removeItem('announcementClosed');
-                            announcement.classList.add('show-announcement');
-                            return;
-                        }
-
-                        if (sessionStorage.getItem('announcementClosed') !== 'true') {
-                            announcement.classList.add('show-announcement');
-                        }
-                    })();
-
-                    function closeAnnouncement() {
-                        sessionStorage.setItem('announcementClosed', 'true');
-                        document.getElementById('announcement-bar')?.remove();
-                    }
-                </script>
 
                 {{ $slot }}
             </div>

@@ -19,5 +19,8 @@
         "howler": "^2.2.4",
         "jquery": "^3.7.1",
         "trix": "^2.1.5"
+    },
+    "allowScripts": {
+        "esbuild@0.21.5": true
     }
 }

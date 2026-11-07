@@ -6,7 +6,7 @@
         <div class="mr-6">
 
           <h1 class="text-4xl font-semibold mb-2">Dashboard Buku Waktu</h1>
-          <h2 class="text-gray-600 ml-0.5 italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+
         </div>
         <div class="flex flex-wrap items-start justify-end -mb-3">
 

@@ -2,7 +2,7 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-    <div class="max-w-3xl mx-auto py-10 px-4 border rounded-xl bg-white shadow-sm">
+    <div class="max-w-3xl mx-auto py-10 px-4 border rounded-xl bg-white shadow-sm mt-10">
 
         <h1 class="text-3xl font-bold mb-6">
             Lounge

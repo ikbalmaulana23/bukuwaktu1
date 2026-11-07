@@ -6,6 +6,7 @@ use App\Models\Audiobook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AudiobookController extends Controller
 {
     // Menampilkan daftar audiobook
@@ -53,10 +54,18 @@ class AudiobookController extends Controller
     // Menampilkan audiobook
     public function show($id)
     {
-        $recomendation = Audiobook::get();
+        $audiobook = Audiobook::with('speaker')->findOrFail($id);
 
-        $audiobook = Audiobook::findOrFail($id);
-        return view('audiobooks.show', compact('audiobook', 'recomendation'));
+        $recomendation = Audiobook::with('speaker')
+            ->where('id', '!=', $audiobook->id)
+            ->latest()
+            ->take(8)
+            ->get();
+
+        return view('audiobooks.show', compact(
+            'audiobook',
+            'recomendation'
+        ));
     }
 
     public function edit(Audiobook $audiobook)

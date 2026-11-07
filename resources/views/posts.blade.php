@@ -44,35 +44,25 @@
         {{ $posts->links() }}
 
 
-{{-- <div class="sm:text-center flex flex-wrap justify-center gap-2 mt-5">
-
-    <a href="/posts"
-        class="text-sm relative rounded-full px-6 py-1.5 font-medium transition-colors
-        {{ !request('category') ? 'bg-yellow-300 text-gray-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
-        All
-    </a>
-
-    {{-- Tombol kategori --}}
-    {{-- @foreach ($categories as $category)
-        <a href="/posts?category={{ $category->slug }}"
-            class="text-sm relative rounded-full px-3 py-1.5 font-medium transition-colors
-            {{ request('category') === $category->slug
-                ? 'bg-yellow-300 text-gray-800'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
-            {{ $category->name }}
-        </a>
-    @endforeach
-{{-- </div> --}}
-
-
         <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-4 mt-10">
             @forelse ($posts as $post)
             <div class="relative">
-               <span class="absolute top-0 right-0 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold
-    bg-gray-900 text-white rounded-bl-lg rounded-tr-md shadow-sm">
-    <i class="fa-solid fa-fire text-yellow-400"></i>
-    The Most Read
-</span>
+            <div class="relative">
+
+    {{-- Badge The Most Read --}}
+    @if($mostRead->contains(function ($item) use ($post) {
+        return $item->content_type === 'post'
+            && $item->id === $post->id;
+    }))
+        <span class="absolute top-0 right-0 z-10 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold bg-gray-900 text-white rounded-bl-lg rounded-tr-md shadow-sm">
+            <i class="fa-solid fa-fire text-yellow-400"></i>
+            The Most Read
+        </span>
+    @endif
+
+    {{-- Konten kartu bukumu di sini --}}
+
+</div>
 
               <article class="flex flex-col items-start justify-between border rounded-md p-5">
     <div class="w-full mb-2 h-64 overflow-hidden">
