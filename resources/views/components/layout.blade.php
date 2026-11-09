@@ -167,9 +167,29 @@
         <main>
             <div class="mx-auto max-w-7xl overflow-x-hidden p-2 pt-20 md:p-0 md:pt-24 sm:px-6 lg:px-8">
 
-                {{-- Announcement marquee --}}
+                <div id="announcement-bar"
+     class="relative overflow-hidden bg-yellow-400 text-black py-3">
 
-{{--   --}}
+    <div class="flex items-center">
+
+        <div class="flex-1 overflow-hidden">
+            <div class="marquee-track">
+
+                @foreach (range(1, 2) as $item)
+                    <span class="whitespace-nowrap px-8 text-sm font-semibold tracking-wide">
+                        ✦ Welcome to BookShelf —
+                        Discover Your Next Favorite Book —
+                        Read More, Learn More ✦
+                    </span>
+                @endforeach
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
 
 
                 {{ $slot }}

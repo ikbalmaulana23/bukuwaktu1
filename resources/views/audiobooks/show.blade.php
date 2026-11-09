@@ -3,64 +3,107 @@
 
     <div
         x-data="audioPlayer(@js(asset('storage/' . $audiobook->file_path)))"
-        class="min-h-screen bg-white pb-36 border"
+        class="min-h-screen bg-white pb-36 "
     >
 
         {{-- Back Navigation --}}
-        <div class="mx-auto px-6 pt-8 border">
+        <div class="mx-auto px-6 pt-8 ">
             <a href="/audiobook"
                class="text-blue-600 text-sm hover:text-blue-800">
                 ← Kembali ke Library
             </a>
         </div>
 
-        {{-- Main Reading Content --}}
-        <main class="max-w-3xl mx-auto px-6 py-16 border">
+
+{{-- Main Reading Content --}}
+<main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
+
+
+
+    <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-10">
+
+        {{-- LEFT: BOOK COVER --}}
+        <div class="mx-auto w-full max-w-[220px] md:sticky md:top-8 lg:max-w-[280px]">
+
+            <div class="overflow-hidden rounded-2xl bg-gray-100 shadow-lg ring-1 ring-black/5">
+                @if($audiobook->cover)
+                    <img
+                        src="{{ asset('storage/' . $audiobook->cover) }}"
+                        alt="Cover {{ $audiobook->title }}"
+                        class="aspect-[3/4] w-full object-cover"
+                    >
+                @else
+                    <div class="flex aspect-[3/4] items-center justify-center bg-gradient-to-br from-blue-100 to-slate-200">
+                        <span class="text-6xl">📚</span>
+                    </div>
+                @endif
+            </div>
+
+            <div class="mx-auto mt-5 h-1 w-12 rounded-full bg-emerald-600"></div>
+        </div>
+
+        {{-- RIGHT: BOOK INFORMATION --}}
+        <section class="min-w-0 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
 
             <div class="mb-6">
-                <span class="text-xs uppercase tracking-wider text-gray-500">
+                <span class="text-xs font-semibold uppercase tracking-[0.15em] text-blue-600">
                     Audiobook Summary
                 </span>
             </div>
 
-            <h1 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-6 book-title">
+            <h1 class="book-title mb-7 text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
                 {{ $audiobook->title }}
             </h1>
 
-            {{-- Book Information --}}
-            <div class="flex items-center gap-3 mb-12">
+            {{-- Narrator Information --}}
+            <div class="mb-10 flex items-center gap-3">
 
-                @if($audiobook->cover)
+                @if($audiobook->speaker && $audiobook->speaker->profile_photo_path)
                     <img
-                        src="{{ asset('storage/' . $audiobook->cover) }}"
-                        class="w-12 h-12 rounded object-cover "
-                        alt="{{ $audiobook->title }}"
+                        src="{{ asset('storage/' . $audiobook->speaker->profile_photo_path) }}"
+                        alt="{{ $audiobook->speaker->name }}"
+                        class="h-12 w-12 rounded-full object-cover ring-2 ring-gray-100"
                     >
+                @else
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-lg font-bold text-blue-700">
+                        {{ strtoupper(substr($audiobook->speaker->name ?? 'U', 0, 1)) }}
+                    </div>
                 @endif
 
                 <div>
-                    <p class="font-semibold text-sm text-slate-800">
-                        {{ $audiobook->speaker->name }}
+                    <p class="text-sm font-semibold text-slate-800">
+                        {{ $audiobook->speaker->name ?? 'Unknown Speaker' }}
                     </p>
-
-                    <p class="text-xs text-gray-500">
+                    <p class="mt-0.5 text-xs text-gray-500">
                         Narrator
                     </p>
                 </div>
 
             </div>
 
+            <div class="mb-8 h-px w-full bg-gray-100"></div>
+
             {{-- Description --}}
-            <article class="prose prose-lg max-w-none
-                            prose-headings:text-slate-900
-                            prose-p:text-slate-700
-                            prose-p:leading-relaxed book-description">
+            <div>
+                <h2 class="mb-4 text-lg font-bold text-slate-900">
+                    About This Audiobook
+                </h2>
 
-                {!! nl2br(e($audiobook->description)) !!}
+                <article class="book-description prose prose-base max-w-none leading-relaxed
+                    prose-headings:font-bold prose-headings:text-slate-900
+                    prose-p:text-gray-600 prose-p:leading-8
+                    prose-strong:text-slate-800">
 
-            </article>
+                    {!! nl2br(e($audiobook->description)) !!}
 
-        </main>
+                </article>
+            </div>
+
+        </section>
+
+    </div>
+</main>
+
 
 
         {{-- FIXED AUDIO PLAYER --}}

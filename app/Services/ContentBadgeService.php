@@ -10,7 +10,10 @@ class ContentBadgeService
 {
     public function mostRead(int $limit = 8): Collection
     {
-        $posts = Post::withCount('views')
+        $posts = Post::without(['author', 'category'])
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->limit($limit)
             ->get()
             ->map(function ($item) {
                 $item->content_type = 'post';
@@ -18,6 +21,8 @@ class ContentBadgeService
             });
 
         $audiobooks = Audiobook::withCount('views')
+            ->orderByDesc('views_count')
+            ->limit($limit)
             ->get()
             ->map(function ($item) {
                 $item->content_type = 'audiobook';
@@ -33,11 +38,14 @@ class ContentBadgeService
 
     public function trending(int $limit = 2): Collection
     {
-        $posts = Post::withCount([
-            'views as recent_views_count' => function ($query) {
-                $query->where('viewed_at', '>=', now()->subDays(7));
-            }
-        ])
+        $posts = Post::without(['author', 'category'])
+            ->withCount([
+                'views as recent_views_count' => function ($query) {
+                    $query->where('viewed_at', '>=', now()->subDays(7));
+                }
+            ])
+            ->orderByDesc('recent_views_count')
+            ->limit($limit)
             ->get()
             ->map(function ($item) {
                 $item->content_type = 'post';
@@ -49,6 +57,8 @@ class ContentBadgeService
                 $query->where('viewed_at', '>=', now()->subDays(7));
             }
         ])
+            ->orderByDesc('recent_views_count')
+            ->limit($limit)
             ->get()
             ->map(function ($item) {
                 $item->content_type = 'audiobook';

@@ -92,7 +92,7 @@
 
                                 <img
                                     src="{{ $comment->user->profile_photo
-                                        ? asset('storage/profile_photos/' . $comment->user->profile_photo)
+                                        ? asset('storage/' . $comment->user->profile_photo)
                                         : asset('img/avatar2.jpg') }}"
                                     class="w-8 h-8 rounded-full object-cover"
                                     alt="Profile"

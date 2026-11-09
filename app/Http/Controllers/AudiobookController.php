@@ -5,22 +5,54 @@ namespace App\Http\Controllers;
 use App\Models\Audiobook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ContentBadgeService;
+
 
 
 class AudiobookController extends Controller
 {
     // Menampilkan daftar audiobook
-    public function index()
+    public function index(ContentBadgeService $badgeService)
     {
-        $audiobooks = Audiobook::with('speaker')->latest()->get();
+        $audiobooks = Audiobook::with('speaker')
+            ->latest()
+            ->get();
 
-        return view('audiobooks.index', compact('audiobooks'));
-    }
+        // Ambil data trending dan most read
+        $trending = $badgeService->trending(8);
+        $mostRead = $badgeService->mostRead(8);
 
-    // Menampilkan formulir untuk menambah audiobook baru
-    public function create()
-    {
-        return view('dashboard.audiobook');
+        // Khusus audiobook
+        $trendingIds = $trending
+            ->where('content_type', 'audiobook')
+            ->pluck('id')
+            ->unique();
+
+        $mostReadIds = $mostRead
+            ->where('content_type', 'audiobook')
+            ->pluck('id')
+            ->unique();
+
+        // Gabungkan ID untuk koleksi mingguan
+        $weeklyIds = $trendingIds
+            ->merge($mostReadIds)
+            ->unique()
+            ->values();
+
+        $weeklyCollection = Audiobook::with('speaker')
+            ->whereIn('id', $weeklyIds)
+            ->get()
+            ->sortBy(function ($audiobook) use ($weeklyIds) {
+                return $weeklyIds->search($audiobook->id);
+            })
+            ->values();
+
+        return view('audiobooks.index', compact(
+            'audiobooks',
+            'weeklyCollection',
+            'trendingIds',
+            'mostReadIds'
+        ));
     }
 
     // Menyimpan audiobook baru
