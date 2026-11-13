@@ -198,27 +198,7 @@
     </div>
 
     {{-- Footer --}}
-    <footer class="mt-10 w-full bg-gray-100 py-6">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-sm">
-                <span class="mx-1 font-semibold text-gray-500">
-                    © {{ date('Y') }} Bukuwaktu.
-                </span>
-
-                <a href="{{ route('about') }}" class="mx-1 transition hover:text-blue-500">
-                    About Us
-                </a>
-
-                <a href="{{ route('contact') }}" class="mx-1 transition hover:text-blue-500">
-                    Contact Us
-                </a>
-
-                <a href="{{ route('privacy-policy') }}" class="mx-1 transition hover:text-blue-500">
-                    Privacy Policy
-                </a>
-            </div>
-        </div>
-    </footer>
+@include('components.footer')
 
     {{-- jQuery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -306,6 +286,81 @@
                 behavior: 'smooth'
             });
         });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const carousel = document.getElementById('weeklyCarousel');
+    const indicators = document.getElementById('weeklyIndicators');
+
+    if (!carousel || !indicators) return;
+
+    const cards = Array.from(carousel.children).filter(card =>
+        card.classList.contains('snap-start')
+    );
+
+    const cardsPerSlide = 3;
+    const totalSlides = Math.ceil(cards.length / cardsPerSlide);
+
+    let activeSlide = 0;
+
+    function renderIndicators() {
+        indicators.innerHTML = '';
+
+        for (let i = 0; i < totalSlides; i++) {
+            const bar = document.createElement('button');
+
+            bar.type = 'button';
+
+            bar.className = `
+                h-1.5 rounded-full transition-all duration-300
+                ${i === activeSlide
+                    ? 'w-10 bg-amber-400'
+                    : 'w-5 bg-gray-200 hover:bg-gray-300'}
+            `;
+
+            bar.setAttribute('aria-label', `Ke slide ${i + 1}`);
+
+            bar.addEventListener('click', () => {
+                const targetCard = cards[i * cardsPerSlide];
+
+                if (targetCard) {
+                    carousel.scrollTo({
+                        left: targetCard.offsetLeft - cards[0].offsetLeft,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+
+            indicators.appendChild(bar);
+        }
+    }
+
+    function updateActiveSlide() {
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        const scrollRatio = maxScroll > 0
+            ? carousel.scrollLeft / maxScroll
+            : 0;
+
+        const newSlide = Math.min(
+            Math.round(scrollRatio * (totalSlides - 1)),
+            totalSlides - 1
+        );
+
+        if (newSlide !== activeSlide) {
+            activeSlide = newSlide;
+            renderIndicators();
+        }
+    }
+
+    if (totalSlides > 0) {
+        renderIndicators();
+        carousel.addEventListener('scroll', updateActiveSlide);
+    }
+
+});
+
     </script>
 
     @yield('scripts')

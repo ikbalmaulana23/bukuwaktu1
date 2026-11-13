@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\playlist;
 use Illuminate\View\View;
-use App\Models\FavoriteBook;
+
 use Illuminate\Http\Request;
 use App\Models\InterestGenre;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +23,7 @@ class ProfileController extends Controller
         $favoriteAuthors = $user->favoriteAuthor;
         $posts = Post::where('author_id', Auth::id())->get();
         $audiobooks = $user->audiobooks; // Pastikan ini adalah koleksi atau array, bukan null
-        $favoriteBooks = FavoriteBook::where('user_id', Auth::id())->get();
+
         $followers = $user->followers; // Relasi 'followers' akan mengembalikan daftar followers
         $following = $user->following;
         $playlists = playlist::with('audiobooks')->get();
@@ -33,7 +33,7 @@ class ProfileController extends Controller
             'user',
             'audiobooks',
             'posts',
-            'favoriteBooks',
+
             'followers',
             'following',
             'playlists',

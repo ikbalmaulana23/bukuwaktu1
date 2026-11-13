@@ -1,315 +1,358 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Admin Dashboard </title>
-    @vite('resources/css/app.css')
-    <style>
-      .rotate-45 {
-        --transform-rotate: 45deg;
-        transform: rotate(45deg);
-      }
+<html lang="id">
 
-      .group:hover .group-hover\:flex {
-        display: flex;
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.10/tailwind.min.css"
-    />
-    <link rel="stylesheet" href="./style.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - BukuWaktu</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </head>
-  <body>
 
-    <!-- partial:index.partial.html -->
-    <div class="flex w-screen h-screen text-gray-700">
-      <!-- Component Start -->
-      <div
-        class="flex flex-col items-center w-16 pb-4 overflow-auto border-r border-gray-300"
-      >
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-full h-16 bg-emerald-500"
-          href="/"
-        >
-        <img src="{{ asset('img/logosquare.png') }}" alt="" class="w-10 ">
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+</head>
 
+<body class="bg-gray-50 text-gray-700">
+
+<div x-data="{ mobileMenuOpen: false }" class="min-h-screen md:flex md:h-screen md:overflow-hidden">
+
+    {{-- ================================= --}}
+    {{-- DESKTOP SIDEBAR --}}
+    {{-- ================================= --}}
+
+    <aside class="hidden md:flex md:w-64 md:flex-shrink-0 md:flex-col md:border-r md:border-gray-200 md:bg-white">
+
+        {{-- LOGO --}}
+        <a href="/" class="flex h-16 items-center gap-3 border-b border-gray-100 px-6">
+            <img src="{{ asset('img/logosquare.png') }}" class="h-9 w-9 object-contain" alt="BukuWaktu">
+            <span class="text-lg font-bold tracking-tight text-gray-800">
+                BukuWaktu
+            </span>
         </a>
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300"
-          href="#"
-        >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
-        </a>
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300"
-          href="#"
-        >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-        </a>
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300"
-          href="#"
-        >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-            />
-          </svg>
-        </a>
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300"
-          href="#"
-        >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-        </a>
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300"
-          href="#"
-        >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-            />
-          </svg>
-        </a>
-        <a
-          class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 mt-auto rounded hover:bg-gray-300"
-          href="#"
-        >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </a>
-      </div>
-      <div class="flex flex-col w-56 border-r border-gray-300">
-        <button class="relative text-sm focus:outline-none group">
-          <div
-            class="flex items-center justify-between w-full h-16 px-4 border-b border-gray-300 hover:"
-          >
-            <span class="font-medium"> Dashboard Admin </span>
 
-          </div>
-          <div
-            class="absolute z-10 flex-col items-start hidden w-full pb-1 bg-white shadow-lg group-focus:flex"
-          >
-            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#"
-              >Menu Item 1</a
-            >
-            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#"
-              >Menu Item 1</a
-            >
-            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#"
-              >Menu Item 1</a
-            >
-          </div>
-        </button>
-        <div class="flex flex-col flex-grow p-4 overflow-auto">
-            <a
-    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-    href="{{ route('admin.dashboard') }}"
->
-    <span class="leading-none">Dashboard</span>
-</a>
-          <a
-    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-    href="{{ route('admin.users') }}"
->
-    <span class="leading-none">Audit User</span>
-</a>
+        {{-- NAVIGATION --}}
+        <div class="flex flex-1 flex-col overflow-y-auto p-4">
 
-<a
-    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-    href="{{ route('admin.posts') }}"
->
-    <span class="leading-none">Audit Postingan</span>
-</a>
+            <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+                Administrator
+            </p>
 
-<a
-    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-    href="{{ route('admin.audiobooks') }}"
->
-    <span class="leading-none">Audit Audiobook</span>
-</a>
+            <nav class="space-y-1">
 
-<a
-    class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"
-    href="{{ route('admin.comments') }}"
->
-    <span class="leading-none">Audit Komentar</span>
-</a>
+                <a href="{{ route('admin.dashboard') }}"
+                    class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
+                    {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                    <span class="w-5 text-center">⌂</span>
+                    Dashboard
+                </a>
 
-          <a
-            class="flex items-center flex-shrink-0 h-10 px-3 mt-auto text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
-            href="#"
-          >
+                <a href="{{ route('admin.users') }}"
+                    class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
+                    {{ request()->routeIs('admin.users') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                    <span class="w-5 text-center">♙</span>
+                    Audit User
+                </a>
 
-            <span class="ml-2 leading-none">Log Out</span>
-          </a>
-        </div>
+                <a href="{{ route('admin.posts') }}"
+                    class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
+                    {{ request()->routeIs('admin.posts') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                    <span class="w-5 text-center">▤</span>
+                    Audit Postingan
+                </a>
 
+                <a href="{{ route('admin.audiobooks') }}"
+                    class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
+                    {{ request()->routeIs('admin.audiobooks') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                    <span class="w-5 text-center">♫</span>
+                    Audit Audiobook
+                </a>
 
-      </div>
-      <div class="flex flex-col flex-grow">
-        <div
-          class="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300"
-        >
-          <h1 class="text-lg font-medium">Page Title</h1>
-          <button
-            class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-300"
-          >
-            Action 1
-          </button>
-          <button
-            class="flex items-center justify-center h-10 px-4 ml-2 text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
-          >
-            Action 2
-          </button>
-          <button class="relative ml-2 text-sm focus:outline-none group">
-            <div
-              class="flex items-center justify-between w-10 h-10 rounded hover:bg-gray-300"
-            >
-              <svg
-                class="w-5 h-5 mx-auto"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                />
-              </svg>
+                <a href="{{ route('admin.comments') }}"
+                    class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
+                    {{ request()->routeIs('admin.comments') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                    <span class="w-5 text-center">☰</span>
+                    Audit Komentar
+                </a>
+
+            </nav>
+
+            {{-- BOTTOM MENU --}}
+            <div class="mt-auto border-t border-gray-100 pt-4">
+
+                <a href="/"
+                    class="mb-2 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100">
+                    <span class="w-5 text-center">↗</span>
+                    Kunjungi Website
+                </a>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit"
+                        class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-red-600 transition hover:bg-red-50">
+                        <span class="w-5 text-center">⇥</span>
+                        Log Out
+                    </button>
+                </form>
+
             </div>
 
-          </button>
         </div>
-        <div class="flex-grow">
+    </aside>
 
-            <main class="p-8">
-                {{ $slot }}
-            </main>
+
+    {{-- ================================= --}}
+    {{-- MAIN CONTENT --}}
+    {{-- ================================= --}}
+
+    <div class="flex min-w-0 flex-1 flex-col md:overflow-hidden">
+
+        {{-- DESKTOP HEADER --}}
+        <header class="hidden h-16 flex-shrink-0 items-center justify-between border-b border-gray-200 bg-white px-8 md:flex">
+
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800">
+                    Admin Dashboard
+                </h1>
+                <p class="text-xs text-gray-400">
+                    Kelola platform BukuWaktu
+                </p>
+            </div>
+
+            <div class="flex items-center gap-3">
+
+                <a href="/"
+                    class="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50">
+                    Lihat Website
+                </a>
+
+                <div class="flex items-center gap-2 rounded-lg bg-gray-50 px-3 py-2">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+
+                    <span class="text-sm font-medium text-gray-700">
+                        {{ auth()->user()->name }}
+                    </span>
+                </div>
+
+            </div>
+        </header>
+
+
+        {{-- MOBILE HEADER --}}
+        <header class="sticky top-0 z-30 flex h-16 flex-shrink-0 items-center justify-between border-b border-gray-200 bg-white px-4 md:hidden">
+
+            <a href="/" class="flex items-center gap-2">
+                <img src="{{ asset('img/logosquare.png') }}" class="h-9 w-9 object-contain" alt="BukuWaktu">
+
+                <div>
+                    <p class="text-sm font-bold text-gray-800">BukuWaktu</p>
+                    <p class="text-[10px] text-gray-400">Administrator</p>
+                </div>
+            </a>
+
+            <button
+                @click="mobileMenuOpen = !mobileMenuOpen"
+                class="flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 transition hover:bg-gray-100"
+                aria-label="Toggle menu"
+            >
+                <svg x-show="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+
+                <svg x-show="mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+        </header>
+
+
+        {{-- ================================= --}}
+        {{-- MOBILE DRAWER --}}
+        {{-- ================================= --}}
+
+        <div
+            x-show="mobileMenuOpen"
+            x-cloak
+            x-transition.opacity
+            class="fixed inset-0 z-40 md:hidden"
+        >
+
+            {{-- OVERLAY --}}
+            <div
+                @click="mobileMenuOpen = false"
+                class="absolute inset-0 bg-black/40"
+            ></div>
+
+            {{-- DRAWER --}}
+            <div
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="-translate-x-full"
+                x-transition:enter-end="translate-x-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="translate-x-0"
+                x-transition:leave-end="-translate-x-full"
+                class="absolute left-0 top-0 flex h-full w-72 max-w-[85%] flex-col bg-white shadow-xl"
+            >
+
+                {{-- DRAWER HEADER --}}
+                <div class="flex h-16 items-center justify-between border-b border-gray-100 px-5">
+
+                    <div class="flex items-center gap-2">
+                        <img src="{{ asset('img/logosquare.png') }}" class="h-8 w-8" alt="BukuWaktu">
+
+                        <span class="font-bold text-gray-800">Admin Menu</span>
+                    </div>
+
+                    <button @click="mobileMenuOpen = false"
+                        class="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100">
+                        ✕
+                    </button>
+
+                </div>
+
+                {{-- USER INFO --}}
+                <div class="border-b border-gray-100 bg-gray-50 px-5 py-4">
+
+                    <p class="text-xs text-gray-400">Login sebagai</p>
+
+                    <p class="mt-1 truncate text-sm font-semibold text-gray-800">
+                        {{ auth()->user()->name }}
+                    </p>
+
+                    <span class="mt-1 inline-block rounded-full bg-emerald-100 px-2 py-1 text-[10px] font-semibold text-emerald-700">
+                        Administrator
+                    </span>
+
+                </div>
+
+                {{-- NAVIGATION --}}
+                <nav class="flex-1 space-y-1 overflow-y-auto p-4">
+
+                    <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                        Menu utama
+                    </p>
+
+                    <a @click="mobileMenuOpen = false"
+                        href="{{ route('admin.dashboard') }}"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium
+                        {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <span class="w-5 text-center">⌂</span>
+                        Dashboard
+                    </a>
+
+                    <a @click="mobileMenuOpen = false"
+                        href="{{ route('admin.users') }}"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium
+                        {{ request()->routeIs('admin.users') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <span class="w-5 text-center">♙</span>
+                        Audit User
+                    </a>
+
+                    <a @click="mobileMenuOpen = false"
+                        href="{{ route('admin.posts') }}"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium
+                        {{ request()->routeIs('admin.posts') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <span class="w-5 text-center">▤</span>
+                        Audit Postingan
+                    </a>
+
+                    <a @click="mobileMenuOpen = false"
+                        href="{{ route('admin.audiobooks') }}"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium
+                        {{ request()->routeIs('admin.audiobooks') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <span class="w-5 text-center">♫</span>
+                        Audit Audiobook
+                    </a>
+
+                    <a @click="mobileMenuOpen = false"
+                        href="{{ route('admin.comments') }}"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium
+                        {{ request()->routeIs('admin.comments') ? 'bg-emerald-50 text-emerald-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                        <span class="w-5 text-center">☰</span>
+                        Audit Komentar
+                    </a>
+
+                </nav>
+
+                {{-- DRAWER FOOTER --}}
+                <div class="border-t border-gray-100 p-4">
+
+                    <a href="/"
+                        class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100">
+                        <span class="w-5 text-center">↗</span>
+                        Kunjungi Website
+                    </a>
+
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+
+                        <button type="submit"
+                            class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50">
+                            <span class="w-5 text-center">⇥</span>
+                            Log Out
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
         </div>
-      </div>
-      <!-- Component End  -->
+
+
+        {{-- ================================= --}}
+        {{-- PAGE CONTENT --}}
+        {{-- ================================= --}}
+
+        <main class="min-w-0 flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+
+            {{ $slot }}
+
+        </main>
+
     </div>
 
-    <a
-      class="fixed flex items-center justify-center h-8 pr-2 pl-1 bg-blue-600 rounded-full bottom-0 right-0 mr-4 mb-4 shadow-lg text-blue-100 hover:bg-blue-600"
-      href="https://twitter.com/lofiui"
-      target="_top"
-    >
-      <div
-        class="flex items-center justify-center h-6 w-6 bg-blue-500 rounded-full"
-      >
-        <svg
-          class="w-4 h-4 fill-current"
-          viewBox="0 0 24 24"
-          class="r-jwli3a r-4qtqp9 r-yyyyoo r-16y2uox r-1q142lx r-8kz0gk r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue"
-        >
-          <g>
-            <path
-              d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"
-            ></path>
-          </g>
-        </svg>
-      </div>
-      <span class="text-sm ml-1 leading-none">@lofiui</span>
-    </a>
-    <!-- partial -->
+</div>
 
+
+{{-- ================================= --}}
+{{-- SWEETALERT NOTIFICATIONS --}}
+{{-- ================================= --}}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
         @if (session('pesan'))
+
             @if (session('pesan') === 'berhasil login')
                 Swal.fire({
                     icon: 'success',
                     title: 'Selamat Datang!',
-                    text: 'Senang melihatmu kembali di Bukuwaktu.',
+                    text: 'Senang melihatmu kembali di BukuWaktu.',
                     confirmButtonColor: '#eab308',
                 });
+
             @elseif (session('pesan') === 'berhasil registrasi')
                 Swal.fire({
                     icon: 'success',
                     title: 'Registrasi Berhasil!',
-                    text: 'Selamat bergabung dengan komunitas Bukuwaktu.',
+                    text: 'Selamat bergabung dengan komunitas BukuWaktu.',
                     confirmButtonColor: '#eab308',
                 });
             @endif
+
         @endif
 
         @if ($errors->any())
@@ -325,7 +368,4 @@
 </script>
 
 </body>
-
 </html>
-
-

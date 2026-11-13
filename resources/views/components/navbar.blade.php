@@ -349,130 +349,118 @@
     </div>
 
     {{-- MOBILE MENU --}}
-    <div x-show="isOpen" class="md:hidden" id="mobile-menu" x-cloak>
 
-        {{-- MOBILE SEARCH --}}
-        <div class="px-4 py-3">
-            <form action="{{ route('search') }}" method="GET" class="relative">
-                <input
-                    type="search"
-                    name="q"
-                    value="{{ request('q') }}"
-                    placeholder="Cari buku, audiobook, pengguna..."
-                    class="w-full rounded-full border border-gray-300 bg-white py-2 pl-4 pr-10 text-sm text-gray-700 outline-none focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+<div x-show="isOpen" class="md:hidden border-t border-gray-100 bg-white shadow-lg" id="mobile-menu" x-cloak>
+
+    {{-- MOBILE SEARCH --}}
+    <div class="px-5 py-4">
+        <form action="{{ route('search') }}" method="GET" class="relative">
+            <input
+                type="search"
+                name="q"
+                value="{{ request('q') }}"
+                placeholder="Cari buku, audiobook, pengguna..."
+                class="w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pl-4 pr-11 text-sm text-gray-700 outline-none transition focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100"
+            >
+
+            <button
+                type="submit"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+                aria-label="Cari"
+            >
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
+    {{-- MOBILE NAVIGATION --}}
+    <div class=" px-4 pb-4 text-[10px]
+                sm:text-xs md:text-sm lg:text-base">
+
+        <p class="px-3 pb-2  font-bold uppercase tracking-widest text-gray-400 ">
+            Menu utama
+        </p>
+
+        <x-nav-link href="/" :active="request()->is('/')">
+            <i class="fas fa-home mr-3 w-5 text-center"></i>
+            Home
+        </x-nav-link>
+
+        <x-nav-link href="/posts" :active="request()->is('posts*')">
+            <i class="fas fa-book-open mr-3 w-5 text-center"></i>
+            Buku
+        </x-nav-link>
+
+        <x-nav-link href="/genre" :active="request()->is('genre*')">
+            <i class="fas fa-layer-group mr-3 w-5 text-center"></i>
+            Genre
+        </x-nav-link>
+
+        <x-nav-link href="/audiobook" :active="request()->is('audiobook*')">
+            <i class="fas fa-headphones mr-3 w-5 text-center"></i>
+            Audiobook
+        </x-nav-link>
+
+        <x-nav-link href="/lounge" :active="request()->is('lounge*')">
+            <i class="fas fa-comments mr-3 w-5 text-center"></i>
+            Lounge
+        </x-nav-link>
+
+    </div>
+
+    {{-- MOBILE USER MENU --}}
+    <div class="border-t border-gray-100 bg-gray-50 px-4 py-4">
+
+        @guest
+
+            <a href="/login"
+                class="flex items-center justify-between rounded-xl bg-[#0F4C75] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#093653]">
+                <span>Login ke akun</span>
+                <i class="fas fa-sign-in-alt"></i>
+            </a>
+
+        @else
+
+            <a href="{{ route('profile') }}"
+                class="flex items-center gap-3 rounded-xl p-3 transition hover:bg-white">
+
+                <img
+                    class="h-10 w-10 rounded-full object-cover"
+                    src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
+                    alt="Profile Photo"
                 >
 
-                <button
-                    type="submit"
-                    class="absolute right-7 top-1/2 -translate-y-1/2 text-gray-500"
-                    aria-label="Cari"
-                >
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
-
-        {{-- MOBILE NAVIGATION --}}
-        <div class="ml-10 flex items-baseline space-x-10">
-
-            <x-nav-link href="/" :active="request()->is('/')">
-                Home
-            </x-nav-link>
-
-            <x-nav-link href="/posts" :active="request()->is('posts*')">
-                Buku
-            </x-nav-link>
-
-            <x-nav-link href="/genre" :active="request()->is('genre*')">
-                Genre
-            </x-nav-link>
-
-            <x-nav-link href="/audiobook" :active="request()->is('audiobook*')">
-                Audiobook
-            </x-nav-link>
-
-            <x-nav-link href="/lounge" :active="request()->is('lounge*')">
-                Lounge
-            </x-nav-link>
-
-        </div>
-
-        {{-- MOBILE USER MENU --}}
-        <div class="border-t border-gray-700 pb-3 pt-4">
-
-            @auth
-                <div class="flex items-center px-5">
-                    <div class="flex-shrink-0"></div>
+                <div class="min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold text-gray-800">
+                        {{ auth()->user()->name }}
+                    </p>
+                    <p class="text-xs text-gray-400">Lihat profil</p>
                 </div>
-            @endauth
 
-            <div class="space-y-1 px-2">
+                <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+            </a>
 
-                @guest
+            <div class="mt-2 grid grid-cols-2 gap-2">
 
-                    {{-- GUEST LOGIN --}}
-                    <a
-                        href="/login"
-                        class="rounded-md px-3 py-2 text-md font-medium text-gray-700 hover:bg-gray-700 hover:text-white flex justify-between items-center"
-                    >
-                        <span>Login</span>
-                        <i class="fas fa-sign-in-alt ml-2"></i>
-                    </a>
+                <a href="/dashboard"
+                    class="rounded-lg border border-gray-200 bg-white px-3 py-3 text-center text-xs font-medium text-gray-600 transition hover:border-blue-200 hover:text-blue-700">
+                    <i class="fas fa-upload mb-1 block"></i>
+                    Upload Buku
+                </a>
 
-                @else
-
-                    {{-- USER PROFILE --}}
-                    <a
-                        href="{{ route('profile') }}"
-                        class="block text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="user-menu-item-0"
-                    >
-                        <div class="flex justify-start hover:bg-gray-600 hover:text-white rounded-lg m-2">
-                            <img
-                                class="h-8 w-8 rounded-full mx-3 object-cover"
-                                src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('img/avatar1.jpg') }}"
-                                alt="Profile Photo"
-                            >
-
-                            <p class="py-2 mx-2">
-                                {{ auth()->user()->name }}
-                            </p>
-                        </div>
-                    </a>
-
-                    {{-- UPLOAD BOOK --}}
-                    <a
-                        href="/dashboard"
-                        class="block text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="user-menu-item-1"
-                    >
-                        <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
-                            Upload Buku
-                        </p>
-                    </a>
-
-                    {{-- SIGN OUT --}}
-                    <a
-                        href="{{ route('logout') }}"
-                        class="block text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="user-menu-item-2"
-                    >
-                        <p class="hover:bg-gray-600 hover:text-white p-2 mx-2 rounded-md">
-                            Sign out
-                        </p>
-                    </a>
-
-                @endguest
+                <a href="{{ route('logout') }}"
+                    class="rounded-lg border border-gray-200 bg-white px-3 py-3 text-center text-xs font-medium text-gray-600 transition hover:border-red-200 hover:text-red-600">
+                    <i class="fas fa-sign-out-alt mb-1 block"></i>
+                    Sign Out
+                </a>
 
             </div>
-        </div>
+
+        @endguest
+
     </div>
+</div>
+
 
 
 </nav>

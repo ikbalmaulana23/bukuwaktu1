@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Database\Seeders\FollowerSeeder;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\FavoriteAuthorSeeder;
-use Database\Factories\FavoriteBookFactory;
-use Database\Factories\FavoriteAuthorFactory;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,7 +34,7 @@ class DatabaseSeeder extends Seeder
             Category::all(),
             User::all(),
         ])->create();
-        FavoriteBook::factory()->count(50)->create();
+
         $this->call(FollowerSeeder::class);
         Audiobook::factory()->count(100)->create();
         $this->call(PlaylistSeeder::class);

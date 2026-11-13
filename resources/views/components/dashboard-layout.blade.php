@@ -36,7 +36,7 @@
 
         {{-- Logo --}}
         <a href="/"
-           class="flex items-center justify-center h-20 bg-purple-600 hover:bg-purple-500 transition">
+           class="flex items-center justify-center h-20 bg-yellow-600 hover:bg-yellow-500 transition">
 
             <img src="{{ asset('img/logosquare.png') }}"
                  alt="BukuWaktu"
@@ -125,8 +125,8 @@
                        placeholder="Cari sesuatu..."
                        class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50
                               border border-gray-100 text-sm
-                              focus:bg-white focus:border-purple-400
-                              focus:ring-2 focus:ring-purple-100 outline-none
+                              focus:bg-white focus:border-yellow-400
+                              focus:ring-2 focus:ring-yellow-100 outline-none
                               transition">
 
             </div>
@@ -150,8 +150,8 @@
 
 
                 {{-- Avatar --}}
-                <div class="w-10 h-10 rounded-full bg-purple-100
-                            text-purple-700 flex items-center justify-center
+                <div class="w-10 h-10 rounded-full bg-yellow-100
+                            text-yellow-700 flex items-center justify-center
                             font-bold text-sm">
 
                     {{ strtoupper(substr($user->name, 0, 1)) }}
@@ -184,7 +184,7 @@
         {{-- PAGE CONTENT --}}
         {{-- ========================================= --}}
 
-        <main class="p-4 sm:p-6 lg:p-10 pb-28 md:pb-10 min-h-[calc(100vh-5rem)]">
+        <main class=" sm:p-6  pb-28 md:pb-10 min-h-[calc(100vh-5rem)]">
 
             {{ $slot }}
 
@@ -208,7 +208,7 @@
         {{-- Dashboard --}}
         <a href="/dashboard"
            class="flex flex-col items-center justify-center gap-1 py-2
-           {{ request()->is('dashboard') ? 'text-purple-600' : 'text-gray-400' }}">
+           {{ request()->is('dashboard') ? 'text-yellow-600' : 'text-gray-400' }}">
 
             <i class="fa-solid fa-house text-lg"></i>
 
@@ -222,7 +222,7 @@
         {{-- Audiobooks --}}
         <a href="/dashboard/audiobooks"
            class="flex flex-col items-center justify-center gap-1 py-2
-           {{ request()->is('dashboard/audiobooks*') ? 'text-purple-600' : 'text-gray-400' }}">
+           {{ request()->is('dashboard/audiobooks*') ? 'text-yellow-600' : 'text-gray-400' }}">
 
             <i class="fa-solid fa-headphones text-lg"></i>
 
@@ -236,7 +236,7 @@
         {{-- Saved --}}
         <a href="/dashboard/save"
            class="flex flex-col items-center justify-center gap-1 py-2
-           {{ request()->is('dashboard/save*') ? 'text-purple-600' : 'text-gray-400' }}">
+           {{ request()->is('dashboard/save*') ? 'text-yellow-600' : 'text-gray-400' }}">
 
             <i class="fa-solid fa-bookmark text-lg"></i>
 
