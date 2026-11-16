@@ -46,7 +46,7 @@
                     </p>
                 </div>
 
-                <span class="rounded-full  px-3 py-1 text-xs font-semibold text-[#173d52]">
+                <span class="rounded-full px-3 py-1 text-xs font-semibold text-[#173d52]">
                     {{ $posts->count() }} Post
                 </span>
 
@@ -84,15 +84,15 @@
                             {{-- ACTION BUTTONS --}}
                             <div class="flex gap-2 border-t border-[#173d52] pt-4">
 
-                                <a href="{{ route('posts.edit', $post->id) }}"
-                                    class="flex flex-1 items-center justify-center gap-2 rounded-lg  px-3 py-2.5 text-xs font-semibold text-[#173d52] transition bg-yellow-100 hover:bg-yellow-200">
+                                <a href="{{ route('posts.edit', $post->slug) }}"
+                                    class="flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-semibold text-[#173d52] transition bg-yellow-100 hover:bg-yellow-200">
 
                                     <i class="fa-solid fa-pen-to-square"></i>
                                     Edit
 
                                 </a>
 
-                                <form action="{{ route('posts.destroy', $post->id) }}"
+                                <form action="{{ route('posts.destroy', $post->slug) }}"
                                     method="POST"
                                     class="flex-1"
                                     onsubmit="return confirm('Yakin ingin menghapus resume ini?')">

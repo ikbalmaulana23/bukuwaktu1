@@ -112,14 +112,18 @@ Route::middleware('auth')->group(function () {
 
 
     // Post Management
-    Route::get('/posts/edit/{id}', [DashboardController::class, 'edit'])
+
+
+    Route::get('/posts/edit/{slug}', [DashboardController::class, 'edit'])
         ->name('posts.edit');
 
-    Route::put('/posts/update/{id}', [DashboardController::class, 'update'])
+    Route::put('/posts/update/{slug}', [DashboardController::class, 'update'])
         ->name('posts.update');
 
-    Route::get('/posts/destroy/{id}', [PostController::class, 'delete'])
+    Route::delete('/posts/destroy/{slug}', [DashboardController::class, 'destroy'])
         ->name('posts.destroy');
+
+
 
 
     // Comments

@@ -17,62 +17,57 @@ class DashboardController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
-        $user = Auth::user(); // atau metode lain untuk mendapatkan data pengguna
+        $user = Auth::user();
 
         $posts = Post::where('author_id', $userId)->get();
 
-        // Pass data to the view
         return view('dashboard.index', compact('userId', 'posts', 'user'));
     }
 
-
-
     public function posts()
     {
-        $categories = Category::all(); // Ambil semua kategori dari database
+        $categories = Category::all();
+
         return view('dashboard.posts', compact('categories'));
     }
 
-
-    public function edit($id)
+    public function edit($slug)
     {
-        // Find the post by ID
         $categories = Category::all();
         $userId = Auth::id();
-        $post = Post::findOrFail($id);
 
-        // Pass the post to the edit view
+        $post = Post::where('slug', $slug)
+            ->where('author_id', $userId)
+            ->firstOrFail();
+
         return view('dashboard.edit', compact('post', 'userId', 'categories'));
     }
+
     public function uploadbuku(UploadBukuRequest $request)
     {
-        if ($request->validated()) {
-            $slug = Str::slug($request->title);
+        $request->validated();
 
-            // Proses upload cover
-            $coverPath = null;
-            if ($request->hasFile('cover')) {
-                $coverPath = $request->file('cover')->store('covers', 'public');
-            }
+        $slug = Str::slug($request->title);
 
-            // Buat postingan dengan field tambahan
-            $post = Post::create([
-                'title' => $request->title,
-                'author_id' => $request->author_id,
-                'category_id' => $request->category_id,
-                'slug' => $slug,
-                'body' => $request->body,
-                'cover' => $coverPath, // Simpan path cover ke database
-                'type' => $request->type ?? 'rangkuman', // Gunakan 'rangkuman' sebagai default jika tidak diisi
-                'is_audited' => $request->is_audited ?? true, // Default true jika tidak diisi
-            ]);
+        $coverPath = null;
+
+        if ($request->hasFile('cover')) {
+            $coverPath = $request->file('cover')->store('covers', 'public');
         }
 
-        // Ambil followers dari user yang membuat postingan
+        $post = Post::create([
+            'title' => $request->title,
+            'author_id' => $request->author_id,
+            'category_id' => $request->category_id,
+            'slug' => $slug,
+            'body' => $request->body,
+            'cover' => $coverPath,
+            'type' => $request->type ?? 'rangkuman',
+            'is_audited' => $request->is_audited ?? true,
+        ]);
+
         $followers = Auth::user()->followers;
 
-        // Kirim notifikasi hanya kepada followers
         foreach ($followers as $follower) {
             $follower->notify(new NewPostNotification($post));
         }
@@ -80,9 +75,12 @@ class DashboardController extends Controller
         return redirect('/posts')->with('pesan', 'Upload Buku berhasil');
     }
 
-
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $slug)
     {
+        $post = Post::where('slug', $slug)
+            ->where('author_id', Auth::id())
+            ->firstOrFail();
+
         $request->validate([
             'title' => 'nullable|string|max:255',
             'body' => 'nullable|string',
@@ -90,35 +88,48 @@ class DashboardController extends Controller
             'category_id' => 'nullable|integer|exists:categories,id',
         ]);
 
-        $user = Auth::user(); // Dapatkan user yang sedang login
-
-        // Update cover jika ada cover baru
         if ($request->hasFile('cover')) {
-            // Hapus cover lama jika ada
             if ($post->cover) {
                 Storage::disk('public')->delete($post->cover);
             }
 
-            $coverPath = $request->file('cover')->store('covers', 'public');
-            $post->cover = $coverPath;
+            $post->cover = $request->file('cover')->store('covers', 'public');
         }
 
-        // Update field lainnya
         $post->title = $request->input('title', $post->title);
         $post->body = $request->input('body', $post->body);
         $post->category_id = $request->input('category_id', $post->category_id);
-        $post->author_id = $user->id; // Tetap set author_id ke ID user yang login
-        $post->slug = Str::slug($post->title); // Update slug jika title berubah
 
-        $post->save(); // Simpan perubahan
+        $newSlug = Str::slug($post->title);
 
+        if ($newSlug !== $post->slug) {
+            $post->slug = $newSlug;
+        }
+
+        $post->save();
 
         return redirect('/posts')->with('pesan', 'Update Buku berhasil');
+    }
+
+    public function destroy($slug)
+    {
+        $post = Post::where('slug', $slug)
+            ->where('author_id', Auth::id())
+            ->firstOrFail();
+
+        if ($post->cover) {
+            Storage::disk('public')->delete($post->cover);
+        }
+
+        $post->delete();
+
+        return back()->with('pesan', 'Buku berhasil dihapus');
     }
 
     public function audiobook()
     {
         $userId = Auth::id();
+
         $audiobooks = Audiobook::where('speaker_id', $userId)->get();
 
         return view('dashboard.indexaudiobook', compact('audiobooks'));
